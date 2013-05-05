@@ -29,8 +29,6 @@ __New in Wikipedia Search 3.2:__
 * Updated to Manifest 2
 * Requires Chrome 18 or newer
 
----------------------------------------------------------
-
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
