@@ -1,0 +1,69 @@
+@charset "UTF-8";
+/* Styles for Wikipedia Search */
+
+/* Options page */
+body {
+	text-align:center;
+	font-family:Helvetica, sans-serif;
+	color:#4D4D4D;
+	font-size:15px;
+	background-color: #EEE;
+	overflow:hidden;
+}
+#content {
+	background-color:#FFFFFF;
+	border: 1px solid #EEE;
+	-moz-box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+	-webkit-box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+	-goog-ms-box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+	box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+	margin-top:20px;
+	width:400px;
+}
+select {
+	width:390px;
+	background:transparent;
+	border:0px;
+	font-family:Helvetica, sans-serif;
+	color:#4D4D4D;
+	font-size:15px;
+	outline: none;
+	padding:5px;
+	margin-top:5px;
+	-webkit-appearance: none;
+}
+input {
+	width:80px;
+	background:#FFF;
+	border:0px;
+	height:30px;
+	font-family:Helvetica, sans-serif;
+	color:#4D4D4D;
+	font-size:15px;
+	border-radius:5px;
+	border:1px solid #CCC;
+	margin:5px;
+}
+#status {
+	font-weight:bold;
+	padding-left:15px;
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    border:0px;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track:hover {
+    border:1px solid #CCCCCC;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background:#CCCCCC;
+}
+#github-buttons {
+	position:absolute;
+	bottom:20px;
+	left:20px;
+}
