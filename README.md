@@ -28,6 +28,7 @@ __New in Wikipedia Search 3.2.1:__
 __New in Wikipedia Search 3.2:__
 * Updated to Manifest 2
 * Requires Chrome 18 or newer
+
 ---------------------------------------------------------
 
 This program is free software: you can redistribute it and/or modify
