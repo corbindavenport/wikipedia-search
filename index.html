@@ -8,37 +8,9 @@ You should have received a copy of the GNU General Public License along with thi
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<style type="text/css">
-body,td,th {
-	font-family: Arial;
-	font-size:10px;
-	text-align:center;
-}
-body {
-	margin:0px;
-	width:400px;
-}
-input:focus {
-    outline: none;
-}
-.textfield {
-	border:0px;
-	font-family: Arial;
-	font-size:14px;
-	width: 380px;
-	float:left;
-	height:22px;
-	background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAC7mlDQ1BJQ0MgUHJvZmlsZQAAeAGFVM9rE0EU/jZuqdAiCFprDrJ4kCJJWatoRdQ2/RFiawzbH7ZFkGQzSdZuNuvuJrWliOTi0SreRe2hB/+AHnrwZC9KhVpFKN6rKGKhFy3xzW5MtqXqwM5+8943731vdt8ADXLSNPWABOQNx1KiEWlsfEJq/IgAjqIJQTQlVdvsTiQGQYNz+Xvn2HoPgVtWw3v7d7J3rZrStpoHhP1A4Eea2Sqw7xdxClkSAog836Epx3QI3+PY8uyPOU55eMG1Dys9xFkifEA1Lc5/TbhTzSXTQINIOJT1cVI+nNeLlNcdB2luZsbIEL1PkKa7zO6rYqGcTvYOkL2d9H5Os94+wiHCCxmtP0a4jZ71jNU/4mHhpObEhj0cGDX0+GAVtxqp+DXCFF8QTSeiVHHZLg3xmK79VvJKgnCQOMpkYYBzWkhP10xu+LqHBX0m1xOv4ndWUeF5jxNn3tTd70XaAq8wDh0MGgyaDUhQEEUEYZiwUECGPBoxNLJyPyOrBhuTezJ1JGq7dGJEsUF7Ntw9t1Gk3Tz+KCJxlEO1CJL8Qf4qr8lP5Xn5y1yw2Fb3lK2bmrry4DvF5Zm5Gh7X08jjc01efJXUdpNXR5aseXq8muwaP+xXlzHmgjWPxHOw+/EtX5XMlymMFMXjVfPqS4R1WjE3359sfzs94i7PLrXWc62JizdWm5dn/WpI++6qvJPmVflPXvXx/GfNxGPiKTEmdornIYmXxS7xkthLqwviYG3HCJ2VhinSbZH6JNVgYJq89S9dP1t4vUZ/DPVRlBnM0lSJ93/CKmQ0nbkOb/qP28f8F+T3iuefKAIvbODImbptU3HvEKFlpW5zrgIXv9F98LZua6N+OPwEWDyrFq1SNZ8gvAEcdod6HugpmNOWls05Uocsn5O66cpiUsxQ20NSUtcl12VLFrOZVWLpdtiZ0x1uHKE5QvfEp0plk/qv8RGw/bBS+fmsUtl+ThrWgZf6b8C8/UXAeIuJAAAACXBIWXMAAAsTAAALEwEAmpwYAAABd0lEQVQoFY1Tu6rCQBA9RkXyDTYh+BUiaMrY2CkR+1ha2NmksRCCIvgHKdTGPj6/wk4kfoSgGJO7M2Cu1yx4B7K7Z2bOzO6eTSYWBmGHwwHz+RxBEBCEpmlot9uo1WqMZUOGyJPJBKvViuOFQoHn+/3Oc6PRQL/fl3GB7XYbVyqVuF6vx6J7HEURf7vdLjZNk2P7/Z56pAy2bXMCET+NClDhbrf7GWKsnE4nqKqKarWa2pphGKBjUI7MFHKKMrLYV59SKpVwu90gtphKFmcFXRzlyExpNpvsH4/H2Gw2eD6fCMMQvu/DdV2OtVotGRcs1Ww2w3K55IR8Ps/z4/FICKS14zjIZrOJjxZMpgU9ksVigcvlQpAfSbFYxHq9ZlwulzEcDpHL5RjzINXgzel5HstFkpGs1+s1ifJt/5ZKrzqdDizL4sDxeESv14MowDjZdpr21/P+hHVdx3Q6xdfOrxLU8fWTnM9nlvbfnakIyTgYDFjK0WiEH/+iGDyjqniMAAAAAElFTkSuQmCC') no-repeat 2px 5px; /* left, top */
-	padding-left:20px;
-	margin:0px;
-}
-select {
-	display:none;
-}
-</style>
 <script src="language.js"></script>
 </head>
-<body>
+<body class="search">
 <form id="searchform" action="http://www.wikipedia.org/search-redirect.php" target="_blank"> 
 <input id="searchInput" class="textfield" name="search" type="text" placeholder="Type to search..." autofocus /> 
 <!--
