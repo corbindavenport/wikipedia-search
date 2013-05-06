@@ -73,17 +73,17 @@ You should have received a copy of the GNU General Public License along with thi
 	font-weight:bold;
 	padding-left:15px;
 }
-::-webkit-scrollbar {
+.settings ::-webkit-scrollbar {
     width: 8px;
 }
-::-webkit-scrollbar-track {
+.settings ::-webkit-scrollbar-track {
     border:0px;
     border-radius: 10px;
 }
-::-webkit-scrollbar-track:hover {
+.settings ::-webkit-scrollbar-track:hover {
     border:1px solid #CCCCCC;
 }
-::-webkit-scrollbar-thumb {
+.settings ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background:#CCCCCC;
 }
