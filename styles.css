@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
@@ -6,6 +5,8 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
 */
+
+/* Search styles */
 .search {
 	margin:0px;
 	width:400px;
@@ -27,6 +28,7 @@ You should have received a copy of the GNU General Public License along with thi
 .search select {
 	display:none;
 }
+/* Settings styles */
 .settings body {
 	text-align:center;
 	font-family:Helvetica, sans-serif;
@@ -73,22 +75,22 @@ You should have received a copy of the GNU General Public License along with thi
 	font-weight:bold;
 	padding-left:15px;
 }
-.settings ::-webkit-scrollbar {
-    width: 8px;
-}
-.settings ::-webkit-scrollbar-track {
-    border:0px;
-    border-radius: 10px;
-}
-.settings ::-webkit-scrollbar-track:hover {
-    border:1px solid #CCCCCC;
-}
-.settings ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background:#CCCCCC;
-}
-#github-buttons {
+.settings #github-buttons {
 	position:absolute;
 	bottom:20px;
 	left:20px;
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    border:0px;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track:hover {
+    border:1px solid #CCCCCC;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background:#CCCCCC;
 }
