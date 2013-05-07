@@ -11,10 +11,10 @@ You should have received a copy of the GNU General Public License along with thi
 	margin:0px;
 	width:400px;
 }
-.search input:focus {
+input:focus {
     outline: none;
 }
-.search .textfield {
+.textfield {
 	border:0px;
 	font-family: Arial;
 	font-size:14px;
@@ -25,11 +25,11 @@ You should have received a copy of the GNU General Public License along with thi
 	padding-left:20px;
 	margin:0px;
 }
-.search select {
+select {
 	display:none;
 }
 /* Settings styles */
-.settings body {
+.settings {
 	text-align:center;
 	font-family:Helvetica, sans-serif;
 	color:#4D4D4D;
@@ -37,7 +37,7 @@ You should have received a copy of the GNU General Public License along with thi
 	background-color: #EEE;
 	overflow:hidden;
 }
-.settings #content {
+#content {
 	background-color:#FFFFFF;
 	border: 1px solid #EEE;
 	-moz-box-shadow: 0 0 20px rgba(0, 0, 0, .2);
@@ -71,11 +71,11 @@ You should have received a copy of the GNU General Public License along with thi
 	border:1px solid #CCC;
 	margin:5px;
 }
-.settings #status {
+#status {
 	font-weight:bold;
 	padding-left:15px;
 }
-.settings #github-buttons {
+#github-buttons {
 	position:absolute;
 	bottom:20px;
 	left:20px;
