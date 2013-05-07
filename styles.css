@@ -29,8 +29,8 @@ input:focus {
 #searchform select {
 	display:none;
 }
-/* Settings styles */
-.settings {
+/* Options styles */
+.options {
 	text-align:center;
 	font-family:Helvetica, sans-serif;
 	color:#4D4D4D;
