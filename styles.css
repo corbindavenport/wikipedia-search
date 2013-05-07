@@ -6,15 +6,16 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
 */
 
+input:focus {
+    outline: none;
+}
+
 /* Search styles */
 .search {
 	margin:0px;
 	width:400px;
 }
-input:focus {
-    outline: none;
-}
-.textfield {
+#searchform .textfield {
 	border:0px;
 	font-family: Arial;
 	font-size:14px;
@@ -25,7 +26,7 @@ input:focus {
 	padding-left:20px;
 	margin:0px;
 }
-select {
+#searchform select {
 	display:none;
 }
 /* Settings styles */
@@ -47,7 +48,7 @@ select {
 	margin-top:20px;
 	width:400px;
 }
-.settings select {
+#language {
 	width:390px;
 	background:transparent;
 	border:0px;
@@ -59,7 +60,7 @@ select {
 	margin-top:5px;
 	-webkit-appearance: none;
 }
-.settings input {
+input[type="button"] {
 	width:80px;
 	background:#FFF;
 	border:0px;
