@@ -5,10 +5,11 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
 */
+
 function save_options() {
   var select = document.getElementById("language");
   var language = select.children[select.selectedIndex].value;
-  localStorage["favorite_color"] = language;
+  localStorage["launguage"] = language;
   var status = document.getElementById("status");
   status.innerHTML = "Saved!";
   setTimeout(function() {
@@ -16,7 +17,7 @@ function save_options() {
   }, 750);
 }
 function restore_options() {
-  var favorite = localStorage["favorite_color"];
+  var favorite = localStorage["launguage"];
   if (!favorite) {
     return;
   }
@@ -33,7 +34,7 @@ window.onload = function(){
     document.querySelector('input[value="Save"]').onclick=save_options;
 }
 window.addEventListener('load',function(){
- var favorite = localStorage["favorite_color"];
+ var favorite = localStorage["launguage"];
   if (!favorite) {
     return;
   }

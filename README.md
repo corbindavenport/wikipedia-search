@@ -9,6 +9,11 @@ Wikipedia Search is free to use in any browser extension, but I would like a lin
 __Wikipedia is a trademark of the Wikimedia Foundation.__
 
 ---------------------------------------------------------
+__New in Wikipedia Serch 4.1:__
+* Now using Roboto as main font (Arial as fallback)
+* Added new languages (Cebuano, Eesti, Minangkabau, and Simple English)
+* Minor UI changes
+
 __New in Wikipedia Serch 4.0:__
 * Major code cleanup
 * UI refresh
