@@ -11,15 +11,16 @@ You should have received a copy of the GNU General Public License along with thi
 
 /* Search styles */
 .search {
-	margin:0px;
-	width:400px;
+	margin:0;
+	padding: 0;
+	width: 400px !important;
+	height: 24px !important;
 }
 input:focus {
 	outline: none;
 }
 #searchform .textfield {
 	border:0px;
-	font-family: Arial;
 	font-size:14px;
 	width: 380px !important;
 	float:left;
