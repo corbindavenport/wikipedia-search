@@ -1,7 +1,8 @@
 {
 	"manifest_version": 2,
 	"name": "Wikipedia Search",
-	"version": "4.1.1",
+	"update_url": "https://raw.github.com/corbindavenport/wikipedia-search/master/updates.xml",
+	"version": "4.2",
 	"description": "Search Wikipedia in every language and open results in a new tab.",
         "options_page": "options.html",
 	"browser_action":	{
