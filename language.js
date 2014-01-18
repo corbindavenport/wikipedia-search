@@ -17,14 +17,14 @@ function save_options() {
   }, 750);
 }
 function restore_options() {
-  var favorite = localStorage["launguage"];
-  if (!favorite) {
+  var launguage = localStorage["launguage"];
+  if (!launguage) {
     return;
   }
   var select = document.getElementById("language");
   for (var i = 0; i < select.children.length; i++) {
     var child = select.children[i];
-    if (child.value == favorite) {
+    if (child.value == launguage) {
       child.selected = "true";
       break;
     }
@@ -34,14 +34,14 @@ window.onload = function(){
     document.querySelector('input[value="Save"]').onclick=save_options;
 }
 window.addEventListener('load',function(){
- var favorite = localStorage["launguage"];
-  if (!favorite) {
+ var launguage = localStorage["launguage"];
+  if (!launguage) {
     return;
   }
   var select = document.getElementById("language");
   for (var i = 0; i < select.children.length; i++) {
     var child = select.children[i];
-    if (child.value == favorite) {
+    if (child.value == launguage) {
       child.selected = "true";
       break;
     }

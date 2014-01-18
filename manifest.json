@@ -9,6 +9,12 @@
 		"default_popup": "index.html",
 		"default_title": "Wikipedia Search"
 	},
+	"permissions": [
+    "contextMenus"
+  	],
+  	"background": {
+    "scripts": ["contextmenu.js"]
+  	},
 	"icons":{
 		"16":"icon16.png",
 		"128":"icon.png"
