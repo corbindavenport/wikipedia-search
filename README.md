@@ -10,8 +10,7 @@ __Wikipedia is a trademark of the Wikimedia Foundation.__
 
 ---------------------------------------------------------
 __New in Wikipedia Serch 5.0:__
-* Search from the Chrome Omnibar by selecting it, typing 'wiki', pressing space, and start typing
-⋅⋅* Based on [OmniWiki](https://github.com/hamczu/OmniWiki)
+* Search from the Chrome Omnibar by selecting it, typing 'wiki', pressing space, and start typing (Based on [OmniWiki](https://github.com/hamczu/OmniWiki))
 * Right-click a word or phrase inside any web page and select 'Wikipedia Search' to lookup
 * Added new languages (Hayeren, Latina, Saxa Tyla, Cebuano, Srpskohrvatski)
 * Various bug fixes
