@@ -40,7 +40,7 @@ input:focus {
 	font-family: 'Roboto', "Arial", sans-serif;
 	color:#4D4D4D;
 	font-size:15px;
-	background-color: #e5e5e5;
+	background-color: #EBEBEB;
 	overflow:hidden;
 }
 #content {
@@ -71,13 +71,13 @@ input[type="button"] {
 	border:0px;
 	height:30px;
 	font-family: 'Roboto', "Arial", sans-serif;
-	color:#88c6d3;
+	color:#1020C5;
 	font-size:15px;
 	margin:5px;
 }
 #status {
 	padding-left:15px;
-	color:#88c6d3;
+	color:#1020C5;
 }
 #github-buttons {
 	position:absolute;

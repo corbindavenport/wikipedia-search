@@ -13,7 +13,7 @@ You should have received a copy of the GNU General Public License along with thi
 	"description": "Search Wikipedia in every language and open results in a new tab.",
         "options_page": "options.html",
 	"browser_action":	{
-		"default_icon": "icon.png",
+		"default_icon": "icon128.png",
 		"default_popup": "index.html",
 		"default_title": "Wikipedia Search"
 	},
@@ -29,6 +29,6 @@ You should have received a copy of the GNU General Public License along with thi
   	},
 	"icons":{
 		"16":"icon16.png",
-		"128":"icon.png"
+		"128":"icon128.png"
 	}
 }

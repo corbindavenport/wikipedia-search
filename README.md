@@ -9,6 +9,13 @@ Wikipedia Search is free to use in any browser extension, but I would like a lin
 __Wikipedia is a trademark of the Wikimedia Foundation.__
 
 ---------------------------------------------------------
+__New in Wikipedia Serch 5.0:__
+* Search from the Chrome Omnibar by selecting it, typing 'wiki', pressing space, and start typing
+⋅⋅* Based on [OmniWiki](https://github.com/hamczu/OmniWiki)
+* Right-click a word or phrase inside any web page and select 'Wikipedia Search' to lookup
+* Added new languages (Hayeren, Latina, Saxa Tyla, Cebuano, Srpskohrvatski)
+* Various bug fixes
+
 __New in Wikipedia Serch 4.1.1:__
 * Fixed bug where the drop down box would not be the size of the text field
 

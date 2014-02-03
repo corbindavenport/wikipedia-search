@@ -11,8 +11,8 @@ You should have received a copy of the GNU General Public License along with thi
 function onSearch(info, tab) {
         chrome.tabs.detectLanguage(null, function(lang) {
             var language = localStorage["launguage"];
-           var taburl = "http://" + language + ".wikipedia.org/w/index.php?title=Special:Search&search=" + info.selectionText.replace(/\s/g, "+");
-             chrome.tabs.create({ url: taburl, selected: false });
+            var taburl = "http://" + language + ".wikipedia.org/w/index.php?title=Special:Search&search=" + info.selectionText.replace(/\s/g, "+");
+                chrome.tabs.create({ url: taburl, selected: false });
         });
     }
     var id = chrome.contextMenus.create({ "title": "Wikipedia Search", "contexts": ["selection"],
@@ -22,7 +22,6 @@ function onSearch(info, tab) {
 // Omnibox Search
 // Derived from OmniWiki (github.com/hamczu/OmniWiki)
 
-var language = localStorage["launguage"];
 var currentRequest = null;
 
 chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
@@ -77,6 +76,7 @@ chrome.omnibox.onInputCancelled.addListener(function() {
 
 
 function suggests(query, callback) {
+    var language = localStorage["launguage"];
     var req = new XMLHttpRequest();
   
     req.open("GET", "http://" + language + ".wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&search=" + query, true);
@@ -98,5 +98,6 @@ function suggests(query, callback) {
 }
 
 chrome.omnibox.onInputEntered.addListener(function(text) {
+    var language = localStorage["launguage"];
     chrome.tabs.update(null, {url: "http://" + language + ".wikipedia.org/w/index.php?search=" + text});
 })();
