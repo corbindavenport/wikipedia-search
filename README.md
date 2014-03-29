@@ -1,5 +1,7 @@
 Wikipedia Search
 ================
+Wikipedia Classic 5.0 is a fork of Wikipedia Search 4.1.1, for people who want to keep the older button search instead of the new integration with Chrome's search bar and right-click functionality. Wikipedia Search Classic also brings bug fixes and new languages from the newer updates.
+
 This extension allows you to type in a topic, click enter on your keyboard, and the article will appear in a new tab. Numerous Wikipedia extensions are available on the Chrome web store, but only this one opens results in the desktop Wikipedia. It opens the full blown site and not the dummed-down mobile version. Instant access to the millions of articles of articles on Wikipedia.
 
 You can aso select your language of choice from the Options page, with access to every language Wikipedia has to offer. Simply right click the Wikipedia button, select Options, select a language from the simple list, and click Save. After that, the next time you search it will send you to the Wikipedia site for the language you chose.
@@ -9,12 +11,17 @@ Wikipedia Search is free to use in any browser extension, but I would like a lin
 __Wikipedia is a trademark of the Wikimedia Foundation.__
 
 ---------------------------------------------------------
-__New in Wikipedia Serch 4.1:__
+__New in Wikipedia Search Classic 5.0:__
+* New branch of Wikipedia Search forked from version 4.1.1
+* Features old search button instead of new search bar/right click search
+* Brings bug fixes and new languages (Hayeren, Latina, Saxa Tyla, Cebuano, Srpskohrvatski) from 5.0
+
+__New in Wikipedia Search 4.1:__
 * Now using Roboto as main font (Arial as fallback)
 * Added new languages (Cebuano, Eesti, Minangkabau, and Simple English)
 * Minor UI changes
 
-__New in Wikipedia Serch 4.0:__
+__New in Wikipedia Search 4.0:__
 * Major code cleanup
 * UI refresh
 * Code now available on Github
