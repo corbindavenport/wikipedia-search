@@ -6,6 +6,17 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
 */
 
+// Update Message
+
+chrome.runtime.onInstalled.addListener(function(details){
+    if(details.reason == "install"){
+        console.log("This is a first install!");
+    }else if(details.reason == "update"){
+        var thisVersion = chrome.runtime.getManifest().version;
+        chrome.tabs.create({'url': chrome.extension.getURL('welcome.html')});
+    }
+});
+
 // Context Menu Search
 
 function onSearch(info, tab) {

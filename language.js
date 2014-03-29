@@ -10,11 +10,6 @@ function save_options() {
   var select = document.getElementById("language");
   var language = select.children[select.selectedIndex].value;
   localStorage["launguage"] = language;
-  var status = document.getElementById("status");
-  status.innerHTML = "Saved!";
-  setTimeout(function() {
-    status.innerHTML = "";
-  }, 750);
 }
 function restore_options() {
   var launguage = localStorage["launguage"];

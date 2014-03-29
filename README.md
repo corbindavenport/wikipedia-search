@@ -1,8 +1,8 @@
 Wikipedia Search
 ================
-This extension allows you to type in a topic, click enter on your keyboard, and the article will appear in a new tab. Numerous Wikipedia extensions are available on the Chrome web store, but only this one opens results in the desktop Wikipedia. It opens the full blown site and not the dummed-down mobile version. Instant access to the millions of articles of articles on Wikipedia.
+This extension allows you to type the word 'wiki' into your search bar, press the space key, and search for an article on Wikipedia. Instant access to the millions of articles of articles on Wikipedia.
 
-You can aso select your language of choice from the Options page, with access to every language Wikipedia has to offer. Simply right click the Wikipedia button, select Options, select a language from the simple list, and click Save. After that, the next time you search it will send you to the Wikipedia site for the language you chose.
+You can aso select your language of choice from the Options page, with access to every language Wikipedia has to offer. Simply click the Chrome menu button, go to Tools > Extensions > Wikipedia Search > Options, select a language from the simple list, and click Save. After that, the next time you search it will send you to the Wikipedia site for the language you chose.
 
 Wikipedia Search is free to use in any browser extension, but I would like a link somewhere linking back to this Github page.
 
@@ -11,8 +11,10 @@ __Wikipedia is a trademark of the Wikimedia Foundation.__
 ---------------------------------------------------------
 __New in Wikipedia Serch 5.0:__
 * Search from the Chrome Omnibar by selecting it, typing 'wiki', pressing space, and start typing (Based on [OmniWiki](https://github.com/hamczu/OmniWiki))
+* Removal of the old search button
 * Right-click a word or phrase inside any web page and select 'Wikipedia Search' to lookup
 * Added new languages (Hayeren, Latina, Saxa Tyla, Cebuano, Srpskohrvatski)
+* New options screen with clean interface
 * Various bug fixes
 
 __New in Wikipedia Serch 4.1.1:__

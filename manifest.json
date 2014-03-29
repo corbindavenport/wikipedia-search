@@ -10,13 +10,8 @@ You should have received a copy of the GNU General Public License along with thi
 	"manifest_version": 2,
 	"name": "Wikipedia Search",
 	"version": "5.0",
-	"description": "Search Wikipedia in every language and open results in a new tab.",
+	"description": "Search Wikipedia in every language from the search bar.",
         "options_page": "options.html",
-	"browser_action":	{
-		"default_icon": "icon128.png",
-		"default_popup": "index.html",
-		"default_title": "Wikipedia Search"
-	},
 	"omnibox": {
     	"keyword": "wiki"
   	},
