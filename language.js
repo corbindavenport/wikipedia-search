@@ -9,17 +9,17 @@ You should have received a copy of the GNU General Public License along with thi
 function save_options() {
   var select = document.getElementById("language");
   var language = select.children[select.selectedIndex].value;
-  localStorage["launguage"] = language;
+  localStorage["language"] = language;
 }
 function restore_options() {
-  var launguage = localStorage["launguage"];
-  if (!launguage) {
+  var favorite = localStorage["language"];
+  if (!favorite) {
     return;
   }
   var select = document.getElementById("language");
   for (var i = 0; i < select.children.length; i++) {
     var child = select.children[i];
-    if (child.value == launguage) {
+    if (child.value == favorite) {
       child.selected = "true";
       break;
     }
@@ -29,19 +29,19 @@ window.onload = function(){
     document.querySelector('input[value="Save"]').onclick=save_options;
 }
 window.addEventListener('load',function(){
- var launguage = localStorage["launguage"];
-  if (!launguage) {
+ var favorite = localStorage["language"];
+  if (!favorite) {
     return;
   }
   var select = document.getElementById("language");
   for (var i = 0; i < select.children.length; i++) {
     var child = select.children[i];
-    if (child.value == launguage) {
+    if (child.value == favorite) {
       child.selected = "true";
       break;
     }
   }
 });
 function startSearch(event) {       
-	document.getElementById("searchform").submit();     
+  document.getElementById("searchform").submit();     
 }

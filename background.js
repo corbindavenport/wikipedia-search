@@ -21,7 +21,7 @@ chrome.runtime.onInstalled.addListener(function(details){
 
 function onSearch(info, tab) {
         chrome.tabs.detectLanguage(null, function(lang) {
-            var language = localStorage["launguage"];
+            var language = localStorage["language"];
             var taburl = "http://" + language + ".wikipedia.org/w/index.php?title=Special:Search&search=" + info.selectionText.replace(/\s/g, "+");
                 chrome.tabs.create({ url: taburl, selected: false });
         });
@@ -87,7 +87,7 @@ chrome.omnibox.onInputCancelled.addListener(function() {
 
 
 function suggests(query, callback) {
-    var language = localStorage["launguage"];
+    var language = localStorage["language"];
     var req = new XMLHttpRequest();
   
     req.open("GET", "http://" + language + ".wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&search=" + query, true);
@@ -109,6 +109,6 @@ function suggests(query, callback) {
 }
 
 chrome.omnibox.onInputEntered.addListener(function(text) {
-    var language = localStorage["launguage"];
+    var language = localStorage["language"];
     chrome.tabs.update(null, {url: "http://" + language + ".wikipedia.org/w/index.php?search=" + text});
 })();
