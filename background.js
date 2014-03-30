@@ -15,6 +15,10 @@ chrome.runtime.onInstalled.addListener(function(details){
         var thisVersion = chrome.runtime.getManifest().version;
         chrome.tabs.create({'url': chrome.extension.getURL('welcome.html')});
     }
+    if(localStorage.getItem("language") === null){
+        var language = "en";
+        localStorage["language"] = language;
+    }
 });
 
 // Context Menu Search
