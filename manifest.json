@@ -1,27 +1,19 @@
-/*
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
-*/
-
 {
-	"manifest_version": 2,
+"manifest_version": 2,
 	"name": "Wikipedia Search",
 	"version": "5.0",
 	"description": "Search Wikipedia in every language from the search bar.",
-        "options_page": "options.html",
+	"options_page": "options.html",
 	"omnibox": {
-    	"keyword": "wiki"
-  	},
+		"keyword": "wiki"
+	},
 	"permissions": [
-    	"contextMenus",
-    	"http://*.wikipedia.org/*"
-  	],
-  	"background": {
-    	"scripts": ["background.js"]
-  	},
+		"contextMenus",
+		"http://*.wikipedia.org/*"
+	],
+	"background": {
+		"scripts": ["background.js"]
+	},
 	"icons":{
 		"16":"icon16.png",
 		"128":"icon128.png"
