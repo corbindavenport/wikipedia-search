@@ -9,16 +9,16 @@ Wikipedia Search is free to use in any browser extension, but I would like a lin
 __Wikipedia is a trademark of the Wikimedia Foundation.__
 
 ---------------------------------------------------------
-__New in Wikipedia Serch 5.0.3:__
+__New in Wikipedia Search 5.0.3:__
 * Fixes default language not generating on extension update/install
 
-__New in Wikipedia Serch 5.0.2:__
+__New in Wikipedia Search 5.0.2:__
 * Bug fixes
 
-__New in Wikipedia Serch 5.0.1:__
+__New in Wikipedia Search 5.0.1:__
 * Fixed bug where searches would try to load 'undefined.wikipedia.org'
 
-__New in Wikipedia Serch 5.0:__
+__New in Wikipedia Search 5.0:__
 * Search from the Chrome Omnibar by selecting it, typing 'wiki', pressing space, and start typing (Based on [OmniWiki](https://github.com/hamczu/OmniWiki))
 * Removal of the old search button
 * Right-click a word or phrase inside any web page and select 'Wikipedia Search' to lookup
@@ -26,15 +26,15 @@ __New in Wikipedia Serch 5.0:__
 * New options screen with clean interface
 * Various bug fixes
 
-__New in Wikipedia Serch 4.1.1:__
+__New in Wikipedia Search 4.1.1:__
 * Fixed bug where the drop down box would not be the size of the text field
 
-__New in Wikipedia Serch 4.1:__
+__New in Wikipedia Search 4.1:__
 * Now using Roboto as main font (Arial as fallback)
 * Added new languages (Cebuano, Eesti, Minangkabau, and Simple English)
 * Minor UI changes
 
-__New in Wikipedia Serch 4.0:__
+__New in Wikipedia Search 4.0:__
 * Major code cleanup
 * UI refresh
 * Code now available on Github
