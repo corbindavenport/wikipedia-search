@@ -9,6 +9,9 @@ Wikipedia Search is free to use in any browser extension, but I would like a lin
 __Wikipedia is a trademark of the Wikimedia Foundation.__
 
 ---------------------------------------------------------
+__New in Wikipedia Serch 5.0.3:__
+* Fixes default language not generating on extension update/install
+
 __New in Wikipedia Serch 5.0.2:__
 * Bug fixes
 

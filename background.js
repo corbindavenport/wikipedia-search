@@ -9,16 +9,14 @@ You should have received a copy of the GNU General Public License along with thi
 // Update Message
 
 chrome.runtime.onInstalled.addListener(function(details){
-    if(details.reason == "install"){
-        console.log("This is a first install!");
-    }else if(details.reason == "update"){
-        var thisVersion = chrome.runtime.getManifest().version;
-        chrome.tabs.create({'url': chrome.extension.getURL('welcome.html')});
+    if(details.reason == "update" || "install"){
+            if(localStorage.getItem("language") === null){
+            var language = "en";
+            localStorage["language"] = language;
+            console.log("no language selected, defaulting to english");
+        }
     }
-    if(localStorage.getItem("language") === null){
-        var language = "en";
-        localStorage["language"] = language;
-    }
+    chrome.tabs.create({'url': chrome.extension.getURL('welcome.html')});
 });
 
 // Context Menu Search
@@ -110,9 +108,9 @@ function suggests(query, callback) {
 
     };
     req.send();
-}
+};
 
 chrome.omnibox.onInputEntered.addListener(function(text) {
     var language = localStorage["language"];
     chrome.tabs.update(null, {url: "http://" + language + ".wikipedia.org/w/index.php?search=" + text});
-})();
+});
