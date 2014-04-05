@@ -9,7 +9,7 @@ You should have received a copy of the GNU General Public License along with thi
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script src="language.js"></script>
+<script src="wikipedia.js"></script>
 <style>
 html {
 	background: url(icon128.png) #eee center center no-repeat;
@@ -45,57 +45,59 @@ input:focus {
 <form id="searchform" action="http://www.wikipedia.org/search-redirect.php" target="_parent"> 
 	<input id="searchInput" class="textfield" name="search" type="text" placeholder="Click to search..." autocomplete="off" /> 
 	<select id="language" name="language">
-		<option value="ar" lang="ar">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</option><!-- Al-Ê¿ArabÄ«yah -->
-		<option value="bg" lang="bg">Ð‘ÑŠÐ»Ð³Ð°Ñ€ÑÐºÐ¸</option><!-- Bulgarski -->
-		<option value="ca" lang="ca">CatalÃ </option>
-		<option value="cs" lang="cs">ÄŒesky</option>
+		<!-- 100,000+ content pages, sorted by romanization (last updated 2013-11-19) -->
+		<option value="ar" lang="ar">العربية</option><!-- Al-ʿArabīyah -->
+		<option value="az" lang="az">Azərbaycanca</option>
+		<option value="bg" lang="bg">Български</option><!-- Bulgarski -->
+		<option value="ca" lang="ca">Català</option>
+		<option value="cs" lang="cs">Česky</option>
 		<option value="da" lang="da">Dansk</option>
 		<option value="de" lang="de">Deutsch</option>
 		<option value="en" lang="en" selected="selected">English</option>
-		<option value="es" lang="es">EspaÃ±ol</option>
+		<option value="es" lang="es">Español</option>
 		<option value="eo" lang="eo">Esperanto</option>
 		<option value="et" lang="et">Eesti</option>
 		<option value="eu" lang="eu">Euskara</option>
-		<option value="fa" lang="fa">ÙØ§Ø±Ø³ÛŒ</option><!-- FÄrsi -->
-		<option value="fr" lang="fr">FranÃ§ais</option>
+		<option value="fa" lang="fa">فارسی</option><!-- Fārsi -->
+		<option value="fr" lang="fr">Français</option>
 		<option value="gl" lang="gl">Galego</option>
-		<option value="ko" lang="ko">í•œêµ­ì–´</option><!-- Hangugeo -->
-		<option value="hy" lang="hy">Õ€Õ¡ÕµÕ¥Ö€Õ¥Õ¶</option><!-- Hayeren -->
-		<option value="hi" lang="hi">à¤¹à¤¿à¤¨à¥à¤¦à¥€</option><!-- HindÄ« -->
+		<option value="ko" lang="ko">한국어</option><!-- Hangugeo -->
+		<option value="hy" lang="hy">Հայերեն</option><!-- Hayeren -->
+		<option value="hi" lang="hi">हिन्दी</option><!-- Hindī -->
 		<option value="hr" lang="hr">Hrvatski</option>
 		<option value="id" lang="id">Bahasa Indonesia</option>
 		<option value="it" lang="it">Italiano</option>
-		<option value="he" lang="he">×¢×‘×¨×™×ª</option><!-- â€˜Ivrit -->
+		<option value="he" lang="he">עברית</option><!-- ‘Ivrit -->
 		<option value="la" lang="la">Latina</option>
-		<option value="lt" lang="lt">LietuviÅ³</option>
+		<option value="lt" lang="lt">Lietuvių</option>
 		<option value="hu" lang="hu">Magyar</option>
 		<option value="ms" lang="ms">Bahasa Melayu</option>
 		<option value="min" lang="min">Baso Minangkabau</option>
 		<option value="nl" lang="nl">Nederlands</option>
-		<option value="ja" lang="ja">æ—¥æœ¬èªž</option><!-- Nihongo -->
-		<option value="no" lang="nb">Norsk (bokmÃ¥l)</option>
+		<option value="ja" lang="ja">日本語</option><!-- Nihongo -->
+		<option value="no" lang="nb">Norsk (bokmål)</option>
 		<option value="nn" lang="nn">Norsk (nynorsk)</option>
-		<option value="uz" lang="uz">OÊ»zbekcha</option>
+		<option value="uz" lang="uz">Oʻzbekcha</option>
 		<option value="pl" lang="pl">Polski</option>
-		<option value="pt" lang="pt">PortuguÃªs</option>
-		<option value="kk" lang="kk">ÒšÐ°Ð·Ð°Ò›ÑˆÐ° / QazaqÅŸa / Ù‚Ø§Ø²Ø§Ù‚Ø´Ø§</option>
-		<option value="ro" lang="ro">RomÃ¢nÄƒ</option>
-		<option value="ru" lang="ru">Ð ÑƒÑÑÐºÐ¸Ð¹</option><!-- Russkiy -->
-		<option value="sah" lang="sah">Ð¡Ð°Ñ…Ð° Ð¢Ñ‹Ð»Ð°</option><!-- Saxa Tyla -->
+		<option value="pt" lang="pt">Português</option>
+		<option value="kk" lang="kk">Қазақша / Qazaqşa / قازاقشا</option>
+		<option value="ro" lang="ro">Română</option>
+		<option value="ru" lang="ru">Русский</option><!-- Russkiy -->
+		<option value="sah" lang="sah">Саха Тыла</option><!-- Saxa Tyla -->
 		<option value="simple" lang="en">Simple English</option>
 		<option value="ceb" lang="ceb">Sinugboanong</option><!-- Cebuano -->
-		<option value="sk" lang="sk">SlovenÄina</option>
-		<option value="sl" lang="sl">SlovenÅ¡Äina</option>
-		<option value="sr" lang="sr">Ð¡Ñ€Ð¿ÑÐºÐ¸ / Srpski</option>
-		<option value="sh" lang="sh">Srpskohrvatski / Ð¡Ñ€Ð¿ÑÐºÐ¾Ñ…Ñ€Ð²Ð°Ñ‚ÑÐºÐ¸</option>
+		<option value="sk" lang="sk">Slovenčina</option>
+		<option value="sl" lang="sl">Slovenščina</option>
+		<option value="sr" lang="sr">Српски / Srpski</option>
+		<option value="sh" lang="sh">Srpskohrvatski / Српскохрватски</option>
 		<option value="fi" lang="fi">Suomi</option>
 		<option value="sv" lang="sv">Svenska</option>
-		<option value="tr" lang="tr">TÃ¼rkÃ§e</option>
-		<option value="uk" lang="uk">Ð£ÐºÑ€Ð°Ñ—Ð½ÑÑŒÐºÐ°</option><!-- Ukrayinsâ€™ka -->
-		<option value="vi" lang="vi">Tiáº¿ng Viá»‡t</option>
-		<option value="vo" lang="vo">VolapÃ¼k</option>
+		<option value="tr" lang="tr">Türkçe</option>
+		<option value="uk" lang="uk">Українська</option><!-- Ukrayins’ka -->
+		<option value="vi" lang="vi">Tiếng Việt</option>
+		<option value="vo" lang="vo">Volapük</option>
 		<option value="war" lang="war">Winaray</option>
-		<option value="zh" lang="zh">ä¸­æ–‡</option><!-- ZhÅngwÃ©n -->
+		<option value="zh" lang="zh">中文</option><!-- Zhōngwén -->
 	</select>
 	<input class="searchButton" type="submit" value="  â†’  " name="go" style="display:none" /> 
 	<input type="hidden" value="Go" name="go" style="display:none" />

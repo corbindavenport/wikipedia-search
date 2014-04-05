@@ -27,10 +27,6 @@ function restore_options() {
     }
 }
 
-window.onload = function(){
-    document.querySelector('input[value="Save"]').onclick=save_options;
-}
-
 window.addEventListener('load',function(){
     var favorite = localStorage["language"];
     if (!favorite) {
@@ -48,4 +44,8 @@ window.addEventListener('load',function(){
 
 function startSearch(event) {       
     document.getElementById("searchform").submit();     
+}
+
+window.onload = function(){
+    document.querySelector('input[value="Save"]').onclick=save_options;
 }

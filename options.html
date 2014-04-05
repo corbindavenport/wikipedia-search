@@ -10,17 +10,19 @@ You should have received a copy of the GNU General Public License along with thi
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Wikipedia Search</title>
 <link rel="icon" type="image/png" href="icon16.png">
-<script src="language.js"></script>
+<script src="wikipedia.js"></script>
 <link href="styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<section id="wrapper" class="wrapper enabled">
     	<h1>Wikipedia Search - Settings</h1>
     	<article>
-       	<section class="settings-card">
-        <h2>Language</h2>
-          <select size="8" id="language" name="language">
+       		<section class="settings-card">
+        	<h2>Language</h2>
+			<select id="language" name="language">
+			<!-- 100,000+ content pages, sorted by romanization (last updated 2013-11-19) -->
 				<option value="ar" lang="ar">العربية</option><!-- Al-ʿArabīyah -->
+				<option value="az" lang="az">Azərbaycanca</option>
 				<option value="bg" lang="bg">Български</option><!-- Bulgarski -->
 				<option value="ca" lang="ca">Català</option>
 				<option value="cs" lang="cs">Česky</option>
@@ -72,10 +74,10 @@ You should have received a copy of the GNU General Public License along with thi
 				<option value="war" lang="war">Winaray</option>
 				<option value="zh" lang="zh">中文</option><!-- Zhōngwén -->
 			</select>
-		</section>
-		<section id="settings-buttons" class="buttons" style="display: block;">
-			<input class="g-button g-button-submit" type="button" onclick="save_options()" value="Save">
-		</section>
+			</section>
+			<section id="settings-buttons" class="buttons" style="display: block;">
+				<input class="g-button g-button-submit" type="button" onclick="save_options()" value="Save">
+			</section>
 		</article>
 		<article>
 			<h2>How it works</h2>
@@ -83,9 +85,7 @@ You should have received a copy of the GNU General Public License along with thi
 			<p>Just type 'wiki', then a space, then the name of the article you want. Live suggestions from Wikipedia are automatically displayed as you type.</p>
 			<p>You can also right-click on any word or phrase on the web and pick 'Wikipedia Search' to open in Wikipedia.</p>
 			<p>Wikipedia Search is open-source under the GPLv3 license <a href="https://github.com/corbindavenport/wikipedia-search">on GitHub</a>. You can browse the code, help fix bugs, or even make your own Wikipedia Search!</p>
-			<iframe src="http://ghbtns.com/github-btn.html?user=corbindavenport&repo=wikipedia-search&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe><iframe src="http://ghbtns.com/github-btn.html?user=corbindavenport&repo=wikipedia-search&type=fork&count=true"
-  allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
-			</article>
-		</section>
+		</article>
+	</section>
 </body>
 </html>

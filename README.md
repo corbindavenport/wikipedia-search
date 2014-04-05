@@ -11,6 +11,7 @@ __Wikipedia is a trademark of the Wikimedia Foundation.__
 ---------------------------------------------------------
 __New in Wikipedia Search 6.0:__
 * New widget for [Awesome New Tab Page](https://chrome.google.com/webstore/detail/mgmiemnjjchgkmgbeljfocdjjnpjnmcg)
+* Added new languages (Azərbaycanca)
 * Major code cleanup
 
 __New in Wikipedia Search 5.0.3:__
