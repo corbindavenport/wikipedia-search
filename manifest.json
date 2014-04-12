@@ -1,16 +1,18 @@
 {
 	"manifest_version": 2,
 	"name": "Wikipedia Search Classic",
-	"version": "5.0.1",
+	"version": "6.0",
 	"description": "Search Wikipedia in every language and open results in a new tab.",
         "options_page": "options.html",
 	"browser_action":	{
-		"default_icon": "icon.png",
+		"default_icon": "icon32.png",
 		"default_popup": "index.html",
 		"default_title": "Wikipedia Search"
 	},
 	"icons":{
 		"16":"icon16.png",
-		"128":"icon.png"
+		"32":"icon32.png",
+		"48":"icon48.png",
+		"128":"icon128.png"
 	}
 }
