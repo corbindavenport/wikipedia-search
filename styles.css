@@ -562,41 +562,26 @@ dl dd {
     opacity: 1;
   }
 }
-#github-buttons {
-	position: absolute;
-	bottom: 20px;
-	left: 20px;
+
+table tr td:first-child {
+  width: 100px;
 }
+
+table tr td:last-child {
+  width: 420px;
+}
+
 #language {
-	width: 100%;
-	background: transparent;
-	color: #333;
-	font: 81.25% arial, sans-serif;
-	line-height: 1;
-	font-size: 15px;
-	border: 0px;
-	padding: 0px;
-	outline: none;
-	-webkit-appearance: none;
-	padding-right: 10px;
+  width: 100%;
+  font: 81.25% arial, sans-serif;
+  line-height: 1;
+  font-size: 15px;
 }
+
 input {
 	outline: none;
 }
+
 .search {
 	width: 520px;
-}
-#language::-webkit-scrollbar {
-    width: 8px;
-}
-#language::-webkit-scrollbar-track {
-    border:0px;
-    border-radius: 10px;
-}
-#language::-webkit-scrollbar-track:hover {
-    border:1px solid #CCCCCC;
-}
-#language::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background:#CCCCCC;
 }

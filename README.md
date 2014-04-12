@@ -6,7 +6,7 @@ You can aso select your language of choice from the Options page, with access to
 
 Wikipedia Search is free to use in any browser extension, but I would like a link somewhere linking back to this Github page.
 
-__Wikipedia is a trademark of the Wikimedia Foundation.__
+__Wikipedia is a trademark of the Wikimedia Foundation. OmniProxy icon from the [Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack._
 
 ---------------------------------------------------------
 __New in Wikipedia Search 6.0:__
