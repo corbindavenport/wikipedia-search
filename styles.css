@@ -94,106 +94,6 @@ button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
 }
-input[type=email],
-input[type=number],
-input[type=password],
-input[type=tel],
-input[type=text],
-input[type=search],
-input[type=url] {
-  -moz-border-radius: 1px;
-  -moz-box-sizing: border-box;
-  -webkit-border-radius: 1px;
-  -webkit-box-sizing: border-box;
-  background: #fff;
-  border: 1px solid #d9d9d9;
-  border-radius: 1px;
-  border-top: 1px solid #c0c0c0;
-  box-sizing: border-box;
-  display: inline-block;
-  height: 29px;
-  margin: 0;
-  padding: 0 8px;
-}
-input[type=email]:hover,
-input[type=number]:hover,
-input[type=password]:hover,
-input[type=tel]:hover,
-input[type=text]:hover,
-input[type=search],
-input[type=url]:hover {
-  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  border: 1px solid #b9b9b9;
-  border-top: 1px solid #a0a0a0;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-}
-input[type=email]:focus,
-input[type=number]:focus,
-input[type=password]:focus,
-input[type=tel]:focus,
-input[type=text]:focus,
-input[type=search],
-input[type=url]:focus {
-  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
-  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
-  border: 1px solid #4d90fe;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
-  outline: none;
-}
-input[type=email][disabled=disabled],
-input[type=number][disabled=disabled],
-input[type=password][disabled=disabled],
-input[type=tel][disabled=disabled],
-input[type=text][disabled=disabled],
-input[type=search][disabled=disabled],
-input[type=url][disabled=disabled] {
-  border: 1px solid #e5e5e5;
-  background: #f1f1f1;
-}
-input[type=email][disabled=disabled]:hover,
-input[type=number][disabled=disabled]:hover,
-input[type=password][disabled=disabled]:hover,
-input[type=tel][disabled=disabled]:hover,
-input[type=text][disabled=disabled]:hover,
-input[type=search][disabled=disabled]:hover,
-input[type=url][disabled=disabled]:hover {
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-input[type=email][readonly=readonly],
-input[type=number][readonly=readonly],
-input[type=password][readonly=readonly],
-input[type=text][readonly=readonly],
-input[type=search][readonly=readonly],
-input[type=url][readonly=readonly] {
-  border: 1px solid #d9d9d9;
-}
-input[type=email][readonly=readonly]:hover,
-input[type=number][readonly=readonly]:hover,
-input[type=password][readonly=readonly]:hover,
-input[type=text][readonly=readonly]:hover,
-input[type=search][readonly=readonly]:hover,
-input[type=url][readonly=readonly]:hover,
-input[type=email][readonly=readonly]:focus,
-input[type=number][readonly=readonly]:focus,
-input[type=password][readonly=readonly]:focus,
-input[type=text][readonly=readonly]:focus,
-input[type=search][readonly=readonly]:focus,
-input[type=url][readonly=readonly]:focus {
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-input[type=checkbox].form-error,
-input[type=email].form-error,
-input[type=number].form-error,
-input[type=password].form-error,
-input[type=text].form-error,
-input[type=url].form-error {
-  border: 1px solid #dd4b39;
-}
 input[type=checkbox],
 input[type=radio] {
   -moz-border-radius: 1px;
@@ -662,41 +562,26 @@ dl dd {
     opacity: 1;
   }
 }
-#github-buttons {
-	position: absolute;
-	bottom: 20px;
-	left: 20px;
+
+table tr td:first-child {
+  width: 100px;
 }
+
+table tr td:last-child {
+  width: 420px;
+}
+
 #language {
-	width: 100%;
-	background: transparent;
-	color: #333;
-	font: 81.25% arial, sans-serif;
-	line-height: 1;
-	font-size: 15px;
-	border: 0px;
-	padding: 0px;
-	outline: none;
-	-webkit-appearance: none;
-	padding-right: 10px;
+  width: 100%;
+  font: 81.25% arial, sans-serif;
+  line-height: 1;
+  font-size: 15px;
 }
+
 input {
 	outline: none;
 }
+
 .search {
 	width: 520px;
-}
-#language::-webkit-scrollbar {
-    width: 8px;
-}
-#language::-webkit-scrollbar-track {
-    border:0px;
-    border-radius: 10px;
-}
-#language::-webkit-scrollbar-track:hover {
-    border:1px solid #CCCCCC;
-}
-#language::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background:#CCCCCC;
 }

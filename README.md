@@ -8,9 +8,14 @@ You can aso select your language of choice from the Options page, with access to
 
 Wikipedia Search is free to use in any browser extension, but I would like a link somewhere linking back to this Github page.
 
-__Wikipedia is a trademark of the Wikimedia Foundation.__
+__Wikipedia is a trademark of the Wikimedia Foundation. OmniProxy icon from the [Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack._
 
 ---------------------------------------------------------
+__New in Wikipedia Search Classic 6.0:__
+* New icon from Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack.
+* Added new language (Azərbaycanca)
+* Major code cleanup
+
 __New in Wikipedia Search Classic 5.0:__
 * New branch of Wikipedia Search forked from version 4.1.1
 * Features old search button instead of new search bar/right click search
