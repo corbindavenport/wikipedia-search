@@ -6,7 +6,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
 */
 
-// Update Message
+// Check for settings & version
 
 chrome.runtime.onInstalled.addListener(function(details){
 	if(details.reason == "update" || "install"){
@@ -15,8 +15,16 @@ chrome.runtime.onInstalled.addListener(function(details){
 			localStorage["language"] = language;
 			console.log("no language selected, defaulting to english");
 		}
+		if(localStorage.getItem("protocol") === null){
+			var protocol = "http://";
+			localStorage["protocol"] = protocol;
+			console.log("no protocol selected, defaulting to http");
+		}
 	}
-	chrome.tabs.create({'url': chrome.extension.getURL('welcome.html')});
+	if(localStorage.getItem("version") != chrome.runtime.getManifest().version){
+		chrome.tabs.create({'url': chrome.extension.getURL('welcome.html')});
+		localStorage["version"] = chrome.runtime.getManifest().version
+	}
 });
 
 // Awesome New Tab Page Widget
@@ -53,7 +61,8 @@ chrome.extension.onMessageExternal.addListener(function (request, sender, sendRe
 function onSearch(info, tab) {
 		chrome.tabs.detectLanguage(null, function(lang) {
 			var language = localStorage["language"];
-			var taburl = "http://" + language + ".wikipedia.org/w/index.php?title=Special:Search&search=" + info.selectionText.replace(/\s/g, "+");
+			var protocol = localStorage["protocol"];
+			var taburl = protocol + language + ".wikipedia.org/w/index.php?title=Special:Search&search=" + info.selectionText.replace(/\s/g, "+");
 			chrome.tabs.create({ url: taburl, selected: false });
 		});
 	}
@@ -116,9 +125,10 @@ chrome.omnibox.onInputCancelled.addListener(function() {
 
 function suggests(query, callback) {
 	var language = localStorage["language"];
+	var protocol = localStorage["protocol"];
 	var req = new XMLHttpRequest();
 	
-	req.open("GET", "http://" + language + ".wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&search=" + query, true);
+	req.open("GET", protocol + language + ".wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&search=" + query, true);
 	req.onload = function(){
 		if(this.status == 200){
 			try{                  
@@ -138,5 +148,6 @@ function suggests(query, callback) {
 
 chrome.omnibox.onInputEntered.addListener(function(text) {
 	var language = localStorage["language"];
-	chrome.tabs.update(null, {url: "http://" + language + ".wikipedia.org/w/index.php?search=" + text});
+	var protocol = localStorage["protocol"];
+	chrome.tabs.update(null, {url: protocol + language + ".wikipedia.org/w/index.php?search=" + text});
 });

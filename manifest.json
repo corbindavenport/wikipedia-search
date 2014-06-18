@@ -12,7 +12,8 @@
 	],
 	"permissions": [
 		"contextMenus",
-		"http://*.wikipedia.org/*"
+		"http://*.wikipedia.org/*",
+		"https://*.wikipedia.org/*"
 	],
 	"background": {
 		"scripts": ["background.js"]
