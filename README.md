@@ -6,13 +6,15 @@ You can aso select your language of choice from the Options page, with access to
 
 Wikipedia Search is free to use in any browser extension, but I would like a link somewhere linking back to this Github page.
 
-__Wikipedia is a trademark of the Wikimedia Foundation. OmniProxy icon from the [Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack._
+__Wikipedia is a trademark of the Wikimedia Foundation. OmniProxy icon from the [Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack.__
 
 ---------------------------------------------------------
 __New in Wikipedia Search 6.0:__
-* New widget for [Awesome New Tab Page](https://chrome.google.com/webstore/detail/mgmiemnjjchgkmgbeljfocdjjnpjnmcg)
-* Added new languages (Azərbaycanca)
-* Major code cleanup
+* __ANTP Widget:__ Wikipedia Search now includes a widget for the popular New Tab Page replacement, Awesome New Tab Page. If you have ANTP installed, just drag the Wikipedia Search widget to an empty slot.
+* __HTTPS Search:__ You can now enable searching with HTTPS from the options, which makes your searches more secure and private.
+* __New Icon:__ Wikipedia Search now has a new icon from the Faenza icon pack.
+* __New Language:__ Wikipedia Search now supports Azərbaycanca as a language.
+* Minor bug fixes and code cleanup
 
 __New in Wikipedia Search 5.0.3:__
 * Fixes default language not generating on extension update/install
