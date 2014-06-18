@@ -56,10 +56,6 @@ window.addEventListener('load',function(){
 	}
 });
 
-function startSearch(event) {       
-	document.getElementById("searchform").submit();     
-}
+function startSearch(event) {document.getElementById("searchform").submit();     }
 
-window.onload = function(){
-	document.querySelector('input[value="Save"]').onclick=save_options;
-}
+window.onload = function(){document.querySelector('input[value="Save"]').onclick=save_options;}
