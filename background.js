@@ -16,9 +16,9 @@ chrome.runtime.onInstalled.addListener(function(details){
 			console.log("no language selected, defaulting to english");
 		}
 		if(localStorage.getItem("protocol") === null){
-			var protocol = "http://";
+			var protocol = "https://";
 			localStorage["protocol"] = protocol;
-			console.log("no protocol selected, defaulting to http");
+			console.log("no protocol selected, defaulting to https (secure)");
 		}
 	}
 	if(localStorage.getItem("version") != chrome.runtime.getManifest().version){
