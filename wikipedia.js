@@ -36,6 +36,10 @@ function restore_options() {
 	}
 }
 
+function doDonation(){
+	chrome.tabs.create({ url: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Corbin%20Davenport&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted" });
+}
+
 window.addEventListener('load',function(){
 	var select1 = document.getElementById("language");
 	for (var i = 0; i < select1.children.length; i++) {
@@ -58,4 +62,8 @@ window.addEventListener('load',function(){
 
 function startSearch(event) {document.getElementById("searchform").submit();     }
 
-window.onload = function(){document.querySelector('input[value="Save"]').onclick=save_options;}
+window.onload = function(){
+	document.querySelector('input[value="Save"]').onclick=save_options;
+	document.querySelector('input[value="Donate via PayPal"]').onclick=doDonation;
+\\
+}

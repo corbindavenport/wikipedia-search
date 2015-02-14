@@ -23,7 +23,7 @@ header, hgroup, menu, nav, section {
 html {
 	background: #fff;
 	color: #333;
-	font: 81.25% arial, sans-serif;
+	font: 18px arial, sans-serif;
 	line-height: 1;
 	-webkit-text-size-adjust: none;
 }
@@ -584,4 +584,8 @@ input {
 
 .search {
 	width: 520px;
+}
+
+#disabled {
+	color: #FF0000;
 }

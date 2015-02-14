@@ -1,14 +1,15 @@
 {
 "manifest_version": 2,
 	"name": "Wikipedia Search",
-	"version": "6.0",
+	"version": "6.1",
 	"description": "Search Wikipedia in every language from the search bar.",
 	"options_page": "options.html",
 	"omnibox": {
 		"keyword": "wiki"
 	},
 	"web_accessible_resources": [
-		"widget.html"
+		"widget.html",
+		"options.html"
 	],
 	"permissions": [
 		"contextMenus",

@@ -9,6 +9,12 @@ Wikipedia Search is free to use in any browser extension, but I would like a lin
 __Wikipedia is a trademark of the Wikimedia Foundation. OmniProxy icon from the [Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack.__
 
 ---------------------------------------------------------
+__New in Wikipedia Search 6.1:__
+* __HTTPS by default:__ Wikipedia Search added support for HTTPS search in version 6.0, but now it's default.
+* __New Language:__ Wikipedia Search now supports Ellīniká as a language.
+* __Easier options access:__ You can now get to the extensions options straight from the OmniBar while searching!.
+* __Bug fixes:__ This release contains various bug fixes.
+
 __New in Wikipedia Search 6.0:__
 * __ANTP Widget:__ Wikipedia Search now includes a widget for the popular New Tab Page replacement, Awesome New Tab Page. If you have ANTP installed, just drag the Wikipedia Search widget to an empty slot.
 * __HTTPS Search:__ You can now enable searching with HTTPS from the options, which makes your searches more secure and private.

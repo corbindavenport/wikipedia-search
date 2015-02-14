@@ -11,19 +11,18 @@ You should have received a copy of the GNU General Public License along with thi
 chrome.runtime.onInstalled.addListener(function(details){
 	if(details.reason == "update" || "install"){
 		if(localStorage.getItem("language") === null){
-			var language = "en";
-			localStorage["language"] = language;
-			console.log("no language selected, defaulting to english");
+			localStorage["language"] = "en";
 		}
 		if(localStorage.getItem("protocol") === null){
-			var protocol = "https://";
-			localStorage["protocol"] = protocol;
-			console.log("no protocol selected, defaulting to https (secure)");
+			localStorage["protocol"] = "https://";
+		}
+		if(localStorage.getItem("donation") === null){
+			localStorage["donation"] = "yes";
 		}
 	}
 	if(localStorage.getItem("version") != chrome.runtime.getManifest().version){
 		chrome.tabs.create({'url': chrome.extension.getURL('welcome.html')});
-		localStorage["version"] = chrome.runtime.getManifest().version
+		localStorage["version"] = chrome.runtime.getManifest().version;
 	}
 });
 
@@ -68,7 +67,7 @@ function onSearch(info, tab) {
 	}
 	var id = chrome.contextMenus.create({ "title": "Wikipedia Search", "contexts": ["selection"],
 		"onclick": onSearch
-	});
+});
 
 // Omnibox Search
 // Derived from OmniWiki (github.com/hamczu/OmniWiki)
@@ -76,6 +75,7 @@ function onSearch(info, tab) {
 var currentRequest = null;
 
 chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
+
 	if (currentRequest != null) {
 		currentRequest.onreadystatechange = null;
 		currentRequest.abort();
@@ -87,32 +87,37 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 	if(text.length > 0){
 		currentRequest = suggests(text, function(data) {
 			var results = [];
-			for(var i = 0; i < data[1].length; i++){
+			for(var i = 0; i < 4; i++){
 				results.push({
 					content: data[1][i],
 					description: data[1][i]
 				});
 			}
+			results.push({
+				content: "options",
+				description: "Open Wikipedia Search options"
+			});
 			suggest(results);
 		});
 	} else {
 	}
+
 });
 
 function resetDefaultSuggestion() {      
 	chrome.omnibox.setDefaultSuggestion({
 		description: ' '
 	});
-}
+};
 
 resetDefaultSuggestion();
 var searchLabel = chrome.i18n.getMessage('search_label');
 function updateDefaultSuggestion(text) {      
 	chrome.omnibox.setDefaultSuggestion({
-		description: searchLabel + ': %s'
+		description: searchLabel + 'Search on Wikipedia: %s'
 	});
 
-}
+};
 
 chrome.omnibox.onInputStarted.addListener(function() {
 	updateDefaultSuggestion('');
@@ -149,5 +154,9 @@ function suggests(query, callback) {
 chrome.omnibox.onInputEntered.addListener(function(text) {
 	var language = localStorage["language"];
 	var protocol = localStorage["protocol"];
-	chrome.tabs.update(null, {url: protocol + language + ".wikipedia.org/w/index.php?search=" + text});
+	if (text == "options") {
+		chrome.tabs.update(null, {url: chrome.extension.getURL('options.html')});
+	} else {
+		chrome.tabs.update(null, {url: protocol + language + ".wikipedia.org/w/index.php?search=" + text});
+	}
 });
