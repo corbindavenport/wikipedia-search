@@ -9,6 +9,9 @@ Wikipedia Search is free to use in any browser extension, but I would like a lin
 __Wikipedia is a trademark of the Wikimedia Foundation. OmniProxy icon from the [Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack.__
 
 ---------------------------------------------------------
+__New in Wikipedia Search 6.1.1:__
+* __Fix for the settings page not working correctly.
+
 __New in Wikipedia Search 6.1:__
 * __HTTPS by default:__ Wikipedia Search added support for HTTPS search in version 6.0, but now it's default.
 * __New Language:__ Wikipedia Search now supports Ellīniká as a language.

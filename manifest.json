@@ -1,7 +1,7 @@
 {
 "manifest_version": 2,
 	"name": "Wikipedia Search",
-	"version": "6.1",
+	"version": "6.1.1",
 	"description": "Search Wikipedia in every language from the search bar.",
 	"options_page": "options.html",
 	"omnibox": {
