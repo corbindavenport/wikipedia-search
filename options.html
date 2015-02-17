@@ -17,14 +17,22 @@ You should have received a copy of the GNU General Public License along with thi
 	<section id="wrapper" class="wrapper enabled">
 		<h1>Wikipedia Search Classic - Settings</h1>
 		<article>
+			<h2>Notice</h2>
+			<p>Wikipedia Search Classic is now discontinued. The current version, v6.1, will be the last update.</p>
+			<p>I recommend all users to switch to the main Wikipedia Search extension, which will continue to be supported into the forseeable future. The main extension also has new features never implemented into Classic, such as right-click search and HTTPS support.</p>
+			<p>If you are a developer, you are more than welcome to fork the GitHub repo below and release your own extension based on this one.</p>
+			<section id="settings-buttons" class="buttons" style="display: block;">
+				<a href="https://chrome.google.com/webstore/detail/wikipedia-search/lipakennkogpodadpikgipnogamhklmk" class="g-button g-button-submit">Download Wikipedia Search</a>
+				<a href="https://github.com/corbindavenport/wikipedia-search/tree/classic" class="g-button g-button-submit">Wikipedia Search Classic on GitHub</a>
+			</section>
+		</article>
+		<article>
 			<section class="settings-card">
 			<h2>Settings</h2>
 			<p>
 				<table>
 					<tr>
-						<td>
-							Language:
-						</td>
+						<td>Language:</td>
 						<td>
 							<select id="language" name="language">
 								<!-- 100,000+ content pages, sorted by romanization (last updated 2013-11-19) -->
@@ -87,14 +95,8 @@ You should have received a copy of the GNU General Public License along with thi
 			</p>
 			</section>
 			<section id="settings-buttons" class="buttons" style="display: block;">
-				<input class="g-button g-button-submit" type="button" onclick="save_options()" value="Save">
+				<input class="g-button g-button-submit" type="button" value="Save">
 			</section>
-		</article>
-		<article>
-			<h2>How it works</h2>
-			<p>You can search Wikipedia straight from the 'W' button in the toolbar. Just click it, type the article you want, and press Enter. The results will open in a new tab.</p>
-			<p>Wikipedia Search Classic 6.0 is a fork of Wikipedia Search 4.1.1, for people who want to keep the older button search instead of the new integration with Chrome's search bar and right-click functionality. Wikipedia Search Classic also brings bug fixes and new languages from the newer updates.</p>
-			<p>Wikipedia Search Classic, just like Wikipedia Search, is open-source under the GPLv3 license <a href="https://github.com/corbindavenport/wikipedia-search/tree/classic">on GitHub</a>. Please note that Classic is a seperate branch from the newer Wikipedia Search, but still on the same repository.</p>
 		</article>
 	</section>
 </body>

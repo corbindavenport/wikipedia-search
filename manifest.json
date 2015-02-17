@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Wikipedia Search Classic",
-	"version": "6.0",
+	"version": "6.1",
 	"description": "Search Wikipedia in every language and open results in a new tab.",
         "options_page": "options.html",
 	"browser_action":	{

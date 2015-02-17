@@ -1,18 +1,23 @@
-Wikipedia Search
+Wikipedia Search Classic
 ================
-Wikipedia Classic 5.0 is a fork of Wikipedia Search 4.1.1, for people who want to keep the older button search instead of the new integration with Chrome's search bar and right-click functionality. Wikipedia Search Classic also brings bug fixes and new languages from the newer updates.
+Wikipedia Search Classic is now discontinued. The current version, v6.1, will be the last update.
 
-This extension allows you to type in a topic, click enter on your keyboard, and the article will appear in a new tab. Numerous Wikipedia extensions are available on the Chrome web store, but only this one opens results in the desktop Wikipedia. It opens the full blown site and not the dummed-down mobile version. Instant access to the millions of articles of articles on Wikipedia.
+Wikipedia Classic started as a fork of Wikipedia Search 4.1.1, for people who wanted to keep the older button search instead of the new integration with Chrome's search bar and right-click functionality that 5.0 and above included. Wikipedia Search Classic was released as a seperate extension alongside the launch of Wikipedia Search 5.0, and has continued to recieve bug fixes and minor features included in the main extension.
 
-You can aso select your language of choice from the Options page, with access to every language Wikipedia has to offer. Simply right click the Wikipedia button, select Options, select a language from the simple list, and click Save. After that, the next time you search it will send you to the Wikipedia site for the language you chose.
+I recommend all users to switch to the main Wikipedia Search extension, which will continue to be supported into the forseeable future. The main extension also has new features never implemented into Classic, such as right-click search and HTTPS support.
 
-Wikipedia Search is free to use in any browser extension, but I would like a link somewhere linking back to this Github page.
+If you are a developer, you are more than welcome to fork the GitHub repo and release your own extension based on this one.
 
-__Wikipedia is a trademark of the Wikimedia Foundation. OmniProxy icon from the [Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack._
+__Wikipedia is a trademark of the Wikimedia Foundation. Wikipedia icon from the [Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack._
 
 ---------------------------------------------------------
+__New in Wikipedia Search Classic 6.1:__
+* Final update
+* Added new language (Ellīniká)
+* Minor bug fixes
+
 __New in Wikipedia Search Classic 6.0:__
-* New icon from Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack.
+* New icon from [Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack.
 * Added new language (Azərbaycanca)
 * Major code cleanup
 

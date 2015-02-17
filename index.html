@@ -17,10 +17,13 @@ body {
 	width: 400px !important;
 	height: 24px !important;
 	overflow: hidden;
+	color: red;
 }
+
 input:focus {
 	outline: none;
 }
+
 #searchform .textfield {
 	border:0px;
 	font-size:14px;
@@ -28,75 +31,80 @@ input:focus {
 	float:left;
 	height:22px;
 	color: #333;
-	background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpDRTBCMjQ1MUVFQTgxMUUzQTgwNDk2NjQwNkNCRkE0QyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpDRTBCMjQ1MkVFQTgxMUUzQTgwNDk2NjQwNkNCRkE0QyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkNFMEIyNDRGRUVBODExRTNBODA0OTY2NDA2Q0JGQTRDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkNFMEIyNDUwRUVBODExRTNBODA0OTY2NDA2Q0JGQTRDIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+h2jbVwAAAUhJREFUeNqUk70rRXEYx889LtdiMBikbBYvi3sSBgbFfyCTKEmJxUI3CzZlUAwmskhZhRSTUoc7eBvMLBaRQW6Oz09fx9N17ylPffo+v5fv8zydficVRZH3E0EQjCOD0AVpuIA9WAnD8PeiIuXMmKrIj6DXKx03MECBB7vpS09k/IR5aIc2mIYnaIEzmvjWnGZjCO2GD8hS/cqcX3O+g+ahEXKwaDtPKM8VGb+DPdd5Usup4rE7le965WNfWsck9dacUV5IMNuzSmvOK+9JMGelb/BozdvKlxkpU8a8Kl3gG8RTuIewBrPQAJcUmEFPNWoHLOnRuHgt9UiayM+h1lwqmLWNEbpvxY+ExT3SDBvwDDUyvsM6jBnzJs2G4842OKhGWqEC7ij8ov0+5NhcnftjTgoK9COHWt763j+CKdzPMwoH7mN+CTAAvqRlozjBhf0AAAAASUVORK5CYII=') no-repeat 2px 5px; /* left, top */
+	background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpDRTBCMjQ1MUVFQTgxMUUzQTgwNDk2NjQwNkNCRkE0QyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpDRTBCMjQ1MkVFQTgxMUUzQTgwNDk2NjQwNkNCRkE0QyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkNFMEIyNDRGRUVBODExRTNBODA0OTY2NDA2Q0JGQTRDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkNFMEIyNDUwRUVBODExRTNBODA0OTY2NDA2Q0JGQTRDIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+h2jbVwAAAUhJREFUeNqUk70rRXEYx889LtdiMBikbBYvi3sSBgbFfyCTKEmJxUI3CzZlUAwmskhZhRSTUoc7eBvMLBaRQW6Oz09fx9N17ylPffo+v5fv8zydficVRZH3E0EQjCOD0AVpuIA9WAnD8PeiIuXMmKrIj6DXKx03MECBB7vpS09k/IR5aIc2mIYnaIEzmvjWnGZjCO2GD8hS/cqcX3O+g+ahEXKwaDtPKM8VGb+DPdd5Usup4rE7le965WNfWsck9dacUV5IMNuzSmvOK+9JMGelb/BozdvKlxkpU8a8Kl3gG8RTuIewBrPQAJcUmEFPNWoHLOnRuHgt9UiayM+h1lwqmLWNEbpvxY+ExT3SDBvwDDUyvsM6jBnzJs2G4842OKhGWqEC7ij8ov0+5NhcnftjTgoK9COHWt763j+CKdzPMwoH7mN+CTAAvqRlozjBhf0AAAAASUVORK5CYII=') no-repeat 2px 5px;
 	font-family: arial, sans-serif;
 	padding-left:20px;
 	margin:0px;
 }
+
 #searchform select {
 	display:none;
 }
+
 </style>
 </head>
 <body>
 <form id="searchform" action="http://www.wikipedia.org/search-redirect.php" target="_blank"> 
-<input id="searchInput" class="textfield" name="search" type="text" placeholder="Type to search..." autofocus /> 
-<select size="8" id="language" name="language">
-	<option value="ar" lang="ar">العربية</option><!-- Al-ʿArabīyah -->
-	<option value="az" lang="az">Azərbaycanca</option>
-	<option value="bg" lang="bg">Български</option><!-- Bulgarski -->
-	<option value="ca" lang="ca">Català</option>
-	<option value="cs" lang="cs">Česky</option>
-	<option value="da" lang="da">Dansk</option>
-	<option value="de" lang="de">Deutsch</option>
-	<option value="en" lang="en" selected="selected">English</option>
-	<option value="es" lang="es">Español</option>
-	<option value="eo" lang="eo">Esperanto</option>
-	<option value="et" lang="et">Eesti</option>
-	<option value="eu" lang="eu">Euskara</option>
-	<option value="fa" lang="fa">فارسی</option><!-- Fārsi -->
-	<option value="fr" lang="fr">Français</option>
-	<option value="gl" lang="gl">Galego</option>
-	<option value="ko" lang="ko">한국어</option><!-- Hangugeo -->
-	<option value="hy" lang="hy">Հայերեն</option><!-- Hayeren -->
-	<option value="hi" lang="hi">हिन्दी</option><!-- Hindī -->
-	<option value="hr" lang="hr">Hrvatski</option>
-	<option value="id" lang="id">Bahasa Indonesia</option>
-	<option value="it" lang="it">Italiano</option>
-	<option value="he" lang="he">עברית</option><!-- ‘Ivrit -->
-	<option value="la" lang="la">Latina</option>
-	<option value="lt" lang="lt">Lietuvių</option>
-	<option value="hu" lang="hu">Magyar</option>
-	<option value="ms" lang="ms">Bahasa Melayu</option>
-	<option value="min" lang="min">Baso Minangkabau</option>
-	<option value="nl" lang="nl">Nederlands</option>
-	<option value="ja" lang="ja">日本語</option><!-- Nihongo -->
-	<option value="no" lang="nb">Norsk (bokmål)</option>
-	<option value="nn" lang="nn">Norsk (nynorsk)</option>
-	<option value="uz" lang="uz">Oʻzbekcha</option>
-	<option value="pl" lang="pl">Polski</option>
-	<option value="pt" lang="pt">Português</option>
-	<option value="kk" lang="kk">Қазақша / Qazaqşa / قازاقشا</option>
-	<option value="ro" lang="ro">Română</option>
-	<option value="ru" lang="ru">Русский</option><!-- Russkiy -->
-	<option value="sah" lang="sah">Саха Тыла</option><!-- Saxa Tyla -->
-	<option value="simple" lang="en">Simple English</option>
-	<option value="ceb" lang="ceb">Sinugboanong</option><!-- Cebuano -->
-	<option value="sk" lang="sk">Slovenčina</option>
-	<option value="sl" lang="sl">Slovenščina</option>
-	<option value="sr" lang="sr">Српски / Srpski</option>
-	<option value="sh" lang="sh">Srpskohrvatski / Српскохрватски</option>
-	<option value="fi" lang="fi">Suomi</option>
-	<option value="sv" lang="sv">Svenska</option>
-	<option value="tr" lang="tr">Türkçe</option>
-	<option value="uk" lang="uk">Українська</option><!-- Ukrayins’ka -->
-	<option value="vi" lang="vi">Tiếng Việt</option>
-	<option value="vo" lang="vo">Volapük</option>
-	<option value="war" lang="war">Winaray</option>
-	<option value="zh" lang="zh">中文</option><!-- Zhōngwén -->
-</select>
-<input class="searchButton" type="submit" value="  →  " name="go" style="display:none" /> 
-<input type="hidden" value="Go" name="go" style="display:none" />
+	<input id="searchInput" class="textfield" name="search" type="text" placeholder="Type to search..." autofocus /> 
+	<select size="8" id="language" name="language">
+		<!-- 100,000+ content pages, sorted by romanization (last updated 2013-11-19) -->
+		<option value="ar" lang="ar">العربية</option><!-- Al-ʿArabīyah -->
+		<option value="az" lang="az">Azərbaycanca</option>
+		<option value="bg" lang="bg">Български</option><!-- Bulgarski -->
+		<option value="ca" lang="ca">Català</option>
+		<option value="cs" lang="cs">Česky</option>
+		<option value="da" lang="da">Dansk</option>
+		<option value="de" lang="de">Deutsch</option>
+		<option value="el" lang="el">Ελληνικά</option><!-- Ellīniká -->
+		<option value="en" lang="en" selected="selected">English</option>
+		<option value="es" lang="es">Español</option>
+		<option value="eo" lang="eo">Esperanto</option>
+		<option value="et" lang="et">Eesti</option>
+		<option value="eu" lang="eu">Euskara</option>
+		<option value="fa" lang="fa">فارسی</option><!-- Fārsi -->
+		<option value="fr" lang="fr">Français</option>
+		<option value="gl" lang="gl">Galego</option>
+		<option value="ko" lang="ko">한국어</option><!-- Hangugeo -->
+		<option value="hy" lang="hy">Հայերեն</option><!-- Hayeren -->
+		<option value="hi" lang="hi">हिन्दी</option><!-- Hindī -->
+		<option value="hr" lang="hr">Hrvatski</option>
+		<option value="id" lang="id">Bahasa Indonesia</option>
+		<option value="it" lang="it">Italiano</option>
+		<option value="he" lang="he">עברית</option><!-- ‘Ivrit -->
+		<option value="la" lang="la">Latina</option>
+		<option value="lt" lang="lt">Lietuvių</option>
+		<option value="hu" lang="hu">Magyar</option>
+		<option value="ms" lang="ms">Bahasa Melayu</option>
+		<option value="min" lang="min">Bahaso Minangkabau</option>
+		<option value="nl" lang="nl">Nederlands</option>
+		<option value="ja" lang="ja">日本語</option><!-- Nihongo -->
+		<option value="no" lang="nb">Norsk (bokmål)</option>
+		<option value="nn" lang="nn">Norsk (nynorsk)</option>
+		<option value="uz" lang="uz">Oʻzbekcha / Ўзбекча</option>
+		<option value="pl" lang="pl">Polski</option>
+		<option value="pt" lang="pt">Português</option>
+		<option value="kk" lang="kk">Қазақша / Qazaqşa / قازاقشا</option>
+		<option value="ro" lang="ro">Română</option>
+		<option value="ru" lang="ru">Русский</option><!-- Russkiy -->
+		<option value="sah" lang="sah">Саха Тыла</option><!-- Saxa Tyla -->
+		<option value="simple" lang="en">Simple English</option>
+		<option value="ceb" lang="ceb">Sinugboanong Binisaya</option><!-- Cebuano -->
+		<option value="sk" lang="sk">Slovenčina</option>
+		<option value="sl" lang="sl">Slovenščina</option>
+		<option value="sr" lang="sr">Српски / Srpski</option>
+		<option value="sh" lang="sh">Srpskohrvatski / Српскохрватски</option>
+		<option value="fi" lang="fi">Suomi</option>
+		<option value="sv" lang="sv">Svenska</option>
+		<option value="tr" lang="tr">Türkçe</option>
+		<option value="uk" lang="uk">Українська</option><!-- Ukrayins’ka -->
+		<option value="vi" lang="vi">Tiếng Việt</option>
+		<option value="vo" lang="vo">Volapük</option>
+		<option value="war" lang="war">Winaray</option>
+		<option value="zh" lang="zh">中文</option><!-- Zhōngwén -->
+	</select>
+	<input class="searchButton" type="submit" value="  →  " name="go" style="display:none" /> 
+	<input type="hidden" value="Go" name="go" style="display:none" />
 </form>
+<div align="center">Wikipedia Search Classic is now discontinued, please install <a href="https://chrome.google.com/webstore/detail/wikipedia-search/lipakennkogpodadpikgipnogamhklmk" target="blank_">Wikipedia Search</a> from the Chrome Web Store.</div>
 </body>
 </html>
