@@ -10,7 +10,7 @@ __Wikipedia is a trademark of the Wikimedia Foundation. OmniProxy icon from the 
 
 ---------------------------------------------------------
 __New in Wikipedia Search 6.1.1:__
-* __Fix for the settings page not working correctly.
+* Fix for the settings page not working correctly.
 
 __New in Wikipedia Search 6.1:__
 * __HTTPS by default:__ Wikipedia Search added support for HTTPS search in version 6.0, but now it's default.
