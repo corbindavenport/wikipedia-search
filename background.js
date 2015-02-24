@@ -10,14 +10,22 @@ You should have received a copy of the GNU General Public License along with thi
 
 chrome.runtime.onInstalled.addListener(function(details){
 	if(details.reason == "update" || "install"){
-		if(localStorage.getItem("language") === null){
+		if (localStorage.getItem("language") === null) {
 			localStorage["language"] = "en";
 		}
-		if(localStorage.getItem("protocol") === null){
+		if (localStorage.getItem("protocol") === null) {
 			localStorage["protocol"] = "https://";
 		}
-		if(localStorage.getItem("donation") === null){
+		if (localStorage.getItem("donation") === null) {
 			localStorage["donation"] = "yes";
+		}
+		if (localStorage.getItem("shortcut") === null) {
+			if ((window.navigator.userAgent.indexOf("OPR") > -1) === false) {
+				localStorage["shortcut"] = "on";
+			} else {
+				// Shortcut to options is not functional on Opera, possibly a bug
+				localStorage["shortcut"] = "off";
+			}
 		}
 	}
 	if(localStorage.getItem("version") != chrome.runtime.getManifest().version){
@@ -57,16 +65,13 @@ chrome.extension.onMessageExternal.addListener(function (request, sender, sendRe
 
 // Context Menu Search
 
-function onSearch(info, tab) {
-		chrome.tabs.detectLanguage(null, function(lang) {
-			var language = localStorage["language"];
-			var protocol = localStorage["protocol"];
-			var taburl = protocol + language + ".wikipedia.org/w/index.php?title=Special:Search&search=" + info.selectionText.replace(/\s/g, "+");
-			chrome.tabs.create({ url: taburl, selected: false });
-		});
+chrome.contextMenus.create({
+	title: "Search \"%s\" on Wikipedia",
+	contexts: ["selection"],
+	onclick: function searchText(info){
+		var url = encodeURI(localStorage["protocol"] + localStorage["language"] + ".wikipedia.org/w/index.php?title=Special:Search&search=" +info.selectionText);
+		chrome.tabs.create({url: url});
 	}
-	var id = chrome.contextMenus.create({ "title": "Wikipedia Search", "contexts": ["selection"],
-		"onclick": onSearch
 });
 
 // Omnibox Search
@@ -87,16 +92,23 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 	if(text.length > 0){
 		currentRequest = suggests(text, function(data) {
 			var results = [];
-			for(var i = 0; i < 4; i++){
+			if (localStorage.getItem("shortcut") === "on") {
+				num = 4;
+			} else {
+				num = 5;
+			}
+			for(var i = 0; i < num; i++){
 				results.push({
 					content: data[1][i],
 					description: data[1][i]
 				});
 			}
-			results.push({
-				content: "options",
-				description: "Open Wikipedia Search options"
-			});
+			if (localStorage.getItem("shortcut") === "on") {
+				results.push({
+					content: "settings",
+					description: "Open Wikipedia Search options"
+				});
+			}
 			suggest(results);
 		});
 	} else {
@@ -154,8 +166,8 @@ function suggests(query, callback) {
 chrome.omnibox.onInputEntered.addListener(function(text) {
 	var language = localStorage["language"];
 	var protocol = localStorage["protocol"];
-	if (text == "options") {
-		chrome.tabs.update(null, {url: chrome.extension.getURL('options.html')});
+	if (text == "settings") {
+		chrome.tabs.update(null, {url: chrome.extension.getURL('settings.html')});
 	} else {
 		chrome.tabs.update(null, {url: protocol + language + ".wikipedia.org/w/index.php?search=" + text});
 	}

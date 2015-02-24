@@ -7,62 +7,67 @@ You should have received a copy of the GNU General Public License along with thi
 */
 
 function save_options() {
-	var select1 = document.getElementById("language");
-	var language = select1.children[select1.selectedIndex].value;
-	localStorage["language"] = language;
-
-	var select2 = document.getElementById("protocol");
-	var protocol = select2.children[select2.selectedIndex].value;
-	localStorage["protocol"] = protocol;
-}
-
-function restore_options() {
-	var select1 = document.getElementById("language");
-	for (var i = 0; i < select1.children.length; i++) {
-		var child1 = select1.children[i];
-		if (child1.value == localStorage["language"]) {
-			child1.selected = "true";
-		break;
+	if (document.getElementById("language")) {
+		localStorage["language"] = document.getElementById("language").value;
+		localStorage["protocol"] = document.getElementById("protocol").value;
+		if (document.getElementById("shortcut").checked === true) {
+			localStorage["shortcut"] = "on";
+		} else {
+			localStorage["shortcut"] = "off";
 		}
-	}
-
-	var select2 = document.getElementById("protocol");
-	for (var i = 0; i < select2.children.length; i++) {
-		var child2 = select2.children[i];
-		if (child2.value == localStorage["protocol"]) {
-			child2.selected = "true";
-		break;
-		}
+		document.getElementById("save").value = "Saved!"
+		document.getElementById("save").style.background = "#009900";
+		setTimeout(function(){
+			document.getElementById("save").value = "Save";
+			document.getElementById("save").style.background = "#4d90fe";
+		}, 2000);
 	}
 }
 
-function doDonation(){
-	chrome.tabs.create({ url: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Corbin%20Davenport&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted" });
+function doPayPalDonation() {
+	chrome.tabs.create({ url: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Wikipedia%20Search%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted" });
 }
 
-window.addEventListener('load',function(){
-	var select1 = document.getElementById("language");
-	for (var i = 0; i < select1.children.length; i++) {
-		var child1 = select1.children[i];
-		if (child1.value == localStorage["language"]) {
-			child1.selected = "true";
-		break;
-		}
-	}
+function doBitcoinDonation() {
+	document.getElementById("bitcoin").style.display = "block";
+}
 
-	var select2 = document.getElementById("protocol");
-	for (var i = 0; i < select2.children.length; i++) {
-		var child2 = select2.children[i];
-		if (child2.value == localStorage["protocol"]) {
-			child2.selected = "true";
-		break;
+window.addEventListener('load',function() {
+	if (document.getElementById("language")) {
+		document.getElementById("language").value = localStorage["language"];
+		document.getElementById("protocol").value = localStorage["protocol"];
+		if (localStorage.getItem("shortcut") === "on") {
+			document.getElementById("shortcut").checked = true;
+		} else {
+			document.getElementById("shortcut").checked = false;
+		}
+		document.getElementById("shortcut").value = localStorage["shortcut"];
+		if ((window.navigator.userAgent.indexOf("OPR") > -1) === true) {
+			document.getElementById("shortcut-label").innerHTML = "Enable settings shortcut in search results (not supported on Opera)";
+			document.getElementById("shortcut").disabled = true;
 		}
 	}
 });
 
-function startSearch(event) {document.getElementById("searchform").submit();     }
+function startSearch(event) {document.getElementById("searchform").submit();}
 
-window.onload = function(){
-	document.querySelector('input[value="Save"]').onclick=save_options;
-	document.querySelector('input[value="Donate via PayPal"]').onclick=doDonation;
+window.onload = function() {
+	if (document.getElementById("searchInput")) {
+		window.addEventListener('keydown', function() {
+			if (event.keyCode == 13) {
+				var text = document.getElementById("searchInput").value;
+				window.parent.location = localStorage["protocol"] + localStorage["language"] + ".wikipedia.org/w/index.php?search=" + text;
+				return false;
+			}
+		}, false);
+	}
+
+	if (document.getElementById("language")) {
+		document.querySelector('input[value="Save"]').onclick=save_options;
+	}
+
+	if (document.getElementById("settings-buttons")) {
+		document.querySelector('input[value="Donate via PayPal"]').onclick=doPayPalDonation;
+		document.querySelector('input[value="Donate via Bitcoin"]').onclick=doBitcoinDonation;
+	}
 }

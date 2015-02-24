@@ -17,11 +17,10 @@ You should have received a copy of the GNU General Public License along with thi
 	<section id="wrapper" class="wrapper enabled">
 		<h1>Wikipedia Search - Settings</h1>
 		<article>
-			<h2>Donate</h2>
-			<p>If you find Wikipedia Search useful, please donate to support continued development. It would mean a lot!</p>
-			<section id="settings-buttons" class="buttons" style="display: block;">
-				<input class="g-button g-button-submit" type="button" value="Donate via PayPal">
-			</section>
+			<h2>How to use</h2>
+			<p>To search, just type 'wiki' in the address bar, then a space, then the name of the article you want. Live suggestions from Wikipedia are displayed as you type, and in your selected language.</p>
+			<p>In addition, you can select any word or phrase on the web, right-click, and search it in Wikipedia instantly.</p>
+			<p>Wikipedia Search is open-source under the GPLv3 license <a href="http://github.com/corbindavenport/wikipedia-search">on GitHub</a>.</p>
 		</article>
 		<article>
 			<section class="settings-card">
@@ -103,18 +102,25 @@ You should have received a copy of the GNU General Public License along with thi
 						</td>
 					</tr>
 				</table>
+				<input type="checkbox" id="shortcut"><label for="shortcut" id="shortcut-label">Enable settings shortcut in search results</label>
 			</p>
+			<div id="saved">Saved!</div>
 			</section>
 			<section id="settings-buttons" class="buttons" style="display: block;">
-				<input class="g-button g-button-submit" type="button" value="Save">
+				<input class="g-button g-button-submit" type="button" id="save" value="Save">
 			</section>
 		</article>
 		<article>
-			<h2>How to use</h2>
-			<p>You can search Wikipedia straight from Chrome's search bar.</p>
-			<p>Just type 'wiki', then a space, then the name of the article you want. Live suggestions from Wikipedia are automatically displayed as you type.</p>
-			<p>You can also right-click on any word or phrase on the web and pick 'Wikipedia Search' to open in Wikipedia.</p>
-			<p>Wikipedia Search is open-source under the GPLv3 license <a href="http://github.com/corbindavenport/wikipedia-search">on GitHub</a>. You can browse the code, help fix bugs, or even make your own Wikipedia Search!</p>
+			<h2>Donate</h2>
+			<p>If you find Wikipedia Search useful, please donate to support continued development. It would mean a lot!</p>
+			<div id="bitcoin">
+				<p><b>Please send bitcoin to the following address:</b></p>
+				<p style="background:#ebebeb; padding:10px; font-family:Monaco,Menlo,Consolas,'Courier New',monospace; text-align:center; overflow-wrap:break-word !important;">1GSbhaUp8JSRepqQceHzrGhV1bPk9hcPuS</p>
+			</div>
+			<section id="settings-buttons" class="buttons" style="display: block;">
+				<input class="g-button g-button-submit" type="button" value="Donate via PayPal">
+				<input class="g-button g-button-submit" type="button" value="Donate via Bitcoin">
+			</section>
 		</article>
 	</section>
 </body>

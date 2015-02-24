@@ -1,14 +1,18 @@
 Wikipedia Search
 ================
-This extension allows you to type the word 'wiki' into your search bar, press the space key, and search for an article on Wikipedia. Instant access to the millions of articles of articles on Wikipedia.
+This extension allows you to type the word 'wiki' into your browser's search bar, press the space key, and search for an article on Wikipedia. You can also select any word or phrase on the web, right-click, and search it in Wikipedia. If you have [Awesome New Tab Page](https://antp.co) installed, there's even a widget for that built-in. Instant access to the millions of articles of articles on Wikipedia.
 
-You can aso select your language of choice from the Options page, with access to every language Wikipedia has to offer. Simply click the Chrome menu button, go to Tools > Extensions > Wikipedia Search > Options, select a language from the simple list, and click Save. After that, the next time you search it will send you to the Wikipedia site for the language you chose.
+If English isn't your main language, it's easy to change the language Wikipedia Search uses. Just go to the Settings page to switch to any of the 50+ languages Wikipedia supports.
 
-Wikipedia Search is free to use in any browser extension, but I would like a link somewhere linking back to this Github page.
-
-__Wikipedia is a trademark of the Wikimedia Foundation. OmniProxy icon from the [Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack.__
+__Wikipedia is a trademark of the Wikimedia Foundation. Wikipedia icon from the [Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack.__
 
 ---------------------------------------------------------
+__New in Wikipedia Search 6.2:__
+* __Opera support:__ Opera browser is now officially supported by Wikipedia Search!
+* __Context menu:__ Minor tweaks to the right-click context menu.
+* __Settings:__ You can now turn the settings shortcut in search results on or off.
+* __Under-the-hood improvements:__ Most of Wikipedia Search 6.2 has been re-written to clean up the overall codebase. There's also less bugs!
+
 __New in Wikipedia Search 6.1.1:__
 * Fix for the settings page not working correctly.
 

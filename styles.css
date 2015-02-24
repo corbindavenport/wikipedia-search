@@ -15,6 +15,7 @@ time, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
+	font-size: 100%;
 }
 article, aside, details, figcaption, figure,
 header, hgroup, menu, nav, section {
@@ -23,7 +24,7 @@ header, hgroup, menu, nav, section {
 html {
 	background: #fff;
 	color: #333;
-	font: 18px arial, sans-serif;
+	font: 14px arial, sans-serif;
 	line-height: 1;
 	-webkit-text-size-adjust: none;
 }
@@ -442,18 +443,22 @@ input[type=submit][disabled].g-button {
 }
 
 /****** General Styles and Structure ******/
+
 html, body {
 	background: #eee;
 	height: 100%;
 }
+
 .wrapper {
 	margin: 0 auto;
 	padding: 0 0 40px;
 	width: 600px;
 }
+
 .wrapper + style + iframe {
 	display: none;
 }
+
 article {
 	position: relative;
 	background: #fff;
@@ -467,6 +472,7 @@ article {
 	-webkit-animation-iteration-count: once;
 	-webkit-animation-duration: .418s;
 }
+
 h1 {
 	position: relative;
 	font-size: 20px;
@@ -477,59 +483,74 @@ h1 {
 	-webkit-animation-iteration-count: once;
 	-webkit-animation-duration: .418s;
 }
+
 h2 {
 	color: #333;
 	font-size: 20px;
 	margin: 0 0 22px;
 }
+
 .settings {
 	margin: 0 0 15px;
 }
+
 .setting {
 	margin: 0 0 12px;
 }
+
 .setting label {
 	display: block;
 	margin-left: 22px;
 }
+
 .setting label span {
 	display: block;
 	margin: 10px 0 0;
 	color: #777;
 }
+
 .setting input[type=checkbox] {
 	float: left;
 }
+
 .setting.inset {
 	margin-top: 18px;
 	margin-left: 23px;
 }
+
 #settings-buttons {
 	display:none;
 }
+
 .buttons {
 	padding-top: 10px;
 	height: 30px;
 }
+
 .buttons a {
 	margin-right: 15px;
 }
+
 dl {
 	margin: 20px 0 0 5px;
 }
+
 dl dt {
 	margin: 0;
 	float: left;
 }
+
 dl dd {
 	min-height: 38px;
 	margin: 0 0 0 30px;
 	padding: 5px 0 0;
 }
+
 .disabled .timeout-wrapper {
 	-webkit-animation: fadeOut .418s;
 	opacity: 0.5;
 }
+
 .enabled .timeout-wrapper {
 	-webkit-animation: fadeIn .418s;
 }
@@ -564,11 +585,15 @@ dl dd {
 }
 
 table tr td:first-child {
-	width: 100px;
+	width: 120px;
 }
 
 table tr td:last-child {
-	width: 420px;
+	width: 400px;
+}
+
+th, td {
+	padding-bottom: 10px;
 }
 
 #language,#protocol {
@@ -578,8 +603,21 @@ table tr td:last-child {
 	font-size: 15px;
 }
 
+#bitcoin, #saved {
+	display: none;
+}
+
+#saved {
+	color: #FF0000;
+	font-weight: bold;
+}
+
 input {
 	outline: none;
+}
+
+label {
+	margin-left: 10px;
 }
 
 .search {
