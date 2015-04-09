@@ -27,6 +27,12 @@ chrome.runtime.onInstalled.addListener(function(details){
 				localStorage["shortcut"] = "off";
 			}
 		}
+		if (localStorage.getItem("contentscripts") === null) {
+			localStorage["contentscripts"] = "on";
+		}
+		if (localStorage.getItem("hidesearch") === null) {
+			localStorage["hidesearch"] = "off";
+		}
 	}
 	if(localStorage.getItem("version") != chrome.runtime.getManifest().version){
 		chrome.tabs.create({'url': chrome.extension.getURL('welcome.html')});
@@ -171,4 +177,11 @@ chrome.omnibox.onInputEntered.addListener(function(text) {
 	} else {
 		chrome.tabs.update(null, {url: protocol + language + ".wikipedia.org/w/index.php?search=" + text});
 	}
+});
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.method == "getLocalStorage")
+      sendResponse({data: localStorage[request.key]});
+    else
+      sendResponse({}); // snub them.
 });

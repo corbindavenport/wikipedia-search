@@ -15,6 +15,16 @@ function save_options() {
 		} else {
 			localStorage["shortcut"] = "off";
 		}
+		if (document.getElementById("contentscripts").checked === true) {
+			localStorage["contentscripts"] = "on";
+		} else {
+			localStorage["contentscripts"] = "off";
+		}
+		if (document.getElementById("hidesearch").checked === true) {
+			localStorage["hidesearch"] = "on";
+		} else {
+			localStorage["hidesearch"] = "off";
+		}
 		document.getElementById("save").value = "Saved!"
 		document.getElementById("save").style.background = "#009900";
 		setTimeout(function(){
@@ -24,12 +34,25 @@ function save_options() {
 	}
 }
 
-function doPayPalDonation() {
-	chrome.tabs.create({ url: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Wikipedia%20Search%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted" });
-}
-
-function doBitcoinDonation() {
-	document.getElementById("bitcoin").style.display = "block";
+function reset_options() {
+	document.getElementById("language").value = "en";
+	localStorage["language"] = "en";
+	document.getElementById("protocol").value = "https://";
+	localStorage["protocol"] = "https://";
+	document.getElementById("shortcut").checked = true;
+	localStorage["shortcut"] = "on";
+	document.getElementById("contentscripts").checked = true;
+	localStorage["contentscripts"] = "on";
+	document.getElementById("hidesearch").checked = false;
+	localStorage["hidesearch"] = "off";
+	document.getElementById("reset").value = "Reset!"
+	document.getElementById("reset").style.background = "#009900";
+	localStorage["language"] = document.getElementById("language").value;
+	localStorage["protocol"] = document.getElementById("protocol").value;
+	setTimeout(function(){
+		document.getElementById("reset").value = "Reset";
+		document.getElementById("reset").style.background = "#4d90fe";
+	}, 2000);
 }
 
 window.addEventListener('load',function() {
@@ -41,7 +64,18 @@ window.addEventListener('load',function() {
 		} else {
 			document.getElementById("shortcut").checked = false;
 		}
+		if (localStorage.getItem("contentscripts") === "on") {
+			document.getElementById("contentscripts").checked = true;
+		} else {
+			document.getElementById("contentscripts").checked = false;
+		}
+		if (localStorage.getItem("hidesearch") === "on") {
+			document.getElementById("hidesearch").checked = true;
+		} else {
+			document.getElementById("hidesearch").checked = false;
+		}
 		document.getElementById("shortcut").value = localStorage["shortcut"];
+		document.getElementById("contentscripts").value = localStorage["contentscripts"];
 		if ((window.navigator.userAgent.indexOf("OPR") > -1) === true) {
 			document.getElementById("shortcut-label").innerHTML = "Enable settings shortcut in search results (not supported on Opera)";
 			document.getElementById("shortcut").disabled = true;
@@ -64,10 +98,11 @@ window.onload = function() {
 
 	if (document.getElementById("language")) {
 		document.querySelector('input[value="Save"]').onclick=save_options;
+		document.querySelector('input[value="Reset"]').onclick=reset_options;
 	}
 
 	if (document.getElementById("settings-buttons")) {
-		document.querySelector('input[value="Donate via PayPal"]').onclick=doPayPalDonation;
-		document.querySelector('input[value="Donate via Bitcoin"]').onclick=doBitcoinDonation;
+		document.querySelector('input[value="Donate via PayPal"]').onclick=function(){chrome.tabs.create({ url: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Wikipedia%20Search%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted" });};
+		document.querySelector('input[value="Donate via Bitcoin"]').onclick=function(){document.getElementById("bitcoin").style.display = "block";};
 	}
 }

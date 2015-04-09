@@ -1,7 +1,9 @@
 {
 "manifest_version": 2,
 	"name": "Wikipedia Search",
-	"version": "6.2",
+	"version": "6.3",
+	"author": "Corbin Davenport",
+	"homepage_url": "https://github.com/corbindavenport/wikipedia-search",
 	"description": "Search Wikipedia in every language from the address bar.",
 	"options_page": "settings.html",
 	"omnibox": {
@@ -19,6 +21,13 @@
 	"background": {
 		"scripts": ["background.js"]
 	},
+	"content_scripts": [
+		{
+		"matches": ["http://*.wikipedia.org/*", "https://*.wikipedia.org/*"],
+		"js": ["content_script.js"],
+		"run_at": "document_end"
+		}
+	],
 	"icons":{
 		"16":"icon16.png",
 		"32":"icon32.png",

@@ -7,6 +7,12 @@ If English isn't your main language, it's easy to change the language Wikipedia 
 __Wikipedia is a trademark of the Wikimedia Foundation. Wikipedia icon from the [Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack.__
 
 ---------------------------------------------------------
+__New in Wikipedia Search 6.3:__
+* __Wikipedia Integration:__ Wikipedia Search now integrates more deeply with Wikipedia, with options to show a panel of options on Wikipedia article pages for quick access to settings, and even hiding the search bar.
+* __Reset options:__ There is now a reset button in the settings, to...well...reset the settings.
+* __Under-the-hood improvements:__ Wikipedia Search 6.3 continues a clean-up of the overall codebase.
+* And a secret easter egg hidden in the code ;)
+
 __New in Wikipedia Search 6.2:__
 * __Opera support:__ Opera browser is now officially supported by Wikipedia Search!
 * __Context menu:__ Minor tweaks to the right-click context menu.
@@ -59,20 +65,6 @@ __New in Wikipedia Search 4.0:__
 * UI refresh
 * Code now available on Github
 * One-time alert that it is open source
-
-__New in Wikipedia Search 3.3.1:__
-* Fixed (very) small bug on extension options page
-
-__New in Wikipedia Search 3.3:__
-* Fixed bug where language selection would not save
-* Rewrite to work with Chrome manifest 2
-
-__New in Wikipedia Search 3.2.1:__
-* Fixed bug where the search icon would not show up
-
-__New in Wikipedia Search 3.2:__
-* Updated to Manifest 2
-* Requires Chrome 18 or newer
 
 ---------------------------------------------------------
 
