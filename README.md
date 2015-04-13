@@ -7,6 +7,10 @@ If English isn't your main language, it's easy to change the language Wikipedia 
 __Wikipedia is a trademark of the Wikimedia Foundation. Wikipedia icon from the [Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack.__
 
 ---------------------------------------------------------
+__New in Wikipedia Search 6.3.1:__
+* Fixed search bar on articles becoming disabled and not completely being removed.
+* Minor bug fixes
+
 __New in Wikipedia Search 6.3:__
 * __Wikipedia Integration:__ Wikipedia Search now integrates more deeply with Wikipedia, with options to show a panel of options on Wikipedia article pages for quick access to settings, and even hiding the search bar.
 * __Reset options:__ There is now a reset button in the settings, to...well...reset the settings.
