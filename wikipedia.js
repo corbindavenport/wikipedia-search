@@ -39,8 +39,13 @@ function reset_options() {
 	localStorage["language"] = "en";
 	document.getElementById("protocol").value = "https://";
 	localStorage["protocol"] = "https://";
-	document.getElementById("shortcut").checked = true;
-	localStorage["shortcut"] = "on";
+	if ((window.navigator.userAgent.indexOf("OPR") > -1) === true) {
+		document.getElementById("shortcut").checked = false;
+		localStorage["shortcut"] = "off";
+	} else {
+		document.getElementById("shortcut").checked = true;
+		localStorage["shortcut"] = "on";
+	}
 	document.getElementById("contentscripts").checked = true;
 	localStorage["contentscripts"] = "on";
 	document.getElementById("hidesearch").checked = false;
@@ -86,6 +91,11 @@ window.addEventListener('load',function() {
 function startSearch(event) {document.getElementById("searchform").submit();}
 
 window.onload = function() {
+	var list = document.getElementsByClassName("version");
+	for (var i = 0; i < list.length; i++) {
+	    list[i].innerHTML = chrome.runtime.getManifest().version;
+	}
+
 	if (document.getElementById("searchInput")) {
 		window.addEventListener('keydown', function() {
 			if (event.keyCode == 13) {

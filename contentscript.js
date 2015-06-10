@@ -13,13 +13,6 @@ chrome.runtime.sendMessage({method: "getLocalStorage", key: "contentscripts"}, f
 		if (window.location.href.indexOf("/wiki/") > -1) {
 			// Add extra button for Wikipedia Search on left panel
 			document.getElementById("p-navigation").innerHTML = document.getElementById("p-navigation").innerHTML + '<h3 style="display: block; padding-top: 10px; background-position: top left; background-repeat: no-repeat; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAAABCAAAAAAphRnkAAAAJ0lEQVQIW7XFsQEAIAyAMPD/b7uLWz8wS5youFW1UREfiIpH1Q2VBz7fGPS1dOGeAAAAAElFTkSuQmCC); background-image: url(//bits.wikimedia.org/static-1.25wmf24/skins/Vector/images/portal-break.png?2015-04-01T19:10:00Z)!ie;">Wikipedia Search ' + chrome.runtime.getManifest().version + '</h3><div class="body"><ul><li><a href="' + chrome.extension.getURL('settings.html') + '" title="Open Wikipedia Search extension settings in new tab" target="_blank">Extension Settings</a></li><li><a href="http://github.com/corbindavenport/wikipedia-search" title="Open Wikipedia Search extenion project on GitHub in a new tab" target="_blank">GitHub Project</a></li><li><a href="http://github.com/corbindavenport/wikipedia-search/issues/new" title="Submit bug report through GitHub" target="_blank">Report bug</a></li></ul></div>';
-
-			// Add information about wikipedia search to top header
-			header = document.getElementById("p-personal").children[1];
-			header.innerHTML = header.innerHTML + '<li>Wikipedia Search ' + chrome.runtime.getManifest().version + '</li>';
-
-			// Add Wikipedia Search info to footer
-			document.getElementById("footer-info-copyright").innerHTML = document.getElementById("footer-info-copyright").innerHTML + '<br /><br />Wikipedia Search ' + chrome.runtime.getManifest().version + ' is developed by ' + chrome.runtime.getManifest().author + ' and licensed under the GPLv3 license. The source code for Wikipedia Search is freely available on its <a href="' + chrome.runtime.getManifest().homepage_url + '" target="blank_">GitHub repository</a>.';
 		}
 	} else {
 		if (window.location.href.indexOf("/wiki/") > -1) {

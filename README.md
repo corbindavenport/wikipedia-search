@@ -4,9 +4,14 @@ This extension allows you to type the word 'wiki' into your browser's search bar
 
 If English isn't your main language, it's easy to change the language Wikipedia Search uses. Just go to the Settings page to switch to any of the 50+ languages Wikipedia supports.
 
-__Wikipedia is a trademark of the Wikimedia Foundation. Wikipedia icon from the [Faenza](http://tiheum.deviantart.com/art/Faenza-Icons-173323228) icon pack.__
+__Wikipedia is a trademark of the Wikimedia Foundation.__
 
 ---------------------------------------------------------
+__New in Wikipedia Search 6.4:__
+* Shiny new icon :)
+* Improvements to the Wikipedia Search widget for Awesome New Tab Page (ANTP)
+* Continued clean-up of overall codebase
+
 __New in Wikipedia Search 6.3.1:__
 * Fixed search bar on articles becoming disabled and not completely being removed.
 * Minor bug fixes
