@@ -95,7 +95,7 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 
 	updateDefaultSuggestion(text);
 
-	if(text.length > 0){
+	if (text.length > 0) {
 		currentRequest = suggests(text, function(data) {
 			var results = [];
 			if (localStorage.getItem("shortcut") === "on") {
@@ -117,7 +117,6 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 			}
 			suggest(results);
 		});
-	} else {
 	}
 
 });
@@ -170,12 +169,10 @@ function suggests(query, callback) {
 };
 
 chrome.omnibox.onInputEntered.addListener(function(text) {
-	var language = localStorage["language"];
-	var protocol = localStorage["protocol"];
 	if (text == "settings") {
 		chrome.tabs.update(null, {url: chrome.extension.getURL('settings.html')});
 	} else {
-		chrome.tabs.update(null, {url: protocol + language + ".wikipedia.org/w/index.php?search=" + text});
+		chrome.tabs.update(null, {url: localStorage["protocol"] + localStorage["language"] + ".wikipedia.org/w/index.php?search=" + text});
 	}
 });
 

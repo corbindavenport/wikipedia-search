@@ -9,8 +9,8 @@ You should have received a copy of the GNU General Public License along with thi
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Wikipedia Search</title>
-<link rel="icon" type="image/png" href="icon16.png">
-<script src="wikipedia.js"></script>
+<link rel="icon" type="image/png" href="img/icon16.png">
+<script src="js/wikipedia.js"></script>
 <link href="styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -35,16 +35,18 @@ You should have received a copy of the GNU General Public License along with thi
 							<select id="language" name="language">
 								<!-- 100,000+ content pages, sorted by romanization -->
 								<option value="ar" lang="ar">العربية</option><!-- Al-ʿArabīyah -->
-								<option value="bg" lang="bg">Български</option><!-- Bulgarski -->
+								<option value="az" lang="az">Azərbaycanca</option>
+								<option value="bg" lang="bg">Български</option><!-- Bǎlgarski -->
+								<option value="be" lang="be">Беларуская (Акадэмічная)</option><!-- Belaruskaya (Akademichnaya) -->
 								<option value="ca" lang="ca">Català</option>
 								<option value="cs" lang="cs">Čeština</option>
 								<option value="da" lang="da">Dansk</option>
 								<option value="de" lang="de">Deutsch</option>
+								<option value="et" lang="et">Eesti</option>
 								<option value="el" lang="el">Ελληνικά</option><!-- Ellīniká -->
-								<option value="en" lang="en" selected="selected">English</option>
+								<option value="en" lang="en">English</option>
 								<option value="es" lang="es">Español</option>
 								<option value="eo" lang="eo">Esperanto</option>
-								<option value="et" lang="et">Eesti</option>
 								<option value="eu" lang="eu">Euskara</option>
 								<option value="fa" lang="fa">فارسی</option><!-- Fārsi -->
 								<option value="fr" lang="fr">Français</option>
@@ -56,6 +58,7 @@ You should have received a copy of the GNU General Public License along with thi
 								<option value="id" lang="id">Bahasa Indonesia</option>
 								<option value="it" lang="it">Italiano</option>
 								<option value="he" lang="he">עברית</option><!-- ʿIvrit -->
+								<option value="ka" lang="ka">ქართული</option><!-- Kartuli -->
 								<option value="la" lang="la">Latina</option>
 								<option value="lt" lang="lt">Lietuvių</option>
 								<option value="hu" lang="hu">Magyar</option>
@@ -63,8 +66,9 @@ You should have received a copy of the GNU General Public License along with thi
 								<option value="min" lang="min">Bahaso Minangkabau</option>
 								<option value="nl" lang="nl">Nederlands</option>
 								<option value="ja" lang="ja">日本語</option><!-- Nihongo -->
-								<option value="no" lang="nb">Norsk (bokmål)</option>
-								<option value="nn" lang="nn">Norsk (nynorsk)</option>
+								<option value="no" lang="nb">Norsk (Bokmål)</option>
+								<option value="nn" lang="nn">Norsk (Nynorsk)</option>
+								<option value="ce" lang="ce">Нохчийн</option><!-- Noxçiyn -->
 								<option value="uz" lang="uz">Oʻzbekcha / Ўзбекча</option>
 								<option value="pl" lang="pl">Polski</option>
 								<option value="pt" lang="pt">Português</option>
@@ -72,7 +76,7 @@ You should have received a copy of the GNU General Public License along with thi
 								<option value="ro" lang="ro">Română</option>
 								<option value="ru" lang="ru">Русский</option><!-- Russkiy -->
 								<option value="simple" lang="en">Simple English</option>
-								<option value="ceb" lang="ceb">Sinugboanong Binisaya</option><!-- Cebuano -->
+								<option value="ceb" lang="ceb">Sinugboanong Binisaya</option>
 								<option value="sk" lang="sk">Slovenčina</option>
 								<option value="sl" lang="sl">Slovenščina</option>
 								<option value="sr" lang="sr">Српски / Srpski</option>
@@ -102,7 +106,7 @@ You should have received a copy of the GNU General Public License along with thi
 				</table>
 				<p><input type="checkbox" id="shortcut"><label for="shortcut" id="shortcut-label">Enable settings shortcut in search results</label></p>
 				<p><input type="checkbox" id="contentscripts"><label for="contentscripts">Show Wikipedia Search panel on Wikipedia</label></p>
-				<p><i>This provides quick access to Wikipedia Search settings and other features while on Wikipedia. The panel appears underneath the Wikipedia logo on any article page. This also enables the social media share links at the top of article pages.</i></p>
+				<p><i>This provides quick access to Wikipedia Search settings and other features while on Wikipedia. The panel appears underneath the Wikipedia logo on any article page.</i></p>
 				<p><input type="checkbox" id="hidesearch"><label for="hidesearch">Hide search bar on Wikipedia home page and article pages (in favor of address bar search)</label></p>
 			</p>
 			<div id="saved">Saved!</div>

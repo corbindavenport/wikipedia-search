@@ -1,7 +1,7 @@
 {
 "manifest_version": 2,
 	"name": "Wikipedia Search",
-	"version": "6.4",
+	"version": "7.0",
 	"author": "Corbin Davenport",
 	"homepage_url": "https://github.com/corbindavenport/wikipedia-search",
 	"description": "Search Wikipedia in every language from the address bar.",
@@ -11,7 +11,8 @@
 	},
 	"web_accessible_resources": [
 		"widget.html",
-		"settings.html"
+		"settings.html",
+		"img/*"
 	],
 	"permissions": [
 		"contextMenus",
@@ -19,19 +20,19 @@
 		"https://*.wikipedia.org/*"
 	],
 	"background": {
-		"scripts": ["background.js"]
+		"scripts": ["js/background.js"]
 	},
 	"content_scripts": [
 		{
 		"matches": ["http://*.wikipedia.org/*", "https://*.wikipedia.org/*"],
-		"js": ["contentscript.js"],
+		"js": ["js/contentscript.js"],
 		"run_at": "document_end"
 		}
 	],
 	"icons":{
-		"16":"icon16.png",
-		"32":"icon32.png",
-		"48":"icon48.png",
-		"128":"icon128.png"
+		"16":"img/icon16.png",
+		"32":"img/icon32.png",
+		"48":"img/icon48.png",
+		"128":"img/icon128.png"
 	}
 }
