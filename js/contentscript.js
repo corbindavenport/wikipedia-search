@@ -23,7 +23,7 @@ chrome.runtime.sendMessage({method: "getLocalStorage", key: "contentscripts"}, f
 		if (window.location.href.indexOf("/wiki/") > -1) {
 			var info = document.createElement("li");
 			info.setAttribute("id", "wikipediasearchinfo");
-			info.innerHTML = '<span style="color: gray;">Wikipedia Search ' + chrome.runtime.getManifest().version + '</span>';
+			info.innerHTML = '<span style="color: gray;">Wikipedia Search ' + chrome.runtime.getManifest().version + '</span> (<a href="' + chrome.extension.getURL('settings.html') + '" title="Open Wikipedia Search extension settings in new tab" target="_blank">Settings</a>)';
 			var headerparent = document.getElementById("p-personal").getElementsByTagName("ul")[0];
 			console.log(headerparent);
 			headerparent.insertBefore(info, document.getElementById("pt-userpage"));

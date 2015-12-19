@@ -7,6 +7,9 @@ If English isn't your main language, it's easy to change the language Wikipedia 
 __Wikipedia is a trademark of the Wikimedia Foundation.__
 
 ---------------------------------------------------------
+__New in Wikipedia Search 7.0.1:__
+* Added settings button to Wikipedia pages when side panel is disabled.
+
 __New in Wikipedia Search 7.0:__
 * Panel improvements: The Wikipedia Search panel (on the left side when browsing Wikipedia) has been improved and now correctly matches Wikipedia's design.
 * New language: Added support for the Estonian, Georgian, Chechen, and Bulgarian Wikipedias.
