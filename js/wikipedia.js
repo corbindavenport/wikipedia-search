@@ -10,6 +10,9 @@ function save_options() {
 	if (document.getElementById("language")) {
 		localStorage["language"] = document.getElementById("language").value;
 		localStorage["protocol"] = document.getElementById("protocol").value;
+		if (document.getElementById("protocol").value === "http://") {
+			document.getElementById("protocolalert").style.display = 'block';
+		}
 		if (document.getElementById("shortcut").checked === true) {
 			localStorage["shortcut"] = "on";
 		} else {
@@ -62,6 +65,7 @@ function reset_options() {
 
 window.addEventListener('load',function() {
 	if (document.getElementById("language")) {
+		document.getElementById("protocolalert").style.display = 'none';
 		document.getElementById("language").value = localStorage["language"];
 		document.getElementById("protocol").value = localStorage["protocol"];
 		if (localStorage.getItem("shortcut") === "on") {
