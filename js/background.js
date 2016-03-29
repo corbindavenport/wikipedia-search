@@ -10,28 +10,38 @@ You should have received a copy of the GNU General Public License along with thi
 
 chrome.runtime.onInstalled.addListener(function(details){
 	if(details.reason == "update" || "install"){
+		// Transfer data from Wikipedia Search 7.0.2 or below
+		// Wikipedia Search 7.1+ use booleans for localStorage
+		if (localStorage.getItem("shortcut") === "on") {
+			localStorage["shortcut"] = "true";
+		} else if (localStorage.getItem("shortcut") === "off") {
+			localStorage["shortcut"] = "false";
+		}
+		if (localStorage.getItem("contentscripts") === "on") {
+			localStorage["contentscripts"] = "true";
+		} else if (localStorage.getItem("contentscripts") === "off") {
+			localStorage["contentscripts"] = "false";
+		}
+		if (localStorage.getItem("hidesearch") === "on") {
+			localStorage["hidesearch"] = "true";
+		} else if (localStorage.getItem("hidesearch") === "off") {
+			localStorage["hidesearch"] = "false";
+		}
+
 		if (localStorage.getItem("language") === null) {
 			localStorage["language"] = "en";
 		}
 		if (localStorage.getItem("protocol") === null) {
 			localStorage["protocol"] = "https://";
 		}
-		if (localStorage.getItem("donation") === null) {
-			localStorage["donation"] = "yes";
-		}
 		if (localStorage.getItem("shortcut") === null) {
-			if ((window.navigator.userAgent.indexOf("OPR") > -1) === false) {
-				localStorage["shortcut"] = "on";
-			} else {
-				// Shortcut to options is not functional on Opera, possibly a bug
-				localStorage["shortcut"] = "off";
-			}
+			localStorage["shortcut"] = "true";
 		}
 		if (localStorage.getItem("contentscripts") === null) {
-			localStorage["contentscripts"] = "on";
+			localStorage["contentscripts"] = "true";
 		}
 		if (localStorage.getItem("hidesearch") === null) {
-			localStorage["hidesearch"] = "off";
+			localStorage["hidesearch"] = "false";
 		}
 	}
 	if(localStorage.getItem("version") != chrome.runtime.getManifest().version){
@@ -98,10 +108,22 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 	if (text.length > 0) {
 		currentRequest = suggests(text, function(data) {
 			var results = [];
-			if (localStorage.getItem("shortcut") === "on") {
-				num = 4;
+			// Opera only supports showing four search results at a time, while Chrome can show five
+			// When the settings shortcut is enabled, it takes up one of the search results slots
+			// If shortcut is disabled = Five search results in Chrome, four search results in Opera
+			// If shortcut is enabled = Four search results in Chrome, three search results in Opera
+			if (localStorage.getItem("shortcut") === "true") {
+				if (window.navigator.userAgent.indexOf("OPR") > -1) {
+					num = 3;
+				} else {
+					num = 4;
+				}
 			} else {
-				num = 5;
+				if (window.navigator.userAgent.indexOf("OPR") > -1) {
+					num = 4;
+				} else {
+					num = 5;
+				}
 			}
 			for(var i = 0; i < num; i++){
 				results.push({
@@ -109,10 +131,10 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 					description: data[1][i]
 				});
 			}
-			if (localStorage.getItem("shortcut") === "on") {
+			if (localStorage.getItem("shortcut") === "true") {
 				results.push({
 					content: "settings",
-					description: "Open Wikipedia Search options"
+					description: "<dim>Open settings for Wikipedia Search</dim>"
 				});
 			}
 			suggest(results);
@@ -121,7 +143,7 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 
 });
 
-function resetDefaultSuggestion() {      
+function resetDefaultSuggestion() {
 	chrome.omnibox.setDefaultSuggestion({
 		description: ' '
 	});
@@ -129,7 +151,7 @@ function resetDefaultSuggestion() {
 
 resetDefaultSuggestion();
 var searchLabel = chrome.i18n.getMessage('search_label');
-function updateDefaultSuggestion(text) {      
+function updateDefaultSuggestion(text) {
 	chrome.omnibox.setDefaultSuggestion({
 		description: searchLabel + 'Search on Wikipedia: %s'
 	});
@@ -149,11 +171,11 @@ function suggests(query, callback) {
 	var language = localStorage["language"];
 	var protocol = localStorage["protocol"];
 	var req = new XMLHttpRequest();
-	
+
 	req.open("GET", protocol + language + ".wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&search=" + query, true);
 	req.onload = function(){
 		if(this.status == 200){
-			try{                  
+			try{
 				callback(JSON.parse(this.responseText));
 			}catch(e){
 				this.onerror();

@@ -9,7 +9,7 @@ You should have received a copy of the GNU General Public License along with thi
 // Wikipedia integration
 
 chrome.runtime.sendMessage({method: "getLocalStorage", key: "contentscripts"}, function(response) {
-	if (response.data === "on") {
+	if (response.data === "true") {
 		if (window.location.href.indexOf("/wiki/") > -1) {
 			// Add extra button for Wikipedia Search on left panel
 			var wikipanel = document.createElement("div");
@@ -34,7 +34,7 @@ chrome.runtime.sendMessage({method: "getLocalStorage", key: "contentscripts"}, f
 // Hide search on Wikipedia article pages
 
 chrome.runtime.sendMessage({method: "getLocalStorage", key: "hidesearch"}, function(response) {
-	if (response.data === "on" && window.location.href.indexOf("/wiki/") > -1) {
+	if (response.data === "true" && window.location.href.indexOf("/wiki/") > -1) {
 			document.getElementById("searchform").style.display = "none";
 			document.getElementById("p-search").style.marginRight = "0";
 	}

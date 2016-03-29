@@ -10,6 +10,7 @@ You should have received a copy of the GNU General Public License along with thi
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Wikipedia Search</title>
 <link rel="icon" type="image/png" href="img/icon16.png">
+<script src="js/jquery-2.1.3.min.js"></script>
 <script src="js/wikipedia.js"></script>
 <link href="styles.css" rel="stylesheet" type="text/css">
 </head>
@@ -26,7 +27,7 @@ You should have received a copy of the GNU General Public License along with thi
 			<section class="settings-card">
 			<h2>Settings</h2>
 			<p>
-				<div id="protocolalert"><b>Using HTTP is not recommended.</b><br /><br /></div>
+				<div id="protocolalert"><b>Using HTTP is not recommended. Please only use it if the HTTPS search does not work.</b><br /><br /></div>
 				<table>
 					<tr>
 						<td>
@@ -38,6 +39,7 @@ You should have received a copy of the GNU General Public License along with thi
 								<option value="ar" lang="ar">العربية</option><!-- Al-ʿArabīyah -->
 								<option value="az" lang="az">Azərbaycanca</option>
 								<option value="bg" lang="bg">Български</option><!-- Bǎlgarski -->
+								<option value="zh-min-nan" lang="nan">Bân-lâm-gú / Hō-ló-oē</option>
 								<option value="be" lang="be">Беларуская (Акадэмічная)</option><!-- Belaruskaya (Akademichnaya) -->
 								<option value="ca" lang="ca">Català</option>
 								<option value="cs" lang="cs">Čeština</option>
@@ -84,8 +86,10 @@ You should have received a copy of the GNU General Public License along with thi
 								<option value="sh" lang="sh">Srpskohrvatski / Српскохрватски</option>
 								<option value="fi" lang="fi">Suomi</option>
 								<option value="sv" lang="sv">Svenska</option>
+								<option value="th" lang="th">ภาษาไทย</option><!-- Phasa Thai -->
 								<option value="tr" lang="tr">Türkçe</option>
 								<option value="uk" lang="uk">Українська</option><!-- Ukrayins’ka -->
+								<option value="ur" lang="ur">اردو</option><!-- Urdu -->
 								<option value="vi" lang="vi">Tiếng Việt</option>
 								<option value="vo" lang="vo">Volapük</option>
 								<option value="war" lang="war">Winaray</option>
@@ -110,10 +114,6 @@ You should have received a copy of the GNU General Public License along with thi
 				<p><i>This provides quick access to Wikipedia Search settings and other features while on Wikipedia. The panel appears underneath the Wikipedia logo on any article page.</i></p>
 				<p><input type="checkbox" id="hidesearch"><label for="hidesearch">Hide search bar on Wikipedia home page and article pages (in favor of address bar search)</label></p>
 			</p>
-			<div id="saved">Saved!</div>
-			</section>
-			<section id="settings-buttons" class="buttons" style="display: block;">
-				<input class="g-button g-button-submit" type="button" id="reset" value="Reset"> <input class="g-button g-button-submit" type="button" id="save" value="Save">
 			</section>
 		</article>
 		<article>
