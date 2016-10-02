@@ -50,6 +50,10 @@ chrome.runtime.onInstalled.addListener(function(details){
 	}
 });
 
+chrome.browserAction.onClicked.addListener(function() {
+	 window.open(chrome.extension.getURL("settings.html"));
+});
+
 // Awesome New Tab Page Widget
 
 var info = {
