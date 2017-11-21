@@ -35,7 +35,6 @@ chrome.browserAction.onClicked.addListener(function() {
 });
 
 // Awesome New Tab Page Widget
-
 var info = {
 	poke: 3,
 	width: 1,
@@ -64,7 +63,6 @@ chrome.extension.onMessageExternal.addListener(function (request, sender, sendRe
 });
 
 // Context Menu Search
-
 chrome.contextMenus.create({
 	title: "Search \"%s\" on Wikipedia",
 	contexts: ["selection"],
@@ -76,19 +74,14 @@ chrome.contextMenus.create({
 
 // Omnibox Search
 // Derived from OmniWiki (github.com/hamczu/OmniWiki)
-
 var currentRequest = null;
-
 chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
-
 	if (currentRequest != null) {
 		currentRequest.onreadystatechange = null;
 		currentRequest.abort();
 		currentRequest = null;
 	}
-
 	updateDefaultSuggestion(text);
-
 	if (text.length > 0) {
 		currentRequest = suggests(text, function(data) {
 			var results = [];
@@ -124,7 +117,6 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 			suggest(results);
 		});
 	}
-
 });
 
 function resetDefaultSuggestion() {
@@ -139,7 +131,6 @@ function updateDefaultSuggestion(text) {
 	chrome.omnibox.setDefaultSuggestion({
 		description: searchLabel + 'Search on Wikipedia: %s'
 	});
-
 };
 
 chrome.omnibox.onInputStarted.addListener(function() {
@@ -149,7 +140,6 @@ chrome.omnibox.onInputStarted.addListener(function() {
 chrome.omnibox.onInputCancelled.addListener(function() {
 	resetDefaultSuggestion();
 });
-
 
 function suggests(query, callback) {
 	var language = localStorage["language"];
