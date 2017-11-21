@@ -4,12 +4,15 @@ This extension allows you to type the word 'wiki' into your browser's search bar
 
 If English isn't your main language, it's easy to change the language Wikipedia Search uses. Just go to the Settings page to switch to any of the 50+ languages Wikipedia supports.
 
-__Wikipedia is a trademark of the Wikimedia Foundation.__
+__Wikipedia is a trademark of the Wikimedia Foundation. Wikipedia Search is in no way affiliated with Wikipedia or the Wikimedia Foundation.__
 
 ---------------------------------------------------------
-__New in Wikipedia Search 8.1:__
-* Clicking toolbar icon now opens extension settings
-* Minor bug fixes
+
+__New in Wikipedia Search 9.0:__
+
+* Redesigned settings and welcome pages
+* Updated widget for Awesome New Tab Page
+* Added support for Tamiḻ and Turkce languages
 
 ---------------------------------------------------------
 
