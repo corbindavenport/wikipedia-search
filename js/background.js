@@ -12,36 +12,16 @@ chrome.runtime.onInstalled.addListener(function(details){
 	if(details.reason == "update" || "install"){
 		// Transfer data from Wikipedia Search 7.0.2 or below
 		// Wikipedia Search 7.1+ use booleans for localStorage
-		if (localStorage.getItem("shortcut") === "on") {
+		if ((localStorage.getItem("shortcut") === "on") || (localStorage.getItem("shortcut") === null)) {
 			localStorage["shortcut"] = "true";
 		} else if (localStorage.getItem("shortcut") === "off") {
 			localStorage["shortcut"] = "false";
 		}
-		if (localStorage.getItem("contentscripts") === "on") {
-			localStorage["contentscripts"] = "true";
-		} else if (localStorage.getItem("contentscripts") === "off") {
-			localStorage["contentscripts"] = "false";
-		}
-		if (localStorage.getItem("hidesearch") === "on") {
-			localStorage["hidesearch"] = "true";
-		} else if (localStorage.getItem("hidesearch") === "off") {
-			localStorage["hidesearch"] = "false";
-		}
-
 		if (localStorage.getItem("language") === null) {
 			localStorage["language"] = "en";
 		}
 		if (localStorage.getItem("protocol") === null) {
 			localStorage["protocol"] = "https://";
-		}
-		if (localStorage.getItem("shortcut") === null) {
-			localStorage["shortcut"] = "true";
-		}
-		if (localStorage.getItem("contentscripts") === null) {
-			localStorage["contentscripts"] = "true";
-		}
-		if (localStorage.getItem("hidesearch") === null) {
-			localStorage["hidesearch"] = "false";
 		}
 	}
 	if(localStorage.getItem("version") != chrome.runtime.getManifest().version){
