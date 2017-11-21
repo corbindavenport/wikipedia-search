@@ -7,7 +7,6 @@ You should have received a copy of the GNU General Public License along with thi
 */
 
 $(window).on("load", function() {
-	// Settings Page
 	if ($("#language").length) {
 		$("#bitcoin").hide();
 		if ($("#protocol").val() === "http://") {
@@ -20,20 +19,6 @@ $(window).on("load", function() {
 		$("#shortcut").prop("checked", $.parseJSON(localStorage.getItem("shortcut")));
 		$("#contentscripts").prop("checked", $.parseJSON(localStorage.getItem("contentscripts")));
 		$("#hidesearch").prop("checked", $.parseJSON(localStorage.getItem("hidesearch")));
-	}
-	// Welcome Page
-	if ($(".version").length) {
-		$("#bitcoin").hide();
-		$(".version").html(chrome.runtime.getManifest().version);
-	}
-	// Awesome New Tab Page Widget
-	if ($("#searchInput").length) {
-		$("#searchInput").keypress(function (e) {
-		  if (e.which == 13) {
-		    window.parent.location = localStorage.getItem("protocol") + localStorage.getItem("language") + ".wikipedia.org/w/index.php?search=" + encodeURI($("#searchInput").val());
-				return false;
-		  }
-		});
 	}
 });
 
