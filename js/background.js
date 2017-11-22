@@ -6,8 +6,11 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
 */
 
-// Check for settings & version
+// List of Wikipedia's supported language in an array, for the auto-detect functionality
+var langArray= ["ar","az","bg","nan","be","ca","cs","da","de","et","el","en","es","eo","eu","fa","fr","gl","ko","hy","hi","hr","id","it","he","ka","la","lt","hu","ms","min","nl","ja","no","nn","ce","uz","pl","pt","kk","ro","ru","ceb","sk","sl","sr","sh","fi","sv","ta","th","tr","uk","ur","vi","vo","war","zh"];
+var detailArray = ["العربية","Azərbaycanca","Български","Bân-lâm-gú / Hō-ló-oē","Беларуская (Акадэмічная)","Català","Čeština","Dansk","Deutsch","Eesti","Ελληνικά","English","Español","Esperanto","Euskara","فارسی","Français","Galego","한국어","Հայերեն","हिन्दी","Hrvatski","Bahasa Indonesia","Italiano","עברית","ქართული","Latina","Lietuvių","Magyar","Bahasa Melayu","Bahaso Minangkabau","Nederlands","日本語","Norsk (Bokmål)","Norsk (Nynorsk)","Нохчийн","Oʻzbekcha / Ўзбекча","Polski","Português","Қазақша / Qazaqşa / قازاقشا","Română","Русский","Sinugboanong Binisaya","Slovenčina","Slovenščina","Српски / Srpski","Srpskohrvatski / Српскохрватски","Suomi","Svenska","தமிழ்","ภาษาไทย","Türkçe","Українська","اردو","Tiếng Việt","Volapük","Winaray","中文"];
 
+// Check for settings & version
 chrome.runtime.onInstalled.addListener(function(details){
 	if(details.reason == "update" || "install"){
 		// Transfer data from Wikipedia Search 7.0.2 or below
@@ -18,10 +21,29 @@ chrome.runtime.onInstalled.addListener(function(details){
 			localStorage["shortcut"] = "false";
 		}
 		if (localStorage.getItem("language") === null) {
-			localStorage["language"] = "en";
+			// Detect the user's system language
+			var lang = navigator.languages[0];
+			// Cut off the localization part if it exists (e.g. en-US becomes en), to match with Wikipedia's format
+			var n = lang.indexOf('-');
+			lang = lang.substring(0, n != -1 ? n : lang.length);
+			console.log(lang)
+			// Check if the language has a Wikipedia
+			if (langArray.includes(lang)) {
+				console.log("Language auto-detected as '" + lang + "' (" + detailArray[langArray.indexOf(lang)] + ")");
+				localStorage["language"] = lang;
+				localStorage["full-language"] = detailArray[langArray.indexOf(lang)];
+			} else {
+				// Set it to English as default
+				console.log("Could not auto-detect language, defaulting to 'en' (English)")
+				localStorage["language"] = "en";
+				localStorage["full-language"] = detailArray[langArray.indexOf("en")];
+			}
 		}
 		if (localStorage.getItem("protocol") === null) {
 			localStorage["protocol"] = "https://";
+		}
+		if (localStorage.getItem("settings-modified") === null) {
+			localStorage["settings-modified"] = "false";
 		}
 	}
 	if(localStorage.getItem("version") != chrome.runtime.getManifest().version){

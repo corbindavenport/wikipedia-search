@@ -11,6 +11,13 @@ $(document).ready(function() {
 	// Add version number to welcome page
 	$(".version").html(" " + chrome.runtime.getManifest().version);
 
+	// Add language to welcome page
+	if ($.parseJSON(localStorage.getItem("settings-modified")) == false) {
+		$(".language-warning").html('The search language has been auto-detected as <b>' + localStorage["full-language"] + ' (' + localStorage["language"] + ')</b>.<a class="btn btn-primary" href="settings.html" role="button">Change language</a>');
+	} else {
+		$(".language-warning").html('The search language is currently set to <b>' + localStorage["full-language"] + ' (' + localStorage["language"] + ')</b>.<a class="btn btn-primary" href="settings.html" role="button">Change language</a>');
+	}
+
 	//Show instructions for leaving a review based on the browser being used
 	var useragent = navigator.userAgent;
 
