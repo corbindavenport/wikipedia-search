@@ -1,8 +1,13 @@
 Wikipedia Search
 ================
-This extension allows you to type the word 'wiki' into your browser's search bar, press the space key, and search for an article on Wikipedia. You can also select any word or phrase on the web, right-click, and search it in Wikipedia. If you have [Awesome New Tab Page](https://antp.co) installed, there's even a widget for that built-in. Instant access to the millions of articles of articles on Wikipedia.
 
-If English isn't your main language, it's easy to change the language Wikipedia Search uses. Just go to the Settings page to switch to any of the 50+ languages Wikipedia supports.
+This extension integrates Wikipedia searching capabilities into Chrome and Opera. You can type the word 'wiki' into the address bar, press space (or tab), and start typing the article you want to find. Live results are pulled from Wikipedia as you type. The search language is automatically detected, but you can change it manually to any of the 50+ languages that Wikipedia supports.
+
+In addition to the address bar search, this extension also adds a 'Search in Wikipedia' option to the right-click menu when you select text on any page. If you have [Awesome New Tab Page](https://antp.co) installed, Wikipedia Search provides a widget you can use.
+
+[Download for Chrome](https://chrome.google.com/webstore/detail/wikipedia-search/lipakennkogpodadpikgipnogamhklmk)
+
+[Download for Opera](https://addons.opera.com/en/extensions/details/wikipedia-search/)
 
 __Wikipedia is a trademark of the Wikimedia Foundation. Wikipedia Search is in no way affiliated with Wikipedia or the Wikimedia Foundation.__
 
@@ -14,6 +19,7 @@ __New in Wikipedia Search 9.0:__
 * Search language now defaults to system language, instead of English
 * Updated widget for Awesome New Tab Page
 * Added support for Tamiḻ and Turkce languages
+* Improved support for Opera
 * Other bug fixes and improvements
 
 ---------------------------------------------------------
