@@ -86,7 +86,7 @@ chrome.extension.onMessageExternal.addListener(function (request, sender, sendRe
 
 // Context Menu Search
 chrome.contextMenus.create({
-	title: "Search \"%s\" on Wikipedia",
+	title: "Search Wikipedia for \"%s\"",
 	contexts: ["selection"],
 	onclick: function searchText(info){
 		var url = encodeURI(localStorage["protocol"] + localStorage["language"] + ".wikipedia.org/w/index.php?title=Special:Search&search=" +info.selectionText);
@@ -133,7 +133,7 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 			if (localStorage.getItem("shortcut") === "true") {
 				results.push({
 					content: "settings",
-					description: "<dim>Open settings for Wikipedia Search</dim>"
+					description: "<dim>Change search language (currently set to " + localStorage["full-language"] + ")</dim>"
 				});
 			}
 			suggest(results);
