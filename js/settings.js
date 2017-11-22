@@ -21,6 +21,25 @@ $(window).on('load', function() {
 	$("input[name='shortcut']").prop("checked", $.parseJSON(localStorage.getItem("shortcut")));
 });
 
+// Reset language button
+$(document).on('click', ".reset-language", function() {
+	// Detect the user's system language
+	var lang = navigator.languages[0];
+	// Cut off the localization part if it exists (e.g. en-US becomes en), to match with Wikipedia's format
+	var n = lang.indexOf('-');
+	lang = lang.substring(0, n != -1 ? n : lang.length);
+	console.log(lang)
+	// Check if the language has a Wikipedia
+	if (langArray.includes(lang)) {
+		$("#language").val(lang);
+		localStorage["language"] = lang;
+		localStorage["full-language"] = detailArray[langArray.indexOf(lang)];
+	} else {
+		// Set it to English as default
+		alert("Sorry, Wikipedia Search could not auto-detect your system language.")
+	}
+});
+
 // Save settings
 $(document).on('change', "input,select", function() {
 	localStorage["settings-modified"] = "true";
