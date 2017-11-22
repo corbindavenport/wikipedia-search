@@ -11,8 +11,10 @@ __Wikipedia is a trademark of the Wikimedia Foundation. Wikipedia Search is in n
 __New in Wikipedia Search 9.0:__
 
 * Redesigned settings and welcome pages
+* Search language now defaults to system language, instead of English
 * Updated widget for Awesome New Tab Page
 * Added support for Tamiḻ and Turkce languages
+* Other bug fixes and improvements
 
 ---------------------------------------------------------
 
