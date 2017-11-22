@@ -107,22 +107,13 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 	if (text.length > 0) {
 		currentRequest = suggests(text, function(data) {
 			var results = [];
-			// Opera only supports showing four search results at a time, while Chrome can show five
 			// When the settings shortcut is enabled, it takes up one of the search results slots
-			// If shortcut is disabled = Five search results in Chrome, four search results in Opera
-			// If shortcut is enabled = Four search results in Chrome, three search results in Opera
+			// If shortcut is disabled = Show five search results
+			// If shortcut is enabled = Show four search results + shortcut
 			if (localStorage.getItem("shortcut") === "true") {
-				if (window.navigator.userAgent.indexOf("OPR") > -1) {
-					num = 3;
-				} else {
-					num = 4;
-				}
+				num = 4;
 			} else {
-				if (window.navigator.userAgent.indexOf("OPR") > -1) {
-					num = 4;
-				} else {
-					num = 5;
-				}
+				num = 5;
 			}
 			for(var i = 0; i < num; i++){
 				results.push({
