@@ -26,7 +26,6 @@ chrome.runtime.onInstalled.addListener(function(details){
 			// Cut off the localization part if it exists (e.g. en-US becomes en), to match with Wikipedia's format
 			var n = lang.indexOf('-');
 			lang = lang.substring(0, n != -1 ? n : lang.length);
-			console.log(lang)
 			// Check if the language has a Wikipedia
 			if (langArray.includes(lang)) {
 				console.log("Language auto-detected as '" + lang + "' (" + detailArray[langArray.indexOf(lang)] + ")");
