@@ -38,6 +38,9 @@ chrome.runtime.onInstalled.addListener(function(details){
 				localStorage["full-language"] = detailArray[langArray.indexOf("en")];
 			}
 		}
+		if (localStorage.getItem("full-language") === null) {
+			localStorage["full-language"] = detailArray[langArray.indexOf(localStorage["language"])];
+		}
 		if (localStorage.getItem("protocol") === null) {
 			localStorage["protocol"] = "https://";
 		}
