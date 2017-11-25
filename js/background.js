@@ -6,42 +6,46 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
 */
 
-// Check for settings & version
+// List of Wikipedia's supported language in an array, for the auto-detect functionality
+var langArray= ["ar","az","bg","nan","be","ca","cs","da","de","et","el","en","es","eo","eu","fa","fr","gl","ko","hy","hi","hr","id","it","he","ka","la","lt","hu","ms","min","nl","ja","no","nn","ce","uz","pl","pt","kk","ro","ru","ceb","sk","sl","sr","sh","fi","sv","ta","th","tr","uk","ur","vi","vo","war","zh"];
+var detailArray = ["العربية","Azərbaycanca","Български","Bân-lâm-gú / Hō-ló-oē","Беларуская (Акадэмічная)","Català","Čeština","Dansk","Deutsch","Eesti","Ελληνικά","English","Español","Esperanto","Euskara","فارسی","Français","Galego","한국어","Հայերեն","हिन्दी","Hrvatski","Bahasa Indonesia","Italiano","עברית","ქართული","Latina","Lietuvių","Magyar","Bahasa Melayu","Bahaso Minangkabau","Nederlands","日本語","Norsk (Bokmål)","Norsk (Nynorsk)","Нохчийн","Oʻzbekcha / Ўзбекча","Polski","Português","Қазақша / Qazaqşa / قازاقشا","Română","Русский","Sinugboanong Binisaya","Slovenčina","Slovenščina","Српски / Srpski","Srpskohrvatski / Српскохрватски","Suomi","Svenska","தமிழ்","ภาษาไทย","Türkçe","Українська","اردو","Tiếng Việt","Volapük","Winaray","中文"];
 
+// Check for settings & version
 chrome.runtime.onInstalled.addListener(function(details){
 	if(details.reason == "update" || "install"){
 		// Transfer data from Wikipedia Search 7.0.2 or below
 		// Wikipedia Search 7.1+ use booleans for localStorage
-		if (localStorage.getItem("shortcut") === "on") {
+		if ((localStorage.getItem("shortcut") === "on") || (localStorage.getItem("shortcut") === null)) {
 			localStorage["shortcut"] = "true";
 		} else if (localStorage.getItem("shortcut") === "off") {
 			localStorage["shortcut"] = "false";
 		}
-		if (localStorage.getItem("contentscripts") === "on") {
-			localStorage["contentscripts"] = "true";
-		} else if (localStorage.getItem("contentscripts") === "off") {
-			localStorage["contentscripts"] = "false";
-		}
-		if (localStorage.getItem("hidesearch") === "on") {
-			localStorage["hidesearch"] = "true";
-		} else if (localStorage.getItem("hidesearch") === "off") {
-			localStorage["hidesearch"] = "false";
-		}
-
 		if (localStorage.getItem("language") === null) {
-			localStorage["language"] = "en";
+			// Detect the user's system language
+			var lang = navigator.languages[0];
+			// Cut off the localization part if it exists (e.g. en-US becomes en), to match with Wikipedia's format
+			var n = lang.indexOf('-');
+			lang = lang.substring(0, n != -1 ? n : lang.length);
+			// Check if the language has a Wikipedia
+			if (langArray.includes(lang)) {
+				console.log("Language auto-detected as '" + lang + "' (" + detailArray[langArray.indexOf(lang)] + ")");
+				localStorage["language"] = lang;
+				localStorage["full-language"] = detailArray[langArray.indexOf(lang)];
+			} else {
+				// Set it to English as default
+				console.log("Could not auto-detect language, defaulting to 'en' (English)")
+				localStorage["language"] = "en";
+				localStorage["full-language"] = detailArray[langArray.indexOf("en")];
+			}
+		}
+		if (localStorage.getItem("full-language") === null) {
+			localStorage["full-language"] = detailArray[langArray.indexOf(localStorage["language"])];
 		}
 		if (localStorage.getItem("protocol") === null) {
 			localStorage["protocol"] = "https://";
 		}
-		if (localStorage.getItem("shortcut") === null) {
-			localStorage["shortcut"] = "true";
-		}
-		if (localStorage.getItem("contentscripts") === null) {
-			localStorage["contentscripts"] = "true";
-		}
-		if (localStorage.getItem("hidesearch") === null) {
-			localStorage["hidesearch"] = "false";
+		if (localStorage.getItem("settings-modified") === null) {
+			localStorage["settings-modified"] = "false";
 		}
 	}
 	if(localStorage.getItem("version") != chrome.runtime.getManifest().version){
@@ -55,7 +59,6 @@ chrome.browserAction.onClicked.addListener(function() {
 });
 
 // Awesome New Tab Page Widget
-
 var info = {
 	poke: 3,
 	width: 1,
@@ -84,9 +87,8 @@ chrome.extension.onMessageExternal.addListener(function (request, sender, sendRe
 });
 
 // Context Menu Search
-
 chrome.contextMenus.create({
-	title: "Search \"%s\" on Wikipedia",
+	title: "Search Wikipedia for \"%s\"",
 	contexts: ["selection"],
 	onclick: function searchText(info){
 		var url = encodeURI(localStorage["protocol"] + localStorage["language"] + ".wikipedia.org/w/index.php?title=Special:Search&search=" +info.selectionText);
@@ -96,38 +98,24 @@ chrome.contextMenus.create({
 
 // Omnibox Search
 // Derived from OmniWiki (github.com/hamczu/OmniWiki)
-
 var currentRequest = null;
-
 chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
-
 	if (currentRequest != null) {
 		currentRequest.onreadystatechange = null;
 		currentRequest.abort();
 		currentRequest = null;
 	}
-
 	updateDefaultSuggestion(text);
-
 	if (text.length > 0) {
 		currentRequest = suggests(text, function(data) {
 			var results = [];
-			// Opera only supports showing four search results at a time, while Chrome can show five
 			// When the settings shortcut is enabled, it takes up one of the search results slots
-			// If shortcut is disabled = Five search results in Chrome, four search results in Opera
-			// If shortcut is enabled = Four search results in Chrome, three search results in Opera
+			// If shortcut is disabled = Show five search results
+			// If shortcut is enabled = Show four search results + shortcut
 			if (localStorage.getItem("shortcut") === "true") {
-				if (window.navigator.userAgent.indexOf("OPR") > -1) {
-					num = 3;
-				} else {
-					num = 4;
-				}
+				num = 4;
 			} else {
-				if (window.navigator.userAgent.indexOf("OPR") > -1) {
-					num = 4;
-				} else {
-					num = 5;
-				}
+				num = 5;
 			}
 			for(var i = 0; i < num; i++){
 				results.push({
@@ -138,13 +126,12 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
 			if (localStorage.getItem("shortcut") === "true") {
 				results.push({
 					content: "settings",
-					description: "<dim>Open settings for Wikipedia Search</dim>"
+					description: "<dim>Change search language (currently set to " + localStorage["full-language"] + ")</dim>"
 				});
 			}
 			suggest(results);
 		});
 	}
-
 });
 
 function resetDefaultSuggestion() {
@@ -159,7 +146,6 @@ function updateDefaultSuggestion(text) {
 	chrome.omnibox.setDefaultSuggestion({
 		description: searchLabel + 'Search on Wikipedia: %s'
 	});
-
 };
 
 chrome.omnibox.onInputStarted.addListener(function() {
@@ -169,7 +155,6 @@ chrome.omnibox.onInputStarted.addListener(function() {
 chrome.omnibox.onInputCancelled.addListener(function() {
 	resetDefaultSuggestion();
 });
-
 
 function suggests(query, callback) {
 	var language = localStorage["language"];

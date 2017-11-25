@@ -4,130 +4,92 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
-!-->
-<html>
+-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Wikipedia Search</title>
-<link rel="icon" type="image/png" href="img/icon16.png">
-<script src="js/jquery-3.1.1.min.js"></script>
-<script src="js/wikipedia.js"></script>
-<link href="styles.css" rel="stylesheet" type="text/css">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="img/icon16.png">
+	<title>Wikipedia Search</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		body { padding-top: 70px; }
+		.reset-language {width: 100%;}
+	</style>
 </head>
 <body>
-	<section id="wrapper" class="wrapper enabled">
-		<h1>Wikipedia Search - Settings</h1>
-		<article>
-			<h2>How to use</h2>
-			<p>To search, just type 'wiki' in the address bar, then a space, then the name of the article you want. Live suggestions from Wikipedia are displayed as you type, and in your selected language.</p>
-			<p>In addition, you can select any word or phrase on the web, right-click, and search it in Wikipedia instantly.</p>
-			<p>Wikipedia Search is open-source under the MIT license <a href="http://github.com/corbindavenport/wikipedia-search">on GitHub</a>.</p>
-		</article>
-		<article>
-			<section class="settings-card">
-			<h2>Settings</h2>
-			<p>
-				<div id="protocolalert"><b>Using HTTP is not recommended. Please only use it if the HTTPS search does not work.</b><br /><br /></div>
-				<table>
-					<tr>
-						<td>
-							Language:
-						</td>
-						<td>
-							<select id="language" name="language">
-								<!-- 100,000+ content pages, sorted by romanization -->
-								<option value="ar" lang="ar">العربية</option><!-- Al-ʿArabīyah -->
-								<option value="az" lang="az">Azərbaycanca</option>
-								<option value="bg" lang="bg">Български</option><!-- Bǎlgarski -->
-								<option value="zh-min-nan" lang="nan">Bân-lâm-gú / Hō-ló-oē</option>
-								<option value="be" lang="be">Беларуская (Акадэмічная)</option><!-- Belaruskaya (Akademichnaya) -->
-								<option value="ca" lang="ca">Català</option>
-								<option value="cs" lang="cs">Čeština</option>
-								<option value="da" lang="da">Dansk</option>
-								<option value="de" lang="de">Deutsch</option>
-								<option value="et" lang="et">Eesti</option>
-								<option value="el" lang="el">Ελληνικά</option><!-- Ellīniká -->
-								<option value="en" lang="en">English</option>
-								<option value="es" lang="es">Español</option>
-								<option value="eo" lang="eo">Esperanto</option>
-								<option value="eu" lang="eu">Euskara</option>
-								<option value="fa" lang="fa">فارسی</option><!-- Fārsi -->
-								<option value="fr" lang="fr">Français</option>
-								<option value="gl" lang="gl">Galego</option>
-								<option value="ko" lang="ko">한국어</option><!-- Hangugeo -->
-								<option value="hy" lang="hy">Հայերեն</option><!-- Hayeren -->
-								<option value="hi" lang="hi">हिन्दी</option><!-- Hindī -->
-								<option value="hr" lang="hr">Hrvatski</option>
-								<option value="id" lang="id">Bahasa Indonesia</option>
-								<option value="it" lang="it">Italiano</option>
-								<option value="he" lang="he">עברית</option><!-- ʿIvrit -->
-								<option value="ka" lang="ka">ქართული</option><!-- Kartuli -->
-								<option value="la" lang="la">Latina</option>
-								<option value="lt" lang="lt">Lietuvių</option>
-								<option value="hu" lang="hu">Magyar</option>
-								<option value="ms" lang="ms">Bahasa Melayu</option>
-								<option value="min" lang="min">Bahaso Minangkabau</option>
-								<option value="nl" lang="nl">Nederlands</option>
-								<option value="ja" lang="ja">日本語</option><!-- Nihongo -->
-								<option value="no" lang="nb">Norsk (Bokmål)</option>
-								<option value="nn" lang="nn">Norsk (Nynorsk)</option>
-								<option value="ce" lang="ce">Нохчийн</option><!-- Noxçiyn -->
-								<option value="uz" lang="uz">Oʻzbekcha / Ўзбекча</option>
-								<option value="pl" lang="pl">Polski</option>
-								<option value="pt" lang="pt">Português</option>
-								<option value="kk" lang="kk">Қазақша / Qazaqşa / قازاقشا</option>
-								<option value="ro" lang="ro">Română</option>
-								<option value="ru" lang="ru">Русский</option><!-- Russkiy -->
-								<option value="simple" lang="en">Simple English</option>
-								<option value="ceb" lang="ceb">Sinugboanong Binisaya</option>
-								<option value="sk" lang="sk">Slovenčina</option>
-								<option value="sl" lang="sl">Slovenščina</option>
-								<option value="sr" lang="sr">Српски / Srpski</option>
-								<option value="sh" lang="sh">Srpskohrvatski / Српскохрватски</option>
-								<option value="fi" lang="fi">Suomi</option>
-								<option value="sv" lang="sv">Svenska</option>
-								<option value="th" lang="th">ภาษาไทย</option><!-- Phasa Thai -->
-								<option value="tr" lang="tr">Türkçe</option>
-								<option value="uk" lang="uk">Українська</option><!-- Ukrayins’ka -->
-								<option value="ur" lang="ur">اردو</option><!-- Urdu -->
-								<option value="vi" lang="vi">Tiếng Việt</option>
-								<option value="vo" lang="vo">Volapük</option>
-								<option value="war" lang="war">Winaray</option>
-								<option value="zh" lang="zh">中文</option><!-- Zhōngwén -->
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Protocol:
-						</td>
-						<td>
-							<select id="protocol" name="protocol">
-								<option value="https://">HTTPS</option>
-								<option value="http://">HTTP (not secure)</option>
-							</select>
-						</td>
-					</tr>
-				</table>
-				<p><input type="checkbox" id="shortcut"><label for="shortcut" id="shortcut-label">Enable settings shortcut in search results</label></p>
-				<p><input type="checkbox" id="contentscripts"><label for="contentscripts">Show Wikipedia Search panel on Wikipedia</label></p>
-				<p><i>This provides quick access to Wikipedia Search settings and other features while on Wikipedia. The panel appears underneath the Wikipedia logo on any article page.</i></p>
-				<p><input type="checkbox" id="hidesearch"><label for="hidesearch">Hide search bar on Wikipedia home page and article pages (in favor of address bar search)</label></p>
-			</p>
-			</section>
-		</article>
-		<article>
-			<h2>Donate</h2>
-			<p>Just like Wikipedia itself, Wikipedia Search is completely free and open for anyone to use or contribute to. If you find Wikipedia Search useful, please donate to support continued development. It would mean a lot!</p>
-			<div id="bitcoin">
-				<p><b>Please send bitcoin to the following address:</b></p>
-				<p style="background:#ebebeb; padding:10px; font-family:Monaco,Menlo,Consolas,'Courier New',monospace; text-align:center; overflow-wrap:break-word !important;">1GSbhaUp8JSRepqQceHzrGhV1bPk9hcPuS</p>
+	<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Wikipedia Search settings</a>
+        </div>
+      </div>
+    </nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="alert alert-success"><b>Tip:</b> You can access this page by clicking the Wikipedia icon in your browser's toolbar.</div>
+				<h3>Language</h3>
+				<p>This is the language used for all searches. Wikipedia Search will try to auto-detect your system language, but if it fails (or you just want to change it), you can set a different one below.</p>
+				<div class="row">
+					<div class="col-sm-8">
+						<select id="language" name="language" class="form-control form-control-lg">
+							<option value="loading" disabled selected>Loading languages...</option>
+						</select>
+					</div>
+					<div class="col-sm-4">
+						<button type="button" class="btn btn-primary reset-language">Reset to system language</button>
+					</div>
+				</div>
 			</div>
-			<section id="settings-buttons" class="buttons" style="display: block;">
-				<input class="g-button g-button-submit" type="button" value="Donate via PayPal">
-				<input class="g-button g-button-submit" type="button" value="Donate via Bitcoin">
-			</section>
-		</article>
-	</section>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Other settings</h3>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="protocol">
+						Enable HTTPS for searches (recommended)
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="shortcut">
+						Enable settings shortcut in omnibox search results
+					</label>
+				</div>
+			</div>
+		</div>
+		<hr />
+		<div class="row">
+				<div class="col-md-8">
+					<h2>Getting Started</h2>
+					<p>To search, just type 'wiki' in the address bar, then a space, then the name of the article you want. Live suggestions from Wikipedia are displayed as you type, and in your selected language.</p>
+					<p>In addition, you can select any word or phrase on the web, right-click, and search it in Wikipedia instantly. Also, if you use <a href="https://chrome.google.com/webstore/detail/awesome-new-tab-page/mgmiemnjjchgkmgbeljfocdjjnpjnmcg" target="_blank">Awesome New Tab Page</a>, Wikipedia Search includes a widget you can add.</p>
+					<h2>Having issues?</h2>
+					<p>If you find a bug, or have a suggestion for a new feature, please create an issue at the <a href="https://github.com/corbindavenport/wikipedia-search/issues" target="_blank">Wikipedia Search GitHub repository</a>. You can also <a href="https://twitter.com/corbindavenport" target="_blank">send me a tweet</a> or <a href="mailto:me@corbin.io?subject=Wikipedia%20Search%20bug%20report">email me</a>.</p>
+				</div>
+				<div class="col-md-4">
+					<h2>Donate</h2>
+					<p>If you find Wikipedia Search useful, please donate to support continued development. It would mean a lot!</p>
+					<p><a class="btn btn-warning" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Wikipedia%20Search%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank" role="button">Donate via PayPal</a></p>
+					<p><b>Note:</b> Wikipedia Search is not affliated with Wikipedia or the Wikimedia Foundation. If you wish to donate to the Wikimedia Foundation, you can do it from their website <a href="https://donate.wikimedia.org/w/index.php?title=Special:LandingPage&country=US&uselang=en&utm_medium=sidebar&utm_source=donate&utm_campaign=C13_wikimediafoundation.org" target="_blank">here</a>.</p>
+					<p class="review-info"></p>
+				</div>
+			</div>
+
+		<hr>
+
+		<footer>
+			<p>Wikipedia Search uses code from <a href="https://jquery.com/" target="_blank">jQuery</a>, <a href="https://getbootstrap.com/" target="_blank">Boostrap</a>, and <a href="https://github.com/hamczu/OmniWiki" target="_blank">OmniWiki</a>. You can find Wikipedia Search's source code <a href="https://github.com/corbindavenport/wikipedia-search" target="_blank">on GitHub</a>, under the GPLv3 license.</p>
+		</footer>
+	</div> <!-- /container -->
+
+	<script src="js/jquery-3.2.1.slim.min.js"></script>
+	<script src="js/settings.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

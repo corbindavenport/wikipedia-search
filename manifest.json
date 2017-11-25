@@ -1,7 +1,7 @@
 {
 "manifest_version": 2,
 	"name": "Wikipedia Search",
-	"version": "8.1",
+	"version": "9.0",
 	"author": "Corbin Davenport",
 	"homepage_url": "https://github.com/corbindavenport/wikipedia-search",
 	"description": "Search Wikipedia in every language from the address bar.",
@@ -11,7 +11,6 @@
 	},
 	"web_accessible_resources": [
 		"widget.html",
-		"settings.html",
 		"img/*"
 	],
 	"permissions": [
@@ -20,10 +19,6 @@
 		"https://*.wikipedia.org/*"
 	],
 	"browser_action": {
-	  "default_icon": {
-		"19": "img/icon19.png",
-		"38": "img/icon38.png"
-	  },
 	  "default_title": "Click the icon to open Wikipedia Search settings."
 	},
 	"background": {

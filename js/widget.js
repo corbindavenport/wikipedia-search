@@ -6,8 +6,15 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
 */
 
-// Remind users of Wikipedia Search on Wikipedia home page
-if ((window.location.href.indexOf("www.wikipedia.org")) > -1 && (document.body.querySelector(".search-container"))) {
-	var searchcontainer = document.body.querySelector(".search-container");
-	searchcontainer.innerHTML = searchcontainer.innerHTML + "<i>Since you have the Wikipedia Search extension installed, you can search Wikipedia from your browser's search bar. Just type 'wiki' in the search bar, then a space, then the name of the article you want.</i>";
-}
+/* Code for the Awesome New Tab Page widget */
+
+$(window).on("load", function() {
+    $("#searchInput").attr("placeholder", "Search in " + localStorage.getItem("language") + "...")
+});
+
+$("#searchInput").keypress(function (e) {
+    if (e.which == 13) {
+    window.parent.location = localStorage.getItem("protocol") + localStorage.getItem("language") + ".wikipedia.org/w/index.php?search=" + encodeURI($("#searchInput").val());
+        return false;
+    }
+});
