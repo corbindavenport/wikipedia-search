@@ -14,9 +14,6 @@
 		"http://*.wikipedia.org/*",
 		"https://*.wikipedia.org/*"
 	],
-	"page_action": {
-	  "default_title": "Click the icon to open Wikipedia Search settings."
-	},
 	"background": {
 		"scripts": ["js/background.js"]
 	},

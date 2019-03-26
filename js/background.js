@@ -47,9 +47,7 @@ chrome.runtime.onInstalled.addListener(function(details){
 		if (localStorage.getItem("full-language") === null) {
 			localStorage["full-language"] = detailArray[langArray.indexOf(localStorage["language"])];
 		}
-		if (localStorage.getItem("protocol") === null) {
-			localStorage["protocol"] = "https://";
-		}
+		localStorage["protocol"] = "https://"; // We'll remove this option later
 		if (localStorage.getItem("settings-modified") === null) {
 			localStorage["settings-modified"] = "false";
 		}

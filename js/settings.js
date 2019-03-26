@@ -3,25 +3,27 @@ var langArray= ["ar","az","bg","nan","be","ca","cs","da","de","et","el","en","si
 var detailArray = ["العربية","Azərbaycanca","Български","Bân-lâm-gú / Hō-ló-oē","Беларуская (Акадэмічная)","Català","Čeština","Dansk","Deutsch","Eesti","Ελληνικά","English","Simple English","Español","Esperanto","Euskara","فارسی","Français","Galego","한국어","Հայերեն","हिन्दी","Hrvatski","Bahasa Indonesia","Italiano","עברית","ქართული","Latina","Lietuvių","Magyar","Bahasa Melayu","Bahaso Minangkabau","Nederlands","日本語","Norsk (Bokmål)","Norsk (Nynorsk)","Нохчийн","Oʻzbekcha / Ўзбекча","Polski","Português","Қазақша / Qazaqşa / قازاقشا","Română","Русский","Sinugboanong Binisaya","Slovenčina","Slovenščina","Српски / Srpski","Srpskohrvatski / Српскохрватски","Suomi","Svenska","தமிழ்","ภาษาไทย","Türkçe","Українська","اردو","Tiếng Việt","Volapük","Winaray","中文"];
 
 // Load settings
-$(window).on('load', function() {
-	// Populate languages menu
-	langArray.forEach(function callback(currentValue, index, array) {
-		$('#language').append($('<option>', {
-			value: currentValue,
-			text: detailArray[langArray.indexOf(currentValue)]
-		}));
-	});
-	// Remove loading option
-	$("#language option[value='loading'").remove();
-	// Set to current language
-	$("#language").val(localStorage["language"]);
-	if (localStorage.getItem("protocol") === "https://") {
-		$("input[name='protocol']").prop("checked", true);
-	} else {
-		$("input[name='protocol']").prop("checked", true);
-	}
-	$("input[name='shortcut']").prop("checked", $.parseJSON(localStorage.getItem("shortcut")));
+langArray.forEach(function callback(currentValue, index, array) {
+	$('#language').append($('<option>', {
+		value: currentValue,
+		text: detailArray[langArray.indexOf(currentValue)]
+	}));
 });
+// Remove loading option
+$("#language option[value='loading'").remove();
+// Set to current language
+$("#language").val(localStorage["language"]);
+$("input[name='shortcut']").prop("checked", $.parseJSON(localStorage.getItem("shortcut")));
+
+// Show instructions for leaving a review based on the browser being used
+var useragent = navigator.userAgent
+
+// Opera has to be checked before Chrome, because Opera has both "Chrome" and "OPR" in the user agent string
+if (useragent.includes("OPR")) {
+	document.querySelector('.review-info').innerHTML = 'Leaving a review on the <a href="https://addons.opera.com/en/extensions/details/wikipedia-search/" target="_blank">Opera add-ons site</a> is also greatly appreciated!'
+} else if (useragent.includes("Chrome")) {
+	document.querySelector('.review-info').innerHTML = 'Leaving a review on the <a href="https://chrome.google.com/webstore/detail/wikipedia-search/lipakennkogpodadpikgipnogamhklmk" target="_blank">Chrome Web Store</a> is also greatly appreciated!'
+}
 
 // Reset language button
 $(document).on('click', ".reset-language", function() {
@@ -46,10 +48,6 @@ $(document).on('change', "input,select", function() {
 	localStorage["settings-modified"] = "true";
 	localStorage["language"] = $("#language").val();
 	localStorage["full-language"] = detailArray[langArray.indexOf($("#language").val())];
-	if ($("input[name='protocol']").is(":checked")) {
-		localStorage["protocol"] = "https://";
-	} else {
-		localStorage["protocol"] = "http://";
-	}
+	localStorage["protocol"] = "https://"; // We'll remove this option later, but at least it's not user-visible anymore
 	localStorage.setItem("shortcut", $("input[name='shortcut']").is(":checked"));
 });

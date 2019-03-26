@@ -13,8 +13,10 @@ __Wikipedia is a trademark of the Wikimedia Foundation. Wikipedia Search is in n
 
 __New in Wikipedia Search 9.1:__
 
+* Add more languages
 * Remove Awesome New Tab Page (ANTP) support, because the project is abandoned
-* Switch toolbar button to pageAction, to reduce background memory usage
+* Remove browserAction toolbar button, to reduce background memory usage
+* Remove option to disable HTTPS
 * Add Patreon donate link
 
 ---------------------------------------------------------
