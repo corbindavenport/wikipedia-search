@@ -1,14 +1,20 @@
-/*
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
-*/
-
 // List of Wikipedia's supported language in an array, for the auto-detect functionality
-var langArray= ["ar","az","bg","nan","be","ca","cs","da","de","et","el","en","es","eo","eu","fa","fr","gl","ko","hy","hi","hr","id","it","he","ka","la","lt","hu","ms","min","nl","ja","no","nn","ce","uz","pl","pt","kk","ro","ru","ceb","sk","sl","sr","sh","fi","sv","ta","th","tr","uk","ur","vi","vo","war","zh"];
-var detailArray = ["العربية","Azərbaycanca","Български","Bân-lâm-gú / Hō-ló-oē","Беларуская (Акадэмічная)","Català","Čeština","Dansk","Deutsch","Eesti","Ελληνικά","English","Español","Esperanto","Euskara","فارسی","Français","Galego","한국어","Հայերեն","हिन्दी","Hrvatski","Bahasa Indonesia","Italiano","עברית","ქართული","Latina","Lietuvių","Magyar","Bahasa Melayu","Bahaso Minangkabau","Nederlands","日本語","Norsk (Bokmål)","Norsk (Nynorsk)","Нохчийн","Oʻzbekcha / Ўзбекча","Polski","Português","Қазақша / Qazaqşa / قازاقشا","Română","Русский","Sinugboanong Binisaya","Slovenčina","Slovenščina","Српски / Srpski","Srpskohrvatski / Српскохрватски","Suomi","Svenska","தமிழ்","ภาษาไทย","Türkçe","Українська","اردو","Tiếng Việt","Volapük","Winaray","中文"];
+var langArray = ["ar", "az", "bg", "nan", "be", "ca", "cs", "da", "de", "et", "el", "en", "es", "eo", "eu", "fa", "fr", "gl", "hy", "hi", "hr", "id", "it", "he", "ka", "la", "lt", "hu", "ms", "min", "nl", "ja", "no", "nn", "ce", "uz", "pl", "pt", "kk", "ro", "ru", "cy", "simple", "ceb", "sk", "sl", "sr", "sh", "fi", "sv", "ta", "th", "tr", "azb", "uk", "ur", "vi", "vo", "war", "zh", "ko"]
+var detailArray = ["العربية", "Azərbaycanca", "Български", "Bân-lâm-gú / Hō-ló-oē", "Беларуская (Акадэмічная)", "Català", "Čeština", "Dansk", "Deutsch", "Eesti", "Ελληνικά", "English", "Español", "Esperanto", "Euskara", "فارسی", "Français", "Galego", "Հայերեն", "हिन्दी", "Hrvatski", "Bahasa Indonesia", "Italiano", "עברית", "ქართული", "Latina", "Lietuvių", "Magyar", "Bahasa Melayu", "Bahaso Minangkabau", "Nederlands", "日本語", "Norsk (Bokmål)", "Norsk (Nynorsk)", "Нохчийн", "Oʻzbekcha / Ўзбекча", "Polski", "Português", "Қазақша / Qazaqşa / قازاقشا", "Română", "Русский", "Cymraeg", "Simple English", "Sinugboanong Binisaya", "Slovenčina", "Slovenščina", "Српски / Srpski", "Srpskohrvatski / Српскохрватски", "Suomi", "Svenska", "தமிழ்", "ภาษาไทย", "Türkçe", "تۆرکجه", "Українська", "اردو", "Tiếng Việt", "Volapük", "Winaray", "中文", "한국어"]
+
+// Code to generate the above arrays from the wikipedia.org home page:
+/*
+var langArray = []
+var detailArray = []
+document.querySelectorAll('#searchLanguage option').forEach(function(item) {
+ langArray.push(item.value)
+ detailArray.push(item.textContent)
+})
+console.log('langArray:')
+console.log(langArray)
+console.log('detailArray: ')
+console.log(detailArray)
+*/
 
 // Check for settings & version
 chrome.runtime.onInstalled.addListener(function(details){
@@ -51,38 +57,6 @@ chrome.runtime.onInstalled.addListener(function(details){
 	if(localStorage.getItem("version") != chrome.runtime.getManifest().version){
 		chrome.tabs.create({'url': chrome.extension.getURL('welcome.html')});
 		localStorage["version"] = chrome.runtime.getManifest().version;
-	}
-});
-
-chrome.browserAction.onClicked.addListener(function() {
-	 window.open(chrome.extension.getURL("settings.html"));
-});
-
-// Awesome New Tab Page Widget
-var info = {
-	poke: 3,
-	width: 1,
-	height: 1,
-	path: "widget.html",
-	"v2": {
-		"resize": false,
-		"min_height": 1,
-		"max_height": 1,
-		"min_width": 1,
-		"max_width": 1
-	},
-	"v3": {
-		"multi_placement": false
-	}
-};
-
-chrome.extension.onMessageExternal.addListener(function (request, sender, sendResponse) {
-	if ( request === "mgmiemnjjchgkmgbeljfocdjjnpjnmcg-poke" ) {
-		chrome.extension.sendMessage(
-		sender.id, {
-			head: "mgmiemnjjchgkmgbeljfocdjjnpjnmcg-pokeback",
-			body: info,
-		});
 	}
 });
 

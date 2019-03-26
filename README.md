@@ -3,29 +3,31 @@ Wikipedia Search
 
 This extension integrates Wikipedia searching capabilities into Chrome and Opera. You can type the word 'wiki' into the address bar, press space (or tab), and start typing the article you want to find. Live results are pulled from Wikipedia as you type. The search language is automatically detected, but you can change it manually to any of the 50+ languages that Wikipedia supports.
 
-In addition to the address bar search, this extension also adds a 'Search in Wikipedia' option to the right-click menu when you select text on any page. If you have [Awesome New Tab Page](https://antp.co) installed, Wikipedia Search provides a widget you can use.
+In addition to the address bar search, this extension also adds a 'Search in Wikipedia' option to the right-click menu when you select text on any page.
 
-[Download for Chrome](https://chrome.google.com/webstore/detail/wikipedia-search/lipakennkogpodadpikgipnogamhklmk)
-
-[Download for Opera](https://addons.opera.com/en/extensions/details/wikipedia-search/)
+[![Download for Chrome](https://corbin.io/img/chrome-button.png)](https://chrome.google.com/webstore/detail/wikipedia-search/lipakennkogpodadpikgipnogamhklmk) [![Download for Opera](https://corbin.io/img/opera-button.png)](https://addons.opera.com/en/extensions/details/wikipedia-search/)
 
 __Wikipedia is a trademark of the Wikimedia Foundation. Wikipedia Search is in no way affiliated with Wikipedia or the Wikimedia Foundation.__
 
 ---------------------------------------------------------
 
-__New in Wikipedia Search 9.0:__
+__New in Wikipedia Search 9.1:__
 
-* Redesigned settings and welcome pages
-* Search language now defaults to system language, instead of English
-* Updated widget for Awesome New Tab Page
-* Added support for Tamiḻ and Turkce languages
-* Improved support for Opera
-* Other bug fixes and improvements
+* Remove Awesome New Tab Page (ANTP) support, because the project is abandoned
+* Switch toolbar button to pageAction, to reduce background memory usage
+* Add Patreon donate link
 
 ---------------------------------------------------------
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.

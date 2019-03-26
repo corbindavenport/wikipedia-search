@@ -1,24 +1,20 @@
 {
 "manifest_version": 2,
 	"name": "Wikipedia Search",
-	"version": "9.0",
+	"version": "9.1",
 	"author": "Corbin Davenport",
 	"homepage_url": "https://github.com/corbindavenport/wikipedia-search",
-	"description": "Search Wikipedia in every language from the address bar.",
+	"description": "Search Wikipedia in every language from the address bar and context menu.",
 	"options_page": "settings.html",
 	"omnibox": {
 		"keyword": "wiki"
 	},
-	"web_accessible_resources": [
-		"widget.html",
-		"img/*"
-	],
 	"permissions": [
 		"contextMenus",
 		"http://*.wikipedia.org/*",
 		"https://*.wikipedia.org/*"
 	],
-	"browser_action": {
+	"page_action": {
 	  "default_title": "Click the icon to open Wikipedia Search settings."
 	},
 	"background": {
