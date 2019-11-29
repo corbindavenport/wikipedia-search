@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,18 +9,19 @@
 	<title>Wikipedia Search</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<style>
-		body { padding-top: 70px; }
-		.reset-language {width: 100%;}
+		body {
+			padding-top: 80px;
+		}
 	</style>
 </head>
+
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Wikipedia Search settings</a>
-        </div>
-      </div>
-    </nav>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+		<span class="navbar-brand">
+			<img src="img/icon48.png" width="30" height="30" class="d-inline-block align-top" alt="">
+			Wikipedia Search
+		</span>
+	</nav>
 
 	<div class="container">
 		<div class="row">
@@ -51,32 +53,41 @@
 		</div>
 		<hr />
 		<div class="row">
-				<div class="col-md-8">
-					<h2>Getting Started</h2>
-					<p>To search, just type 'wiki' in the address bar, then a space, then the name of the article you want. Live suggestions from Wikipedia are displayed as you type, and in your selected language.</p>
-					<p>In addition, you can select any word or phrase on the web, right-click, and search it in Wikipedia instantly. Also, if you use <a href="https://chrome.google.com/webstore/detail/awesome-new-tab-page/mgmiemnjjchgkmgbeljfocdjjnpjnmcg" target="_blank">Awesome New Tab Page</a>, Wikipedia Search includes a widget you can add.</p>
+			<div class="col-md-8">
+				<h2>Getting Started</h2>
+				<p>To search, just type 'wiki' in the address bar, then a space, then the name of the article you want. Live suggestions from Wikipedia are displayed as you type, in your selected language. In addition, you can select any word or phrase on the web, right-click, and search it in Wikipedia instantly.</p>
+				<p>Wikipedia Search will try to auto-detect your preferred language, but you can change it manually by clicking the 'Change language' button above.</p>
+				<p>
 					<h2>Having issues?</h2>
-					<p>If you find a bug, or have a suggestion for a new feature, please create an issue at the <a href="https://github.com/corbindavenport/wikipedia-search/issues" target="_blank">Wikipedia Search GitHub repository</a>.</p>
-				</div>
-				<div class="col-md-4">
-					<h2>Donate</h2>
-					<p>If you find Wikipedia Search useful, please donate to support continued development. It would mean a lot!</p>
-					<p><a class="btn btn-success" href="https://www.patreon.com/corbindavenport" target="_blank" role="button" style="width: 100%">Donate via Patreon</a></p>
-					<p><a class="btn btn-success" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Wikipedia%20Search%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank" role="button" style="width: 100%">Donate via PayPal</a></p>
-					<p><b>Note:</b> Wikipedia Search is not affliated with Wikipedia or the Wikimedia Foundation. If you wish to donate to the Wikimedia Foundation, you can do so from their website <a href="https://donate.wikimedia.org" target="_blank">here</a>.</p>
-					<p class="review-info"></p>
-				</div>
+				</p>
+				<p>If you find a bug, or have a suggestion for a new feature, please <a href="https://github.com/corbindavenport/noplugin/issues" target="_blank">create an issue on the NoPlugin GitHub repository</a> or <a href="mailto:wikisearch@fire.fundersclub.com?subject=Wikipedia%20Search%20Bug%20Report">submit an issue via email</a>.</p>
 			</div>
+			<div class="col-md-4">
+				<p>
+					<h2>Donate</h2>
+				</p>
+				<p>If you find Wikipedia Search useful, please donate to support continued development. It would mean a lot!</p>
+				<p>
+					<button type="button" class="btn btn-success btn-block link-btn" data-url="https://www.patreon.com/corbindavenport">Donate via Patreon</button>
+				</p>
+				<p>
+					<button type="button" class="btn btn-success btn-block link-btn" data-url="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Wikipedia%20Search%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">Donate via PayPal</button>
+				</p>
+				<p><b>Note:</b> Wikipedia Search is not affliated with Wikipedia or the Wikimedia Foundation. If you wish to donate to the Wikimedia Foundation, you can do so from their website <a href="https://donate.wikimedia.org" target="_blank">here</a>.</p>
+				<p class="review-info"></p>
+			</div>
+		</div>
 
 		<hr>
 
 		<footer>
-			<p>Wikipedia Search uses code from <a href="https://jquery.com/" target="_blank">jQuery</a>, <a href="https://getbootstrap.com/" target="_blank">Boostrap</a>, and <a href="https://github.com/hamczu/OmniWiki" target="_blank">OmniWiki</a>. You can find Wikipedia Search's source code <a href="https://github.com/corbindavenport/wikipedia-search" target="_blank">on GitHub</a>, under the GPLv3 license.</p>
+			<p>Wikipedia Search uses code from <a href="https://jquery.com/" target="_blank">jQuery</a>, <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a>, and <a href="https://github.com/hamczu/OmniWiki" target="_blank">OmniWiki</a>. You can find Wikipedia Search's source code <a href="https://github.com/corbindavenport/wikipedia-search" target="_blank">on GitHub</a>.</p>
 		</footer>
 	</div> <!-- /container -->
 
-	<script src="js/jquery-3.2.1.slim.min.js"></script>
+	<script src="js/jquery-3.4.1.min.js"></script>
 	<script src="js/settings.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>
+
 </html>

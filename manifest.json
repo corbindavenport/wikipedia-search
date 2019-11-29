@@ -1,7 +1,7 @@
 {
 "manifest_version": 2,
 	"name": "Wikipedia Search",
-	"version": "9.1",
+	"version": "10",
 	"author": "Corbin Davenport",
 	"homepage_url": "https://github.com/corbindavenport/wikipedia-search",
 	"description": "Search Wikipedia in every language from the address bar and context menu.",

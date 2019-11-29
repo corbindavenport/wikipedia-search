@@ -1,6 +1,6 @@
 // List of Wikipedia's supported language in an array
-var langArray= ["ar","az","bg","nan","be","ca","cs","da","de","et","el","en","simple","es","eo","eu","fa","fr","gl","ko","hy","hi","hr","id","it","he","ka","la","lt","hu","ms","min","nl","ja","no","nn","ce","uz","pl","pt","kk","ro","ru","ceb","sk","sl","sr","sh","fi","sv","ta","th","tr","uk","ur","vi","vo","war","zh"];
-var detailArray = ["العربية","Azərbaycanca","Български","Bân-lâm-gú / Hō-ló-oē","Беларуская (Акадэмічная)","Català","Čeština","Dansk","Deutsch","Eesti","Ελληνικά","English","Simple English","Español","Esperanto","Euskara","فارسی","Français","Galego","한국어","Հայերեն","हिन्दी","Hrvatski","Bahasa Indonesia","Italiano","עברית","ქართული","Latina","Lietuvių","Magyar","Bahasa Melayu","Bahaso Minangkabau","Nederlands","日本語","Norsk (Bokmål)","Norsk (Nynorsk)","Нохчийн","Oʻzbekcha / Ўзбекча","Polski","Português","Қазақша / Qazaqşa / قازاقشا","Română","Русский","Sinugboanong Binisaya","Slovenčina","Slovenščina","Српски / Srpski","Srpskohrvatski / Српскохрватски","Suomi","Svenska","தமிழ்","ภาษาไทย","Türkçe","Українська","اردو","Tiếng Việt","Volapük","Winaray","中文"];
+var langArray = ["ar", "az", "bg", "nan", "be", "ca", "cs", "da", "de", "et", "el", "en", "simple", "es", "eo", "eu", "fa", "fr", "gl", "ko", "hy", "hi", "hr", "id", "it", "he", "ka", "la", "lt", "hu", "ms", "min", "nl", "ja", "no", "nn", "ce", "uz", "pl", "pt", "kk", "ro", "ru", "ceb", "sk", "sl", "sr", "sh", "fi", "sv", "ta", "th", "tr", "uk", "ur", "vi", "vo", "war", "zh"];
+var detailArray = ["العربية", "Azərbaycanca", "Български", "Bân-lâm-gú / Hō-ló-oē", "Беларуская (Акадэмічная)", "Català", "Čeština", "Dansk", "Deutsch", "Eesti", "Ελληνικά", "English", "Simple English", "Español", "Esperanto", "Euskara", "فارسی", "Français", "Galego", "한국어", "Հայերեն", "हिन्दी", "Hrvatski", "Bahasa Indonesia", "Italiano", "עברית", "ქართული", "Latina", "Lietuvių", "Magyar", "Bahasa Melayu", "Bahaso Minangkabau", "Nederlands", "日本語", "Norsk (Bokmål)", "Norsk (Nynorsk)", "Нохчийн", "Oʻzbekcha / Ўзбекча", "Polski", "Português", "Қазақша / Qazaqşa / قازاقشا", "Română", "Русский", "Sinugboanong Binisaya", "Slovenčina", "Slovenščina", "Српски / Srpski", "Srpskohrvatski / Српскохрватски", "Suomi", "Svenska", "தமிழ்", "ภาษาไทย", "Türkçe", "Українська", "اردو", "Tiếng Việt", "Volapük", "Winaray", "中文"];
 
 // Load settings
 langArray.forEach(function callback(currentValue, index, array) {
@@ -15,18 +15,25 @@ $("#language option[value='loading'").remove();
 $("#language").val(localStorage["language"]);
 $("input[name='shortcut']").prop("checked", $.parseJSON(localStorage.getItem("shortcut")));
 
-// Show instructions for leaving a review based on the browser being used
-var useragent = navigator.userAgent
+// Button links
+document.querySelectorAll('.link-btn').forEach(function (el) {
+	el.addEventListener('click', function () {
+		chrome.tabs.create({ url: el.getAttribute('data-url') })
+	})
+})
 
+// Show instructions for leaving a review based on the browser being used
+const useragent = navigator.userAgent
+var review = document.querySelector('.review-info')
 // Opera has to be checked before Chrome, because Opera has both "Chrome" and "OPR" in the user agent string
 if (useragent.includes("OPR")) {
-	document.querySelector('.review-info').innerHTML = 'Leaving a review on the <a href="https://addons.opera.com/en/extensions/details/wikipedia-search/" target="_blank">Opera add-ons site</a> is also greatly appreciated!'
+	review.innerHTML = 'Leaving a review on the <a href="https://addons.opera.com/en/extensions/details/wikipedia-search/" target="_blank">Opera add-ons site</a> is also greatly appreciated!'
 } else if (useragent.includes("Chrome")) {
-	document.querySelector('.review-info').innerHTML = 'Leaving a review on the <a href="https://chrome.google.com/webstore/detail/wikipedia-search/lipakennkogpodadpikgipnogamhklmk" target="_blank">Chrome Web Store</a> is also greatly appreciated!'
+	review.innerHTML = 'Leaving a review on the <a href="https://chrome.google.com/webstore/detail/wikipedia-search/lipakennkogpodadpikgipnogamhklmk" target="_blank">Chrome Web Store</a> is also greatly appreciated!'
 }
 
 // Reset language button
-$(document).on('click', ".reset-language", function() {
+$(document).on('click', ".reset-language", function () {
 	// Detect the user's system language
 	var lang = navigator.languages[0];
 	// Cut off the localization part if it exists (e.g. en-US becomes en), to match with Wikipedia's format
@@ -44,7 +51,7 @@ $(document).on('click', ".reset-language", function() {
 });
 
 // Save settings
-$(document).on('change', "input,select", function() {
+$(document).on('change', "input,select", function () {
 	localStorage["settings-modified"] = "true";
 	localStorage["language"] = $("#language").val();
 	localStorage["full-language"] = detailArray[langArray.indexOf($("#language").val())];
