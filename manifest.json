@@ -12,10 +12,11 @@
 	"permissions": [
 		"contextMenus",
 		"http://*.wikipedia.org/*",
-		"https://*.wikipedia.org/*"
+		"https://*.wikipedia.org/*",
+		"storage"
 	],
 	"background": {
-		"scripts": ["js/background.js"]
+		"scripts": ["js/getwikis.js", "js/background.js"]
 	},
 	"content_scripts": [
 		{
