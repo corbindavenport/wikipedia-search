@@ -1,5 +1,7 @@
 chrome.runtime.onInstalled.addListener(function () {
-	chrome.storage.local.get(async function (data) {
+	// Show welcome page after update
+	// TODO: Verify language function is complete before opening welcome page
+	chrome.storage.local.get(function (data) {
 		// Show welcome page after update
 		if (data.version) {
 			if (!(data.version === chrome.runtime.getManifest().version)) {
@@ -14,55 +16,54 @@ chrome.runtime.onInstalled.addListener(function () {
 				version: chrome.runtime.getManifest().version
 			})
 		}
-		// Initialize list of Wikis
-		if (!data.wikiList) {
-			console.log('Initializing Wiki list...')
-			chrome.storage.local.set({
-				wikiList: defaultWikiArray
-			})
+	})
+	// Initialize language settings
+	chrome.storage.local.get(function (data) {
+		if (data.userLanguage) {
+			console.log("Language already set to '" + data.userLanguage + "' (" + defaultLangArray[defaultPrefixArray.indexOf(data.userLanguage)] + ")")
+		} else {
+			if (localStorage['language']) {
+				// Transfer language setting from Wikipedia Search 7.0.2-9.1
+				if (defaultPrefixArray.includes(localStorage['language'])) {
+					chrome.storage.local.set({
+						userLanguage: localStorage['language']
+					}, function () {
+						// Delete old variable so this check doesn't happen again
+						localStorage.removeItem('language')
+					})
+				}
+			} else {
+				// Detect system language and set it as the default
+				var lang = navigator.languages[0]
+				// Cut off the localization part if it exists (e.g. en-US becomes en), to match with Wikipedia's format
+				var n = lang.indexOf('-')
+				lang = lang.substring(0, n != -1 ? n : lang.length)
+				// Check if the language has a Wikipedia
+				if (defaultPrefixArray.includes(lang)) {
+					console.log("Language auto-detected as '" + lang + "' (" + defaultLangArray[defaultPrefixArray.indexOf(lang)] + ")")
+					chrome.storage.local.set({
+						userLanguage: lang
+					})
+				} else {
+					// Set it to English as default
+					console.log("Could not auto-detect language, defaulting to 'en' (English)")
+					chrome.storage.local.set({
+						userLanguage: 'en'
+					})
+				}
+			}
 		}
 	})
-	/*
-	// Transfer data from Wikipedia Search 7.0.2 or below
-	// Wikipedia Search 7.1+ use booleans for localStorage
-	if ((localStorage.getItem("shortcut") === "on") || (localStorage.getItem("shortcut") === null)) {
-		localStorage["shortcut"] = "true"
-	} else if (localStorage.getItem("shortcut") === "off") {
-		localStorage["shortcut"] = "false"
-	}
-	if (localStorage.getItem("language") === null) {
-		// Detect the user's system language
-		var lang = navigator.languages[0]
-		// Cut off the localization part if it exists (e.g. en-US becomes en), to match with Wikipedia's format
-		var n = lang.indexOf('-')
-		lang = lang.substring(0, n != -1 ? n : lang.length)
-		// Check if the language has a Wikipedia
-		if (langArray.includes(lang)) {
-			console.log("Language auto-detected as '" + lang + "' (" + detailArray[langArray.indexOf(lang)] + ")")
-			localStorage["language"] = lang
-			localStorage["full-language"] = detailArray[langArray.indexOf(lang)]
-		} else {
-			// Set it to English as default
-			console.log("Could not auto-detect language, defaulting to 'en' (English)")
-			localStorage["language"] = "en"
-			localStorage["full-language"] = detailArray[langArray.indexOf("en")]
-		}
-	}
-	if (localStorage.getItem("full-language") === null) {
-		localStorage["full-language"] = detailArray[langArray.indexOf(localStorage["language"])]
-	}
-	localStorage["protocol"] = "https://" // We'll remove this option later
-	if (localStorage.getItem("settings-modified") === null) {
-		localStorage["settings-modified"] = "false"
-	}*/
-	
+
 	// Create Context Menu Search
 	chrome.contextMenus.create({
 		title: "Search Wikipedia for \"%s\"",
 		contexts: ["selection"],
 		onclick: function searchText(info) {
-			var url = encodeURI(localStorage["protocol"] + localStorage["language"] + ".wikipedia.org/w/index.php?title=Special:Search&search=" + info.selectionText)
-			chrome.tabs.create({ url: url })
+			chrome.storage.local.get(function (data) {
+				var url = 'https://' + data.userLanguage + '.wikipedia.org/w/index.php?title=Special:Search&search=' + encodeURIComponent(info.selectionText)
+				chrome.tabs.create({ url: url })
+			})
 		}
 	})
 })
