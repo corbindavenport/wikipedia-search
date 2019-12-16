@@ -121,7 +121,7 @@ chrome.runtime.onInstalled.addListener(function () {
 		chrome.storage.local.get(async function (data) {
 			if (data.userLanguage) {
 				console.log("Language already set to '" + data.userLanguage + "' (" + defaultLangArray[defaultPrefixArray.indexOf(data.userLanguage)] + ")")
-				resolve(data)
+				resolve()
 			} else {
 				if (localStorage['language']) {
 					// Transfer language setting from Wikipedia Search 7.0.2-9.1
@@ -132,54 +132,52 @@ chrome.runtime.onInstalled.addListener(function () {
 							console.log('Language setting (' + localStorage['language'] + ') migrated to chrome.storage.')
 							// Delete old variable so this check doesn't happen again
 							localStorage.removeItem('language')
-							resolve(data)
+							resolve()
 						})
 					} else {
 						// Detect system language and set it as the default
 						detectSystemLanguage(data)
-						resolve(data)
+						resolve()
 					}
 				} else {
 					// Detect system language and set it as the default
 					detectSystemLanguage(data)
-					resolve(data)
+					resolve()
 				}
 			}
 		})
 	})
 	// Finish startup
-	Promise.all([langPromise]).then(function (data) {
-		data = data[0]
-		// Initialize Context Menu Search
-		chrome.contextMenus.create({
-			title: "Search Wikipedia for \"%s\"",
-			contexts: ["selection"],
-			onclick: function searchText(info) {
-				chrome.storage.local.get(function (data) {
-					var url = 'https://' + data.userLanguage + '.wikipedia.org/w/index.php?title=Special:Search&search=' + encodeURIComponent(info.selectionText)
-					chrome.tabs.create({ url: url })
-				})
-			}
-		})
-		// Initialize Omnibox search
-		initializeOmniboxSearch(data.userLanguage)
-		// Show welcome page after update
-		var welcomeString = encodeURIComponent(defaultLangArray[defaultPrefixArray.indexOf(data.userLanguage)] + ' (' + data.userLanguage + ')')
-		if (data.version) {
-			if (!(data.version === chrome.runtime.getManifest().version)) {
+	Promise.all([langPromise]).then(function () {
+		chrome.storage.local.get(function (data) {
+			// Initialize Context Menu Search
+			chrome.contextMenus.create({
+				title: 'Search Wikipedia for \"%s\"',
+				contexts: ['selection'],
+				onclick: function searchText(info) {
+					chrome.storage.local.get(function (data) {
+						var url = 'https://' + data.userLanguage + '.wikipedia.org/w/index.php?title=Special:Search&search=' + encodeURIComponent(info.selectionText)
+						chrome.tabs.create({ url: url })
+					})
+				}
+			})
+			// Initialize Omnibox search
+			initializeOmniboxSearch(data.userLanguage)
+			// Show welcome page after update
+			const welcomeString = encodeURIComponent(defaultLangArray[defaultPrefixArray.indexOf(data.userLanguage)] + ' (' + data.userLanguage + ')')
+			if (data.version) {
+				if (!(data.version === chrome.runtime.getManifest().version)) {
+					chrome.tabs.create({ 'url': chrome.extension.getURL('welcome.html?lang=' + welcomeString) })
+					chrome.storage.local.set({
+						version: chrome.runtime.getManifest().version
+					})
+				}
+			} else {
 				chrome.tabs.create({ 'url': chrome.extension.getURL('welcome.html?lang=' + welcomeString) })
 				chrome.storage.local.set({
 					version: chrome.runtime.getManifest().version
 				})
 			}
-		} else {
-			chrome.tabs.create({ 'url': chrome.extension.getURL('welcome.html?lang=' + welcomeString) })
-			chrome.storage.local.set({
-				version: chrome.runtime.getManifest().version
-			})
-		}
+		})
 	})
 })
-
-// Omnibox Search
-// Derived from OmniWiki (github.com/hamczu/OmniWiki)
