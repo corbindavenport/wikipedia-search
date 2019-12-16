@@ -682,3 +682,27 @@ async function getWikis() {
         return [defaultPrefixArray, defaultLangArray]
     }
 }
+
+// Function for detecting system language and setting it to the default search language
+function resetToSystemLanguage() {
+    var lang = navigator.languages[0]
+    var newLang = ''
+	// Cut off the localization part if it exists (e.g. en-US becomes en), to match with Wikipedia's format
+	var n = lang.indexOf('-')
+	lang = lang.substring(0, n != -1 ? n : lang.length)
+	// Check if the language has a Wikipedia
+	if (defaultPrefixArray.includes(lang)) {
+        console.log("Language auto-detected as '" + lang + "' (" + defaultLangArray[defaultPrefixArray.indexOf(lang)] + ")")
+        newLang = lang
+	} else {
+		// Set it to English as default
+        console.log("Could not auto-detect language, defaulting to 'en' (English)")
+        newLang = 'en'
+    }
+    // Update language setting
+    chrome.storage.local.set({
+        userLanguage: newLang
+    })
+    // Return new language
+    return newLang
+}

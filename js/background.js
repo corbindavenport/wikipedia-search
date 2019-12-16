@@ -1,28 +1,3 @@
-// Function for detecting system language and setting it to the default search language
-function detectSystemLanguage(data) {
-	var lang = navigator.languages[0]
-	// Cut off the localization part if it exists (e.g. en-US becomes en), to match with Wikipedia's format
-	var n = lang.indexOf('-')
-	lang = lang.substring(0, n != -1 ? n : lang.length)
-	// Check if the language has a Wikipedia
-	if (defaultPrefixArray.includes(lang)) {
-		console.log("Language auto-detected as '" + lang + "' (" + defaultLangArray[defaultPrefixArray.indexOf(lang)] + ")")
-		chrome.storage.local.set({
-			userLanguage: lang
-		}, function () {
-			return true
-		})
-	} else {
-		// Set it to English as default
-		console.log("Could not auto-detect language, defaulting to 'en' (English)")
-		chrome.storage.local.set({
-			userLanguage: 'en'
-		}, function () {
-			return true
-		})
-	}
-}
-
 // Functions for Omnibox Search
 // Derived from OmniWiki (github.com/hamczu/OmniWiki)
 function initializeOmniboxSearch(userLanguage) {
@@ -136,12 +111,12 @@ chrome.runtime.onInstalled.addListener(function () {
 						})
 					} else {
 						// Detect system language and set it as the default
-						detectSystemLanguage(data)
+						resetToSystemLanguage()
 						resolve()
 					}
 				} else {
 					// Detect system language and set it as the default
-					detectSystemLanguage(data)
+					resetToSystemLanguage()
 					resolve()
 				}
 			}

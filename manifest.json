@@ -16,7 +16,7 @@
 		"storage"
 	],
 	"background": {
-		"scripts": ["js/getwikis.js", "js/background.js"]
+		"scripts": ["js/shared.js", "js/background.js"]
 	},
 	"content_scripts": [
 		{

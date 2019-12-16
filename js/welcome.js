@@ -28,7 +28,7 @@ document.querySelectorAll('.link-btn').forEach(function (el) {
 
 // Show instructions for leaving a review based on the browser being used
 const useragent = navigator.userAgent
-var review = document.querySelector('.review-info')
+const review = document.querySelector('.review-info')
 // Opera has to be checked before Chrome, because Opera has both "Chrome" and "OPR" in the user agent string
 if (useragent.includes("OPR")) {
 	review.innerHTML = 'Leaving a review on the <a href="https://addons.opera.com/en/extensions/details/wikipedia-search/" target="_blank">Opera add-ons site</a> is also greatly appreciated!'
