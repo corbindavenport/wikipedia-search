@@ -676,10 +676,21 @@ async function getWikis() {
                 wikiLangArray.push(wikiList[i].language)
             }
         }
-        return [wikiPrefixArray, wikiLangArray]
+        // Save to chrome.storage for Omnibox use
+        chrome.storage.local.set({
+            wikiPrefixArray: wikiPrefixArray,
+            wikiLangArray: wikiLangArray
+        }, function() {
+            return [wikiPrefixArray, wikiLangArray]
+        })
     } catch (error) {
         console.log('Could not obtain data from Wikipedia API: ' + error)
-        return [defaultPrefixArray, defaultLangArray]
+        chrome.storage.local.set({
+            wikiPrefixArray: defaultPrefixArray,
+            wikiLangArray: defaultLangArray
+        }, function() {
+            return [defaultPrefixArray, defaultLangArray]
+        })
     }
 }
 
