@@ -11,13 +11,11 @@ __Wikipedia is a trademark of the Wikimedia Foundation. Wikipedia Search is in n
 
 ---------------------------------------------------------
 
-__New in Wikipedia Search 9.1:__
+__New in Wikipedia Search 10:__
 
-* Add more languages
-* Remove Awesome New Tab Page (ANTP) support, because the project is abandoned
-* Remove browserAction toolbar button, to reduce background memory usage
-* Remove option to disable HTTPS
-* Add Patreon donate link
+* Rewritten codebase
+* Over 300+ languages now included by default, and the list is automatically updated
+* The default language can be overriden by typing the language prefix before a search (example: "fr google" will search "Google" in the French Wikipedia)
 
 ---------------------------------------------------------
 
