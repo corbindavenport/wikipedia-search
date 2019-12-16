@@ -1,12 +1,23 @@
+// Function for retrieving parameters from URLs
+// Credit: https://stackoverflow.com/a/901144/2255592
+function getParameterByName(name, url) {
+	if (!url) {
+	  url = window.location.href
+	}
+	name = name.replace(/[\[\]]/g, '\\$&')
+	var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+	  results = regex.exec(url)
+	if (!results) return null
+	if (!results[2]) return ''
+	return decodeURIComponent(results[2].replace(/\+/g, ' '))
+  }
+
 // Add version number to welcome page
 document.querySelector('.version').innerHTML = chrome.runtime.getManifest().version
 
 // Add language to welcome page
-if (JSON.parse(localStorage.getItem("settings-modified")) == false) {
-	document.querySelector(".language-warning").innerHTML = 'The search language has been auto-detected as <b>' + localStorage["full-language"] + ' (' + localStorage["language"] + ')</b>.<a class="btn btn-primary" href="settings.html" role="button">Change language</a>'
-} else {
-	document.querySelector(".language-warning").innerHTML = 'The search language is currently set to <b>' + localStorage["full-language"] + ' (' + localStorage["language"] + ')</b>.<a class="btn btn-primary" href="settings.html" role="button">Change language</a>'
-}
+var lang = decodeURIComponent(getParameterByName('lang'))
+document.querySelector(".wikipedia-search-language").innerHTML = 'The search language is currently set to <b>' + lang + '</b>.'
 
 // Button links
 document.querySelectorAll('.link-btn').forEach(function (el) {

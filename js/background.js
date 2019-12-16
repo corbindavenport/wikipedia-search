@@ -164,15 +164,16 @@ chrome.runtime.onInstalled.addListener(function () {
 		// Initialize Omnibox search
 		initializeOmniboxSearch(data.userLanguage)
 		// Show welcome page after update
+		var welcomeString = encodeURIComponent(defaultLangArray[defaultPrefixArray.indexOf(data.userLanguage)] + ' (' + data.userLanguage + ')')
 		if (data.version) {
 			if (!(data.version === chrome.runtime.getManifest().version)) {
-				chrome.tabs.create({ 'url': chrome.extension.getURL('welcome.html') })
+				chrome.tabs.create({ 'url': chrome.extension.getURL('welcome.html?lang=' + welcomeString) })
 				chrome.storage.local.set({
 					version: chrome.runtime.getManifest().version
 				})
 			}
 		} else {
-			chrome.tabs.create({ 'url': chrome.extension.getURL('welcome.html') })
+			chrome.tabs.create({ 'url': chrome.extension.getURL('welcome.html?lang=' + welcomeString) })
 			chrome.storage.local.set({
 				version: chrome.runtime.getManifest().version
 			})
