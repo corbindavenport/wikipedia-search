@@ -51,7 +51,7 @@ function initializeOmniboxSearch(extensionData) {
 	var searchLabel = chrome.i18n.getMessage('search_label')
 	function updateDefaultSuggestion(text) {
 		chrome.omnibox.setDefaultSuggestion({
-			description: searchLabel + extensionData.wikiLangArray[extensionData.wikiPrefixArray.indexOf(activeLanguage)] + ' Wikipedia: %s'
+			description: searchLabel + '%s<dim> - ' + extensionData.wikiLangArray[extensionData.wikiPrefixArray.indexOf(activeLanguage)] + '</dim>'
 		})
 	}
 
