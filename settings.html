@@ -33,12 +33,21 @@
 				</p>
 				<p>Here you can change the language that Wikipedia Search uses. The language list is automatically updated every time you open this settings page, using the <a href="https://www.mediawiki.org/wiki/API:Query" target="_blank">Wikipedia Query API</a>.</p>
 				<p>
-					<select id="wikipedia-search-language-select" class="custom-select custom-select-lg" disabled>
-						<option value="loading" selected>Loading languages...</option>
-					</select>
+					<div class="row">
+						<div class="col-md-6">
+							<select id="wikipedia-search-language-select" class="custom-select" disabled>
+								<option value="loading" selected>Loading languages...</option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<button type="button" class="btn btn-primary btn-block" id="wikipedia-search-reset-language" disabled>Reset to system language</button>
+						</div>
+					</div>
 				</p>
+				<hr />
+				<p>You must restart your browser or click the button below for some changes to take effect. Clicking the button will close this settings page.</p>
 				<p>
-					<button type="button" class="btn btn-primary btn-block" id="wikipedia-search-reset-language" disabled>Reset to system language</button>
+					<button type="button" class="btn btn-primary btn-block" id="wikipedia-search-apply-settings">Apply settings</button>
 				</p>
 			</div>
 		</div>

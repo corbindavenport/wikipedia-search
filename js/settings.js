@@ -61,5 +61,10 @@ document.getElementById('wikipedia-search-reset-language').addEventListener('cli
 	document.getElementById('wikipedia-search-language-select').value = lang
 })
 
+// Apply settings button
+document.getElementById('wikipedia-search-apply-settings').addEventListener('click', function() {
+	chrome.runtime.reload()
+})
+
 // Enable language select
 insertLanguages()
