@@ -1,9 +1,9 @@
 Wikipedia Search
 ================
 
-This extension integrates Wikipedia searching capabilities into Chrome and Opera. You can type the word 'wiki' into the address bar, press space (or tab), and start typing the article you want to find. Live results are pulled from Wikipedia as you type. The search language is automatically detected, but you can change it manually to any of the 50+ languages that Wikipedia supports.
+This extension adds Wikipedia searching capabilities to web browsers. To perform a search, just type 'wiki' in your browser's address bar, then a space, then the name of the article you want. Live suggestions from Wikipedia are displayed as you type. You can also highlight any word or phrase on the web, and an option to search in Wikipedia will appear in the context menu.
 
-In addition to the address bar search, this extension also adds a 'Search in Wikipedia' option to the right-click menu when you select text on any page.
+Your device's language is used as the default for searches, but you can also change it to any of the 300+ languages supported by Wikipedia.
 
 [![Download for Chrome](https://corbin.io/img/chrome-button.png)](https://chrome.google.com/webstore/detail/wikipedia-search/lipakennkogpodadpikgipnogamhklmk) [![Download for Opera](https://corbin.io/img/opera-button.png)](https://addons.opera.com/en/extensions/details/wikipedia-search/)
 
