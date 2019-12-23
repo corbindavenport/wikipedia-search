@@ -1,3 +1,7 @@
+const isChrome = Boolean(navigator.userAgent.includes('Chrome'))
+const isFirefox = Boolean(navigator.userAgent.includes('Firefox'))
+const isOpera = Boolean(navigator.userAgent.includes('OPR'))
+
 // Functions for Omnibox Search
 // Derived from OmniWiki (github.com/hamczu/OmniWiki)
 function initializeOmniboxSearch(extensionData) {
@@ -20,22 +24,37 @@ function initializeOmniboxSearch(extensionData) {
 			currentRequest.abort()
 			currentRequest = null
 		}
-		updateDefaultSuggestion(text)
+		updateDefaultSuggestion(text, activeLanguage)
 		if (text.length > 0) {
 			currentRequest = suggests(text, function (data) {
+				// Set the maximum number of suggestion slots, and leave one for the settings option
 				var results = []
-				// The settings shortcut takes up one of the search results slots
-				num = 4
+				if (isOpera) {
+					// Opera supports 5 suggestions
+					num = 5
+				} else {
+					// Chrome and Firefox support 4 suggestions
+					num = 4
+				}
 				for (var i = 0; i < num; i++) {
 					results.push({
 						content: data[1][i],
 						description: data[1][i]
 					})
 				}
-				results.push({
-					content: "settings",
-					description: "<dim>Change default search language (currently set to " + extensionData.wikiLangArray[extensionData.wikiPrefixArray.indexOf(userLanguage)] + ")</dim>"
-				})
+				// Add settings suggestion
+				if (isFirefox) {
+					// Firefox doesn't support <dim>
+					results.push({
+						content: "settings",
+						description: "Change default search language (currently set to " + extensionData.wikiLangArray[extensionData.wikiPrefixArray.indexOf(userLanguage)] + ")"
+					})
+				} else {
+					results.push({
+						content: "settings",
+						description: "<dim>Change default search language (currently set to " + extensionData.wikiLangArray[extensionData.wikiPrefixArray.indexOf(userLanguage)] + ")</dim>"
+					})
+				}
 				suggest(results)
 			})
 		}
@@ -48,15 +67,26 @@ function initializeOmniboxSearch(extensionData) {
 	}
 
 	resetDefaultSuggestion()
-	var searchLabel = chrome.i18n.getMessage('search_label')
-	function updateDefaultSuggestion(text) {
-		chrome.omnibox.setDefaultSuggestion({
-			description: searchLabel + '%s<dim> - ' + extensionData.wikiLangArray[extensionData.wikiPrefixArray.indexOf(activeLanguage)] + '</dim>'
-		})
+	function updateDefaultSuggestion(text, activeLanguage) {
+		// Remove language prefix from live results
+		if (text.startsWith(activeLanguage + ' ')) {
+			text = text.replace(activeLanguage + ' ', '')
+		}
+		// Add default suggestion
+		if (isFirefox) {
+			// Firefox doesn't support <dim>
+			chrome.omnibox.setDefaultSuggestion({
+				description: text + ' — ' + extensionData.wikiLangArray[extensionData.wikiPrefixArray.indexOf(activeLanguage)]
+			})
+		} else {
+			chrome.omnibox.setDefaultSuggestion({
+				description: text + ' <dim>- ' + extensionData.wikiLangArray[extensionData.wikiPrefixArray.indexOf(activeLanguage)] + '</dim>'
+			})
+		}
 	}
 
 	chrome.omnibox.onInputStarted.addListener(function () {
-		updateDefaultSuggestion('')
+		updateDefaultSuggestion('', activeLanguage)
 	})
 
 	chrome.omnibox.onInputCancelled.addListener(function () {
@@ -66,7 +96,7 @@ function initializeOmniboxSearch(extensionData) {
 	function suggests(query, callback) {
 		var req = new XMLHttpRequest()
 
-		req.open("GET", "https://" + activeLanguage + ".wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&search=" + query, true)
+		req.open("GET", "https://" + activeLanguage + ".wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&search=" + encodeURIComponent(query), true)
 		req.onload = function () {
 			if (this.status == 200) {
 				try {
@@ -92,13 +122,13 @@ function initializeOmniboxSearch(extensionData) {
 			if (text.startsWith(activeLanguage + ' ')) {
 				text = text.replace(activeLanguage + ' ', '')
 			}
-			chrome.tabs.update(null, { url: "https://" + activeLanguage + ".wikipedia.org/w/index.php?search=" + text })
+			chrome.tabs.update(null, { url: "https://" + activeLanguage + ".wikipedia.org/w/index.php?search=" + encodeURIComponent(text) })
 		}
 	})
 
 }
 
-chrome.runtime.onInstalled.addListener(function () {
+function main() {
 	// Initialize language settings
 	var langPromise = new Promise(function (resolve, reject) {
 		chrome.storage.local.get(async function (data) {
@@ -167,4 +197,6 @@ chrome.runtime.onInstalled.addListener(function () {
 			}
 		})
 	})
-})
+}
+
+main()
