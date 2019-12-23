@@ -16,6 +16,9 @@ __New in Wikipedia Search 10:__
 * Rewritten codebase
 * Over 300+ languages now included by default, and the list is automatically updated
 * The default language can be overriden by typing the language prefix before a search (example: "fr google" will search "Google" in the French Wikipedia)
+* Firefox is now supported (#15)
+* Fixed bug where searches with special characters would fail (#16)
+* Fixed bug where search box on Wikipedia.org wouldn't focus automatically with extension installed (#10)
 
 ---------------------------------------------------------
 
