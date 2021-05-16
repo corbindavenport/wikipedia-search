@@ -1,5 +1,5 @@
 // Function for populating language select
-async function insertLanguages() {
+async function loadSettings() {
 	// Update list of Wikipedias using API
 	const select = document.getElementById('wikipedia-search-language-select')
 	const resetButton = document.getElementById('wikipedia-search-reset-language')
@@ -20,7 +20,7 @@ async function insertLanguages() {
 		// Finally, allow interaction on language select
 		select.remove(0)
 		select.removeAttribute('disabled')
-		resetButton.removeAttribute('disabled')
+		//resetButton.removeAttribute('disabled')
 		// Save language changes to chrome.storage
 		document.getElementById('wikipedia-search-language-select').addEventListener('change', function() {
 			saveLanguage(this.value)
@@ -28,14 +28,15 @@ async function insertLanguages() {
 	})
 }
 
-// Function for saving language select changes
-function saveLanguage(language) {
-	chrome.storage.local.set({
-		userLanguage: language
-	}, function() {
-		console.log('Language changed to:', language)
+// Save settings after any input change
+document.querySelectorAll('input,select').forEach(function (el) {
+	el.addEventListener('change', function () {
+		chrome.storage.sync.set({
+		// Default language
+		userLanguage: document.querySelector('#wikipedia-search-language-select').value
+		})
 	})
-}
+})
 
 // Button links
 document.querySelectorAll('.link-btn').forEach(function (el) {
@@ -44,27 +45,28 @@ document.querySelectorAll('.link-btn').forEach(function (el) {
 	})
 })
 
-// Show instructions for leaving a review based on the browser being used
-const useragent = navigator.userAgent
-const review = document.querySelector('.review-info')
-// Opera has to be checked before Chrome, because Opera has both "Chrome" and "OPR" in the user agent string
-if (useragent.includes("OPR")) {
-	review.innerHTML = 'Leaving a review on the <a href="https://addons.opera.com/en/extensions/details/wikipedia-search/" target="_blank">Opera add-ons site</a> is also greatly appreciated!'
-} else if (useragent.includes("Chrome")) {
-	review.innerHTML = 'Leaving a review on the <a href="https://chrome.google.com/webstore/detail/wikipedia-search/lipakennkogpodadpikgipnogamhklmk" target="_blank">Chrome Web Store</a> is also greatly appreciated!'
-}
-
 // Reset language button
+/*
 document.getElementById('wikipedia-search-reset-language').addEventListener('click', function() {
 	var lang = resetToSystemLanguage()
 	// resetToSystemLanguage updates the storage, so here we only need to change the select value
 	document.getElementById('wikipedia-search-language-select').value = lang
 })
+*/
 
-// Apply settings button
-document.getElementById('wikipedia-search-apply-settings').addEventListener('click', function() {
-	chrome.runtime.reload()
+// Show credits
+fetch('https://corbin.io/supporters.json').then(function (response) {
+  response.json().then(function (data) {
+    var creditsList = 'Diamond supporters: '
+    for (var i = 0; i < data['supporters'].length; i++) {
+      creditsList += data['supporters'][i] + ', '
+    }
+    creditsList = creditsList.substring(0, creditsList.length - 2)
+    document.getElementById('supporters').innerText = creditsList
+  })
 })
+  .catch(function (err) {
+    document.getElementById('supporters').innerText = 'There was an error fetching Peek supporters.'
+  })
 
-// Enable language select
-insertLanguages()
+loadSettings()
