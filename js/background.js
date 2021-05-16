@@ -5,14 +5,20 @@ const isOpera = Boolean(navigator.userAgent.includes('OPR'))
 // Functions for Omnibox Search
 // Derived from OmniWiki (github.com/hamczu/OmniWiki)
 function initializeOmniboxSearch(extensionData) {
-	const userLanguage = extensionData.userLanguage
+	var userLanguage = extensionData.userLanguage
+	var multiLang = extensionData.multiLang
 	var activeLanguage = extensionData.userLanguage
 
+	chrome.omnibox.onInputStarted.addListener(function() {
+		// TODO
+	})
+
 	var currentRequest = null
+
 	chrome.omnibox.onInputChanged.addListener(function (text, suggest) {
-		// If the first word in the query matches a known Wikipedia language, change the active search to that language
+		// If the first word in the query matches a known Wikipedia language, and multi-language is enabled, change the active search to that language
 		var firstWord = text.split(' ')[0]
-		if (text.startsWith(firstWord + ' ') && (extensionData.wikiPrefixArray.includes(firstWord))) {
+		if ((multiLang === true) && text.startsWith(firstWord + ' ') && (extensionData.wikiPrefixArray.includes(firstWord))) {
 			activeLanguage = firstWord
 			text = text.replace(firstWord + ' ', '')
 		} else {
@@ -136,31 +142,18 @@ function main() {
 			if (!data.wikiPrefixArray || !data.wikiLangArray) {
 				await getWikis()
 			}
+			if (typeof data.multiLang == 'undefined') {
+				chrome.storage.local.set({
+					multiLang: true
+				})
+			}
 			if (data.userLanguage) {
 				console.log("Language already set to '" + data.userLanguage + "' (" + defaultLangArray[defaultPrefixArray.indexOf(data.userLanguage)] + ")")
 				resolve()
 			} else {
-				if (localStorage['language']) {
-					// Transfer language setting from Wikipedia Search 7.0.2-9.1
-					if (defaultPrefixArray.includes(localStorage['language'])) {
-						chrome.storage.local.set({
-							userLanguage: localStorage['language']
-						}, function () {
-							console.log('Language setting (' + localStorage['language'] + ') migrated to chrome.storage.')
-							// Delete old variable so this check doesn't happen again
-							localStorage.removeItem('language')
-							resolve()
-						})
-					} else {
-						// Detect system language and set it as the default
-						resetToSystemLanguage()
-						resolve()
-					}
-				} else {
-					// Detect system language and set it as the default
-					resetToSystemLanguage()
-					resolve()
-				}
+				// Detect system language and set it as the default
+				resetToSystemLanguage()
+				resolve()
 			}
 		})
 	})
