@@ -42,11 +42,6 @@ document.querySelectorAll('input,select').forEach(function (el) {
 	})
 })
 
-// Fully apply changes on page close
-document.addEventListener('beforeunload', function() {
-	chrome.runtime.reload()
-})
-
 // Button links
 document.querySelectorAll('.link-btn').forEach(function (el) {
 	el.addEventListener('click', function () {
