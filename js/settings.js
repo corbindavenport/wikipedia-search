@@ -16,15 +16,11 @@ async function loadSettings() {
 			select.value = data.userLanguage
 			resolve()
 		})
-	}).then(function() {
+	}).then(function () {
 		// Finally, allow interaction on language select
 		select.remove(0)
 		select.removeAttribute('disabled')
-		//resetButton.removeAttribute('disabled')
-		// Save language changes to chrome.storage
-		document.getElementById('wikipedia-search-language-select').addEventListener('change', function() {
-			saveLanguage(this.value)
-		})
+		resetButton.removeAttribute('disabled')
 	})
 }
 
@@ -32,8 +28,8 @@ async function loadSettings() {
 document.querySelectorAll('input,select').forEach(function (el) {
 	el.addEventListener('change', function () {
 		chrome.storage.sync.set({
-		// Default language
-		userLanguage: document.querySelector('#wikipedia-search-language-select').value
+			// Default language
+			userLanguage: document.querySelector('#wikipedia-search-language-select').value
 		})
 	})
 })
@@ -46,27 +42,25 @@ document.querySelectorAll('.link-btn').forEach(function (el) {
 })
 
 // Reset language button
-/*
-document.getElementById('wikipedia-search-reset-language').addEventListener('click', function() {
+document.getElementById('wikipedia-search-reset-language').addEventListener('click', function () {
 	var lang = resetToSystemLanguage()
 	// resetToSystemLanguage updates the storage, so here we only need to change the select value
 	document.getElementById('wikipedia-search-language-select').value = lang
 })
-*/
 
 // Show credits
 fetch('https://corbin.io/supporters.json').then(function (response) {
-  response.json().then(function (data) {
-    var creditsList = 'Diamond supporters: '
-    for (var i = 0; i < data['supporters'].length; i++) {
-      creditsList += data['supporters'][i] + ', '
-    }
-    creditsList = creditsList.substring(0, creditsList.length - 2)
-    document.getElementById('supporters').innerText = creditsList
-  })
+	response.json().then(function (data) {
+		var creditsList = 'Diamond supporters: '
+		for (var i = 0; i < data['supporters'].length; i++) {
+			creditsList += data['supporters'][i] + ', '
+		}
+		creditsList = creditsList.substring(0, creditsList.length - 2)
+		document.getElementById('supporters').innerText = creditsList
+	})
 })
-  .catch(function (err) {
-    document.getElementById('supporters').innerText = 'There was an error fetching Peek supporters.'
-  })
+.catch(function (err) {
+	document.getElementById('supporters').innerText = 'There was an error fetching Peek supporters.'
+})
 
 loadSettings()

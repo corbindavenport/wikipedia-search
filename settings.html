@@ -35,9 +35,14 @@
 				<div class="form-group row">
 					<label for="wikipedia-search-language-select" class="col-sm-2 col-form-label">Language</label>
 					<div class="col-sm-10">
-						<select id="wikipedia-search-language-select" class="custom-select" disabled>
-							<option value="loading" selected>Loading languages...</option>
-						</select>
+						<div class="input-group mb-3">
+							<select id="wikipedia-search-language-select" class="custom-select" disabled>
+								<option value="loading" selected>Loading languages...</option>
+							</select>
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="button" id="wikipedia-search-reset-language">Reset</button>
+							  </div>
+						</div>
 						<small class="form-text text-muted">This is the language used for searches. The language list is automatically updated every time you open this settings page, using the <a href="https://www.mediawiki.org/wiki/API:Query" target="_blank">Wikipedia Query API</a>.</small>
 					</div>
 				</div>
