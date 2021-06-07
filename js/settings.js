@@ -4,6 +4,7 @@ async function loadSettings() {
 	const select = document.getElementById('wikipedia-search-language-select')
 	const resetButton = document.getElementById('wikipedia-search-reset-language')
 	const multiLangButton = document.querySelector('#wikipedia-search-multilang')
+	const siteSelect = document.querySelector('#wikipedia-search-site-select')
 	const wikiList = await getWikis()
 	for (i in wikiList[0]) {
 		var option = document.createElement('option')
@@ -17,6 +18,7 @@ async function loadSettings() {
 			console.log(data)
 			select.value = data.userLanguage
 			multiLangButton.checked = data.multiLang
+			siteSelect.value = data.siteVersion
 			resolve()
 		})
 	}).then(function () {
@@ -25,6 +27,7 @@ async function loadSettings() {
 		select.removeAttribute('disabled')
 		resetButton.removeAttribute('disabled')
 		multiLangButton.removeAttribute('disabled')
+		siteSelect.removeAttribute('disabled')
 	})
 }
 
@@ -35,7 +38,9 @@ document.querySelectorAll('input,select').forEach(function (el) {
 			// Default language
 			userLanguage: document.querySelector('#wikipedia-search-language-select').value,
 			// Multi-language
-			multiLang: document.querySelector('#wikipedia-search-multilang').checked
+			multiLang: document.querySelector('#wikipedia-search-multilang').checked,
+			// Site version
+			siteVersion: document.querySelector('#wikipedia-search-site-select').value
 		}, function() {
 			console.log('settings saved')
 		})

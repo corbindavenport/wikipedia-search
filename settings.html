@@ -14,7 +14,7 @@
 <body class="settings">
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Wikipedia Search settings</h1>
+			<h1>Wikipedia Search Settings</h1>
 			<p>Here you can change all the options for Wikipedia Search. Your changes are automatically saved.</p>
 		</div>
 	</div>
@@ -48,7 +48,7 @@
 				</div>
 				<!-- Multi-language -->
 				<div class="form-group row">
-					<label for="wikipedia-search-language-select" class="col-sm-2 col-form-label">Multi-language</label>
+					<label for="wikipedia-search-multilang" class="col-sm-2 col-form-label">Multi-language</label>
 					<div class="col-sm-10">
 						<div class="form-check">
 							<input class="form-check-input" type="checkbox" id="wikipedia-search-multilang" disabled>
@@ -57,6 +57,17 @@
 							</label>
 						</div>
 						<small class="form-text text-muted">This allows you to set a different language by typing a Wikipedia language prefix before your search (e.g. "fr google" searches "Google" in French Wikipedia). Turn this off if you accidentally search in different languages with queries like "LA Law" or "La Niña".</small>
+					</div>
+				</div>
+				<!-- Site version -->
+				<div class="form-group row">
+					<label for="wikipedia-search-site-select" class="col-sm-2 col-form-label">Site version</label>
+					<div class="col-sm-10">
+						<select id="wikipedia-search-site-select" class="form-control w-100" disabled>
+							<option value="desktop">Desktop Wikipedia (wikipedia.org)</option>
+							<option value="mobile">Mobile Wikipedia (m.wikipedia.org)</option>
+						</select>
+						<small class="form-text text-muted">This changes what version of Wikipedia's site is used for searches.</small>
 					</div>
 				</div>
 			</div>

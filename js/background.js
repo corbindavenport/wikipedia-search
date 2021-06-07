@@ -5,6 +5,7 @@ var wikiLangArray = []
 var wikiPrefixArray = []
 var userLanguage = ''
 var multiLang = ''
+var siteVersion = ''
 var activeLanguage = ''
 var currentRequest = null
 
@@ -16,6 +17,7 @@ chrome.omnibox.onInputStarted.addListener(function () {
 		multiLang = data.multiLang
 		wikiLangArray = data.wikiLangArray
 		wikiPrefixArray = data.wikiPrefixArray
+		siteVersion = data.siteVersion
 	})
 })
 
@@ -124,7 +126,11 @@ chrome.omnibox.onInputEntered.addListener(function (text) {
 		if (text.startsWith(activeLanguage + ' ')) {
 			text = text.replace(activeLanguage + ' ', '')
 		}
-		chrome.tabs.update(null, { url: "https://" + activeLanguage + ".wikipedia.org/w/index.php?search=" + encodeURIComponent(text) })
+		if (siteVersion === 'desktop') {
+			chrome.tabs.update(null, { url: "https://" + activeLanguage + ".wikipedia.org/w/index.php?search=" + encodeURIComponent(text) })
+		} else {
+			chrome.tabs.update(null, { url: "https://" + activeLanguage + ".m.wikipedia.org/w/index.php?search=" + encodeURIComponent(text) })
+		}
 	}
 })
 
@@ -139,13 +145,16 @@ chrome.storage.local.get(async function (data) {
 			multiLang: true
 		})
 	}
+	if (typeof data.siteVersion == 'undefined') {
+		chrome.storage.local.set({
+			siteVersion: 'desktop'
+		})
+	}
 	if (data.userLanguage) {
 		console.log("Language already set to '" + data.userLanguage + "' (" + defaultLangArray[defaultPrefixArray.indexOf(data.userLanguage)] + ")")
-		resolve()
 	} else {
 		// Detect system language and set it as the default
 		resetToSystemLanguage()
-		resolve()
 	}
 })
 
@@ -172,7 +181,11 @@ chrome.contextMenus.create({
 	contexts: ['selection'],
 	onclick: function searchText(info) {
 		chrome.storage.local.get(function (data) {
-			var url = 'https://' + data.userLanguage + '.wikipedia.org/w/index.php?title=Special:Search&search=' + encodeURIComponent(info.selectionText)
+			if (data.siteVersion === 'desktop') {
+				var url = 'https://' + data.userLanguage + '.wikipedia.org/w/index.php?title=Special:Search&search=' + encodeURIComponent(info.selectionText)
+			} else {
+				var url = 'https://' + data.userLanguage + '.m.wikipedia.org/w/index.php?title=Special:Search&search=' + encodeURIComponent(info.selectionText)
+			}
 			chrome.tabs.create({ url: url })
 		})
 	}
