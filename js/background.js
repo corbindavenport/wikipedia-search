@@ -41,8 +41,13 @@ chrome.omnibox.onInputChanged.addListener(function (text, suggest) {
 		currentRequest = suggests(text, function (data) {
 			// Set the maximum number of suggestion slots, and leave one for the settings option
 			var results = []
-			// Chrome and Firefox support 4 suggestions
-			num = 4
+			if (isFirefox) {
+				// Firefox supports 4 suggestions
+				num = 4
+			} else if (isChrome) {
+				// Chrome can do 8 suggestions
+				num = 8
+			}
 			for (var i = 0; i < num; i++) {
 				results.push({
 					content: data[1][i],
