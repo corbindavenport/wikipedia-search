@@ -143,7 +143,7 @@ chrome.storage.local.get(async function (data) {
 	}
 	if (typeof data.multiLang == 'undefined') {
 		chrome.storage.local.set({
-			multiLang: true
+			multiLang: false
 		})
 	}
 	if (typeof data.siteVersion == 'undefined') {
@@ -159,24 +159,15 @@ chrome.storage.local.get(async function (data) {
 	}
 })
 
+// Show welcome page when extension is installed or updated
+
 chrome.runtime.onInstalled.addListener(function (details) {
-	// Show welcome page after an update
-	chrome.storage.local.get({
-		version: '0'
-	}, function (data) {
-		// Show welcome page after an update
-		if (data.version != chrome.runtime.getManifest().version) {
-			// Open welcome page
-			chrome.tabs.create({ 'url': chrome.runtime.getURL('welcome.html') })
-			// Set version number
-			chrome.storage.local.set({
-				version: chrome.runtime.getManifest().version
-			})
-		}
-	})
+	if (details.reason === 'install' || details.reason === 'update') {
+		chrome.tabs.create({ 'url': chrome.runtime.getURL('welcome.html') })
+	}
 })
 
-// Context menu search
+// Show search option in context menu
 
 chrome.runtime.onStartup.addListener(function () {
 	chrome.contextMenus.create({
