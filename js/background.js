@@ -1,3 +1,5 @@
+importScripts('/js/shared.js');
+
 // Global variables
 const isChrome = Boolean(navigator.userAgent.includes('Chrome'))
 const isFirefox = Boolean(navigator.userAgent.includes('Firefox'))
@@ -125,7 +127,7 @@ function suggests(query, callback) {
 
 chrome.omnibox.onInputEntered.addListener(function (text) {
 	if (text == "settings") {
-		chrome.tabs.update(null, { url: chrome.extension.getURL('settings.html') })
+		chrome.tabs.update(null, { url: chrome.runtime.getURL('settings.html') })
 	} else {
 		// If a search prefix is being used, exclude it from the text string
 		if (text.startsWith(activeLanguage + ' ')) {
@@ -171,7 +173,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 		// Show welcome page after an update
 		if (data.version != chrome.runtime.getManifest().version) {
 			// Open welcome page
-			chrome.tabs.create({ 'url': chrome.extension.getURL('welcome.html') })
+			chrome.tabs.create({ 'url': chrome.runtime.getURL('welcome.html') })
 			// Set version number
 			chrome.storage.local.set({
 				version: chrome.runtime.getManifest().version
@@ -180,12 +182,17 @@ chrome.runtime.onInstalled.addListener(function (details) {
 	})
 })
 
-// Initialize Context Menu Search
+// Context menu search
+
 chrome.contextMenus.create({
+	id: "search-wikipedia",
 	title: 'Search Wikipedia for \"%s\"',
-	contexts: ['selection'],
-	onclick: function searchText(info) {
-		chrome.storage.local.get(function (data) {
+	contexts: ['selection']
+})
+
+chrome.contextMenus.onClicked.addListener(function(info, tab) {
+	if (info.menuItemId == "search-wikipedia") {
+        chrome.storage.local.get(function (data) {
 			if (data.siteVersion === 'desktop') {
 				var url = 'https://' + data.userLanguage + '.wikipedia.org/w/index.php?title=Special:Search&search=' + encodeURIComponent(info.selectionText)
 			} else {
@@ -193,5 +200,5 @@ chrome.contextMenus.create({
 			}
 			chrome.tabs.create({ url: url })
 		})
-	}
+    }
 })
