@@ -23,7 +23,7 @@ chrome.omnibox.onInputStarted.addListener(function () {
 	})
 })
 
-chrome.omnibox.onInputChanged.addListener(function (text, suggest) {
+chrome.omnibox.onInputChanged.addListener(async function (text, suggest) {
 	// If the first word in the query matches a known Wikipedia language, and multi-language is enabled, change the active search to that language
 	var firstWord = text.split(' ')[0]
 	if ((multiLang === true) && text.startsWith(firstWord + ' ') && (wikiPrefixArray.includes(firstWord))) {
@@ -32,15 +32,14 @@ chrome.omnibox.onInputChanged.addListener(function (text, suggest) {
 	} else {
 		activeLanguage = userLanguage
 	}
-	// Continue with search
-	if (currentRequest != null) {
-		currentRequest.onreadystatechange = null
-		currentRequest.abort()
-		currentRequest = null
-	}
 	updateDefaultSuggestion(text, activeLanguage)
 	if (text.length > 0) {
-		currentRequest = suggests(text, function (data) {
+		var localCurrentRequest = suggests(text)
+		currentRequest = localCurrentRequest
+		localCurrentRequest.then(function (data) {
+			if (localCurrentRequest !== currentRequest) {
+				return
+			}
 			// Set the maximum number of suggestion slots, and leave one for the settings option
 			var results = []
 			if (isFirefox) {
@@ -51,10 +50,13 @@ chrome.omnibox.onInputChanged.addListener(function (text, suggest) {
 				num = 8
 			}
 			for (var i = 0; i < num; i++) {
-				results.push({
-					content: data[1][i],
-					description: data[1][i]
-				})
+				var content = data[1][i]
+				if (content) {
+					results.push({
+						content: content,
+						description: content
+					})
+				}
 			}
 			// Add settings suggestion
 			if (isFirefox) {
@@ -104,25 +106,17 @@ chrome.omnibox.onInputCancelled.addListener(function () {
 	resetDefaultSuggestion()
 })
 
-function suggests(query, callback) {
-	var req = new XMLHttpRequest()
-
-	req.open("GET", "https://" + activeLanguage + ".wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&search=" + encodeURIComponent(query), true)
-	req.onload = function () {
-		if (this.status == 200) {
-			try {
-				callback(JSON.parse(this.responseText))
-			} catch (e) {
-				this.onerror()
-			}
-		} else {
-			this.onerror()
+async function suggests(query) {
+	return new Promise(async function (resolve, reject) {
+		const url = "https://" + activeLanguage + ".wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&search=" + encodeURIComponent(query)
+		const response = await fetch(url)
+		if (!response.ok) {
+			console.log('Could not obtain data from Wikipedia API.')
+			resolve(null)
 		}
-	}
-	req.onerror = function () {
-
-	}
-	req.send()
+		const json = await response.json()
+		resolve(json)
+	})
 }
 
 chrome.omnibox.onInputEntered.addListener(function (text) {
@@ -184,15 +178,17 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
 // Context menu search
 
-chrome.contextMenus.create({
-	id: "search-wikipedia",
-	title: 'Search Wikipedia for \"%s\"',
-	contexts: ['selection']
+chrome.runtime.onStartup.addListener(function () {
+	chrome.contextMenus.create({
+		id: "search-wikipedia",
+		title: 'Search Wikipedia for \"%s\"',
+		contexts: ['selection']
+	})
 })
 
-chrome.contextMenus.onClicked.addListener(function(info, tab) {
+chrome.contextMenus.onClicked.addListener(function (info, tab) {
 	if (info.menuItemId == "search-wikipedia") {
-        chrome.storage.local.get(function (data) {
+		chrome.storage.local.get(function (data) {
 			if (data.siteVersion === 'desktop') {
 				var url = 'https://' + data.userLanguage + '.wikipedia.org/w/index.php?title=Special:Search&search=' + encodeURIComponent(info.selectionText)
 			} else {
@@ -200,5 +196,5 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
 			}
 			chrome.tabs.create({ url: url })
 		})
-    }
+	}
 })
