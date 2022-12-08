@@ -5,7 +5,10 @@
 	"author": "Corbin Davenport",
 	"homepage_url": "https://github.com/corbindavenport/wikipedia-search",
 	"description": "Search Wikipedia in every language from the address bar and context menu.",
-	"options_page": "settings.html",
+	"options_ui": {
+		"page": "settings.html",	
+		"open_in_tab": false
+	},
 	"omnibox": {
 		"keyword": "wiki"
 	},
@@ -14,7 +17,9 @@
 		"storage"
 	],
 	"minimum_chrome_version": "93",
-	"host_permissions": ["https://*.wikipedia.org/*"],
+	"host_permissions": [
+		"https://*.wikipedia.org/*"
+	],
 	"background": {
 		"service_worker": "js/background.js"
 	},
