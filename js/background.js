@@ -129,8 +129,10 @@ chrome.omnibox.onInputEntered.addListener(function (text) {
 		}
 		if (siteVersion === 'desktop') {
 			chrome.tabs.update(null, { url: "https://" + activeLanguage + ".wikipedia.org/w/index.php?search=" + encodeURIComponent(text) })
-		} else {
+		} else if (siteVersion === 'mobile') {
 			chrome.tabs.update(null, { url: "https://" + activeLanguage + ".m.wikipedia.org/w/index.php?search=" + encodeURIComponent(text) })
+		} else if (siteVersion === 'wikiwand') {
+			chrome.tabs.update(null, { url: "https://www.wikiwand.com/" + activeLanguage + "/" + encodeURIComponent(text) })
 		}
 	}
 })
@@ -159,31 +161,32 @@ chrome.storage.local.get(async function (data) {
 	}
 })
 
-// Show welcome page when extension is installed or updated
+// Initialize welcome message and context menu entry on extension load
 
 chrome.runtime.onInstalled.addListener(function (details) {
-	if (details.reason === 'install' || details.reason === 'update') {
-		chrome.tabs.create({ 'url': chrome.runtime.getURL('welcome.html') })
-	}
-})
-
-// Show search option in context menu
-
-chrome.runtime.onStartup.addListener(function () {
+	// Initialize context menu
 	chrome.contextMenus.create({
 		id: "search-wikipedia",
 		title: 'Search Wikipedia for \"%s\"',
 		contexts: ['selection']
 	})
+	// Show welcome message
+	if (details.reason === 'install' || details.reason === 'update') {
+		//chrome.tabs.create({ 'url': chrome.runtime.getURL('welcome.html') })
+	}
 })
+
+// Function for context menu search
 
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
 	if (info.menuItemId == "search-wikipedia") {
 		chrome.storage.local.get(function (data) {
 			if (data.siteVersion === 'desktop') {
 				var url = 'https://' + data.userLanguage + '.wikipedia.org/w/index.php?title=Special:Search&search=' + encodeURIComponent(info.selectionText)
-			} else {
+			} else if (data.siteVersion === 'mobile') {
 				var url = 'https://' + data.userLanguage + '.m.wikipedia.org/w/index.php?title=Special:Search&search=' + encodeURIComponent(info.selectionText)
+			} else if (data.siteVersion === 'wikiwand') {
+				var url = 'https://www.wikiwand.com/' + data.userLanguage + '/' + encodeURIComponent(info.selectionText)
 			}
 			chrome.tabs.create({ url: url })
 		})
