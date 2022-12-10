@@ -121,7 +121,7 @@ async function suggests(query) {
 
 chrome.omnibox.onInputEntered.addListener(function (text) {
 	if (text == "settings") {
-		chrome.tabs.update(null, { url: chrome.runtime.getURL('settings.html') })
+		chrome.runtime.openOptionsPage()
 	} else {
 		// If a search prefix is being used, exclude it from the text string
 		if (text.startsWith(activeLanguage + ' ')) {
