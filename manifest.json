@@ -1,34 +1,43 @@
 {
-"manifest_version": 2,
+	"manifest_version": 3,
 	"name": "Wikipedia Search",
-	"version": "10.1",
+	"version": "11",
 	"author": "Corbin Davenport",
 	"homepage_url": "https://github.com/corbindavenport/wikipedia-search",
 	"description": "Search Wikipedia in every language from the address bar and context menu.",
-	"options_page": "settings.html",
+	"options_ui": {
+		"page": "settings.html",	
+		"open_in_tab": false
+	},
 	"omnibox": {
 		"keyword": "wiki"
 	},
 	"permissions": [
 		"contextMenus",
-		"http://*.wikipedia.org/*",
-		"https://*.wikipedia.org/*",
-		"storage"
+		"storage",
+		"notifications"
+	],
+	"minimum_chrome_version": "93",
+	"host_permissions": [
+		"https://*.wikipedia.org/*"
 	],
 	"background": {
-		"scripts": ["js/shared.js", "js/background.js"]
+		"service_worker": "js/background.js"
 	},
 	"content_scripts": [
 		{
-		"matches": ["http://*.wikipedia.org/*", "https://*.wikipedia.org/*"],
-		"js": ["js/contentscript.js"],
-		"run_at": "document_end"
+			"matches": [
+				"https://*.wikipedia.org/*"
+			],
+			"js": [
+				"js/contentscript.js"
+			],
+			"run_at": "document_end"
 		}
 	],
-	"icons":{
-		"16":"img/icon16.png",
-		"32":"img/icon32.png",
-		"48":"img/icon48.png",
-		"128":"img/icon128.png"
+	"icons": {
+		"32": "img/icon32.png",
+		"48": "img/icon48.png",
+		"128": "img/icon128.png"
 	}
 }
