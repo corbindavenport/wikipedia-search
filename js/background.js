@@ -172,7 +172,37 @@ chrome.runtime.onInstalled.addListener(function (details) {
 	})
 	// Show welcome message
 	if (details.reason === 'install' || details.reason === 'update') {
-		//chrome.tabs.create({ 'url': chrome.runtime.getURL('welcome.html') })
+		// Set message
+		const notification = {
+			type: 'basic',
+			iconUrl: chrome.runtime.getURL('img/icon128.png'),
+			title: 'Wikipedia Search ' +  chrome.runtime.getManifest().version + ' installed!',
+			buttons: [
+				{
+					title: 'Open Settings'
+				},
+				{
+					title: 'Join Discord'
+				}
+			],
+			message: "Click here to see what's new in this version."
+		}
+		// Send notification
+		chrome.notifications.create(notification, () => {
+			// Handle notification click
+			chrome.notifications.onClicked.addListener(function() {
+				chrome.tabs.create({ url: 'https://corbin.io/wikipedia-search-11' })
+			})
+			// Handle notification button clicks
+			chrome.notifications.onButtonClicked.addListener(function(_, buttonIndex) {
+				if (buttonIndex === 0) {
+					chrome.runtime.openOptionsPage()
+				} else if (buttonIndex === 1) {
+					// Open Discord
+					chrome.tabs.create({ url: 'https://discord.com/invite/59wfy5cNHw' })
+				}
+			})
+		})
 	}
 })
 

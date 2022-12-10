@@ -14,7 +14,8 @@
 	},
 	"permissions": [
 		"contextMenus",
-		"storage"
+		"storage",
+		"notifications"
 	],
 	"minimum_chrome_version": "93",
 	"host_permissions": [
