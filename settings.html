@@ -2,72 +2,85 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/dark.css" rel="stylesheet" media="(prefers-color-scheme: dark)">
-    <style>
-        body {
-            max-width: 450px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="img/icon32.png">
+    <title>Wikipedia Search</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container-fluid">
-        <!-- Multi-language -->
-        <div class="mb-3">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="wikipedia-search-multilang">
-                <label class="form-check-label" for="wikipedia-search-multilang">Enable multi-language search</label>
+    <!-- Header -->
+    <div class="container-fluid bg-light mb-5">
+        <div class="container bg-light py-5">
+            <div class="row">
+                <div class="col-9">
+                    <h1 class="display-5 fw-bold">Wikipedia Search settings</h1>
+                    <p>Here you can change all the options for Wikipedia Search. Your changes are automatically saved.</p>
+                </div>
             </div>
-            <small class="text-muted">Search in a different language by typing a Wikipedia language prefix before your search. For example, "fr google" searches "Google" in French Wikipedia. Turn this off if you accidentally search in different languages with queries like "La Niña".</small>
         </div>
-        <!-- Language -->
-        <div class="mb-3">
-            <label for="wikipedia-search-language-select" class="form-label">Search language</label>
-            <div class="input-group mb-1">
-                <select id="wikipedia-search-language-select" class="form-select" disabled>
-                    <option value="loading" selected>Loading languages...</option>
-                </select>
-                <button class="btn btn-secondary" type="button" id="wikipedia-search-reset-language">Reset</button>
+    </div>
+    <!-- Main container -->
+    <div class="container">
+        <!-- Info and donation -->
+        <div class="row">
+            <div class="col-md-8">
+                <!-- Language -->
+                <div class="mb-3">
+                    <label for="wikipedia-search-language-select" class="form-label">Search language</label>
+                    <div class="input-group mb-1">
+                        <select id="wikipedia-search-language-select" class="form-select" disabled>
+                            <option value="loading" selected>Loading languages...</option>
+                        </select>
+                        <button class="btn btn-primary" type="button" id="wikipedia-search-reset-language">Reset</button>
+                    </div>
+                    <small class="text-muted">The language list is updated every time you open this settings page, using the <a href="https://www.mediawiki.org/wiki/API:Query" target="_blank">Wikipedia Query API</a>.</small>
+                </div>
+                <!-- Multi-language -->
+                <div class="mb-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="wikipedia-search-multilang">
+                        <label class="form-check-label" for="wikipedia-search-multilang">Enable multi-language search</label>
+                    </div>
+                    <small class="text-muted">Search in a different language by typing a Wikipedia language prefix before your search. For example, "fr google" searches "Google" in French Wikipedia. Turn this off if you accidentally search in different languages with queries like "La Niña".</small>
+                </div>
+                <!-- Site version -->
+                <div class="mb-3">
+                    <label for="wikipedia-search-site-select" class="form-label">Wikipedia design</label>
+                    <select id="wikipedia-search-site-select" class="form-select" disabled>
+                        <option value="desktop">Desktop Wikipedia (wikipedia.org)</option>
+                        <option value="mobile">Mobile Wikipedia (m.wikipedia.org)</option>
+                        <option value="wikiwand">Wikiwand (wikiwand.com)</option>
+                    </select>
+                </div>
             </div>
-            <small class="text-muted">The language list is updated every time you open this settings page, using the <a href="https://www.mediawiki.org/wiki/API:Query" target="_blank">Wikipedia Query API</a>.</small>
-        </div>
-        <!-- Site version -->
-        <div class="mb-3">
-            <label for="wikipedia-search-site-select" class="form-label">Wikipedia design</label>
-            <select id="wikipedia-search-site-select" class="form-select" disabled>
-                <option value="desktop">Desktop Wikipedia (wikipedia.org)</option>
-                <option value="mobile">Mobile Wikipedia (m.wikipedia.org)</option>
-                <option value="wikiwand">Wikiwand (wikiwand.com)</option>
-            </select>
-        </div>
-        <hr>
-        <p>If you find Wikipedia Search useful, please donate to support continued development. It would mean a lot!</p>
-        <div class="row mb-3">
-            <div class="col-6">
+            <div class="col-md-4">
+                <h2>Donate</h2>
+                <p>If you find this extension useful, please donate to support continued development. It would mean a lot!</p>
+                <a href="https://www.patreon.com/corbindavenport" target="_blank">
+                    <button type="button" class="btn btn-success w-100 mb-3">Support via Patreon</button>
+                </a>
                 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Wikipedia%20Search%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank">
-                    <button type="button" class="btn btn-sm btn-success w-100">Donate via PayPal</button>
+                    <button type="button" class="btn btn-success w-100 mb-3">Donate via PayPal</button>
                 </a>
-            </div>
-            <div class="col-6">
                 <a href="https://cash.app/$corbdav" target="_blank">
-                    <button type="button" class="btn btn-sm btn-success w-100">Donate via Cash App</button>
+                    <button type="button" class="btn btn-success w-100 mb-3">Donate via Cash App</button>
                 </a>
+                <p>This project is not affiliated with Wikipedia or the Wikimedia Foundation, but you can <a href="https://donate.wikimedia.org/">donate to Wikipedia</a>. Wikipedia Search is developed by <a href="https://corbin.io/?utm_source=Wikipedia%20Search%20Extension">Corbin Davenport</a>.</p>
+                <h2>Need help?</h2>
+                <p>If something isn't working or you need help, <a href="https://github.com/corbindavenport/wikipedia-search/issues" target="_blank">create an issue on GitHub</a> or <a href="https://discord.com/invite/59wfy5cNHw" target="_blank">join the Discord server</a>.</p>
             </div>
         </div>
-        <p>Wikipedia Search is not affliated with Wikipedia or the Wikimedia Foundation. You can <a href="https://donate.wikimedia.org" target="_blank">donate to Wikipedia directly</a>.</p>
-        <hr>
-        <a href="https://github.com/corbindavenport/wikipedia-search/" target="_blank" class="d-block mb-3">
-            <button type="button" class="btn btn-sm btn-primary w-100">Open GitHub repository</button>
-        </a>
-        <a href="https://discord.com/invite/59wfy5cNHw" target="_blank" class="d-block mb-3">
-            <button type="button" class="btn btn-sm btn-primary w-100">Join Discord server</button>
-        </a>
+        <!-- Footer -->
+        <div class="row">
+            <div class="bg-light rounded-3 pt-3 pb-3 mt-5 mb-5">
+                Wikipedia Search uses code from <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a>. You can find the source code <a href="https://github.com/corbindavenport/wikipedia-search" target="_blank">on GitHub</a> under the GPL license.</div>
+        </div>
     </div>
 
+    <script src="js/bootstrap.js"></script>
     <script src="js/shared.js"></script>
     <script src="js/settings.js"></script>
 

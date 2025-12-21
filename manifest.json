@@ -1,21 +1,20 @@
 {
 	"manifest_version": 3,
 	"name": "Wikipedia Search",
-	"version": "11",
+	"version": "12.0",
 	"author": "Corbin Davenport",
 	"homepage_url": "https://github.com/corbindavenport/wikipedia-search",
 	"description": "Search Wikipedia in every language from the address bar and context menu.",
 	"options_ui": {
 		"page": "settings.html",	
-		"open_in_tab": false
+		"open_in_tab": true
 	},
 	"omnibox": {
 		"keyword": "wiki"
 	},
 	"permissions": [
 		"contextMenus",
-		"storage",
-		"notifications"
+		"storage"
 	],
 	"minimum_chrome_version": "93",
 	"host_permissions": [
