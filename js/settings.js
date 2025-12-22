@@ -18,7 +18,6 @@ async function loadSettings() {
 			console.log(data)
 			select.value = data.userLanguage
 			multiLangButton.checked = data.multiLang
-			siteSelect.value = data.siteVersion
 			resolve()
 		})
 	}).then(function () {
@@ -39,8 +38,6 @@ document.querySelectorAll('input,select').forEach(function (el) {
 			userLanguage: document.querySelector('#wikipedia-search-language-select').value,
 			// Multi-language
 			multiLang: document.querySelector('#wikipedia-search-multilang').checked,
-			// Site version
-			siteVersion: document.querySelector('#wikipedia-search-site-select').value
 		}, function() {
 			console.log('settings saved')
 		})

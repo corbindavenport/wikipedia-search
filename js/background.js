@@ -7,7 +7,6 @@ var wikiLangArray = []
 var wikiPrefixArray = []
 var userLanguage = ''
 var multiLang = ''
-var siteVersion = ''
 var activeLanguage = ''
 var currentRequest = null
 
@@ -19,9 +18,13 @@ chrome.omnibox.onInputStarted.addListener(function () {
 		multiLang = data.multiLang
 		wikiLangArray = data.wikiLangArray
 		wikiPrefixArray = data.wikiPrefixArray
-		siteVersion = data.siteVersion
 	})
 })
+
+
+function getWikiUrl(searchText, language) {
+	return "https://" + language + ".wikipedia.org/w/index.php?search=" + encodeURIComponent(searchText);
+}
 
 chrome.omnibox.onInputChanged.addListener(async function (text, suggest) {
 	// If the first word in the query matches a known Wikipedia language, and multi-language is enabled, change the active search to that language
@@ -107,6 +110,7 @@ chrome.omnibox.onInputCancelled.addListener(function () {
 })
 
 async function suggests(query) {
+	// OpenSearch documentation: https://www.mediawiki.org/wiki/API:Opensearch
 	return new Promise(async function (resolve, reject) {
 		const url = "https://" + activeLanguage + ".wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&search=" + encodeURIComponent(query)
 		const response = await fetch(url)
@@ -127,13 +131,7 @@ chrome.omnibox.onInputEntered.addListener(function (text) {
 		if (text.startsWith(activeLanguage + ' ')) {
 			text = text.replace(activeLanguage + ' ', '')
 		}
-		if (siteVersion === 'desktop') {
-			chrome.tabs.update(null, { url: "https://" + activeLanguage + ".wikipedia.org/w/index.php?search=" + encodeURIComponent(text) })
-		} else if (siteVersion === 'mobile') {
-			chrome.tabs.update(null, { url: "https://" + activeLanguage + ".m.wikipedia.org/w/index.php?search=" + encodeURIComponent(text) })
-		} else if (siteVersion === 'wikiwand') {
-			chrome.tabs.update(null, { url: "https://www.wikiwand.com/" + activeLanguage + "/" + encodeURIComponent(text) })
-		}
+		chrome.tabs.update(null, { url: getWikiUrl(text, activeLanguage) });
 	}
 })
 
@@ -146,11 +144,6 @@ chrome.storage.local.get(async function (data) {
 	if (typeof data.multiLang == 'undefined') {
 		chrome.storage.local.set({
 			multiLang: false
-		})
-	}
-	if (typeof data.siteVersion == 'undefined') {
-		chrome.storage.local.set({
-			siteVersion: 'desktop'
 		})
 	}
 	if (data.userLanguage) {
@@ -181,14 +174,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
 	if (info.menuItemId == "search-wikipedia") {
 		chrome.storage.local.get(function (data) {
-			if (data.siteVersion === 'desktop') {
-				var url = 'https://' + data.userLanguage + '.wikipedia.org/w/index.php?title=Special:Search&search=' + encodeURIComponent(info.selectionText)
-			} else if (data.siteVersion === 'mobile') {
-				var url = 'https://' + data.userLanguage + '.m.wikipedia.org/w/index.php?title=Special:Search&search=' + encodeURIComponent(info.selectionText)
-			} else if (data.siteVersion === 'wikiwand') {
-				var url = 'https://www.wikiwand.com/' + data.userLanguage + '/' + encodeURIComponent(info.selectionText)
-			}
-			chrome.tabs.create({ url: url })
+			chrome.tabs.create({ url: getWikiUrl(info.selectionText, data.userLanguage) })
 		})
 	}
 })
