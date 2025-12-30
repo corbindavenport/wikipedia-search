@@ -1,10 +1,10 @@
 importScripts('/js/shared.js');
 
+// TODO: Migrate userLanguage, multiLang, and other options to chrome.storage.sync
+
 // Global variables
-const isChrome = Boolean(navigator.userAgent.includes('Chrome'))
-const isFirefox = Boolean(navigator.userAgent.includes('Firefox'))
-var wikiLangArray = []
-var wikiPrefixArray = []
+const isFirefox = chrome.runtime.getURL('').startsWith('moz-extension://');
+let wikiList = {};
 var userLanguage = ''
 var multiLang = ''
 var activeLanguage = ''
@@ -13,23 +13,19 @@ var currentRequest = null
 // Load data and settings when Omnibox search is activated
 chrome.omnibox.onInputStarted.addListener(function () {
 	updateDefaultSuggestion('', activeLanguage)
+	getWikis().then(function (data) {
+		wikiList = data;
+	})
 	chrome.storage.local.get(function (data) {
 		userLanguage = data.userLanguage
 		multiLang = data.multiLang
-		wikiLangArray = data.wikiLangArray
-		wikiPrefixArray = data.wikiPrefixArray
 	})
 })
-
-
-function getWikiUrl(searchText, language) {
-	return "https://" + language + ".wikipedia.org/w/index.php?search=" + encodeURIComponent(searchText);
-}
 
 chrome.omnibox.onInputChanged.addListener(async function (text, suggest) {
 	// If the first word in the query matches a known Wikipedia language, and multi-language is enabled, change the active search to that language
 	var firstWord = text.split(' ')[0]
-	if ((multiLang === true) && text.startsWith(firstWord + ' ') && (wikiPrefixArray.includes(firstWord))) {
+	if ((multiLang === true) && text.startsWith(firstWord + ' ') && wikiList.hasOwnProperty(firstWord)) {
 		activeLanguage = firstWord
 		text = text.replace(firstWord + ' ', '')
 	} else {
@@ -48,7 +44,7 @@ chrome.omnibox.onInputChanged.addListener(async function (text, suggest) {
 			if (isFirefox) {
 				// Firefox supports 4 suggestions
 				num = 4
-			} else if (isChrome) {
+			} else {
 				// Chrome can do 8 suggestions
 				num = 8
 			}
@@ -66,12 +62,12 @@ chrome.omnibox.onInputChanged.addListener(async function (text, suggest) {
 				// Firefox doesn't support <dim>
 				results.push({
 					content: "settings",
-					description: "Change default search language (currently set to " + wikiLangArray[wikiPrefixArray.indexOf(userLanguage)] + ")"
+					description: "Change default search language (currently set to " + wikiList[activeLanguage] + ")"
 				})
 			} else {
 				results.push({
 					content: "settings",
-					description: "<dim>Change default search language (currently set to " + wikiLangArray[wikiPrefixArray.indexOf(userLanguage)] + ")</dim>"
+					description: "<dim>Change default search language (currently set to " + wikiList[activeLanguage] + ")</dim>"
 				})
 			}
 			suggest(results)
@@ -96,11 +92,11 @@ function updateDefaultSuggestion(text, activeLanguage) {
 	if (isFirefox) {
 		// Firefox doesn't support <dim>
 		chrome.omnibox.setDefaultSuggestion({
-			description: text + ' — ' + wikiLangArray[wikiPrefixArray.indexOf(activeLanguage)]
+			description: text + ' — ' + wikiList[activeLanguage]
 		})
 	} else {
 		chrome.omnibox.setDefaultSuggestion({
-			description: text + ' <dim>- ' + wikiLangArray[wikiPrefixArray.indexOf(activeLanguage)] + '</dim>'
+			description: text + ' <dim>- ' + wikiList[activeLanguage] + '</dim>'
 		})
 	}
 }
@@ -135,25 +131,6 @@ chrome.omnibox.onInputEntered.addListener(function (text) {
 	}
 })
 
-// Load settings and languages from storage when the extension is initialized
-chrome.storage.local.get(async function (data) {
-	// Add languages to storage if they are not there
-	if (!data.wikiPrefixArray || !data.wikiLangArray) {
-		await getWikis()
-	}
-	if (typeof data.multiLang == 'undefined') {
-		chrome.storage.local.set({
-			multiLang: false
-		})
-	}
-	if (data.userLanguage) {
-		console.log("Language already set to '" + data.userLanguage + "' (" + defaultLangArray[defaultPrefixArray.indexOf(data.userLanguage)] + ")")
-	} else {
-		// Detect system language and set it as the default
-		resetToSystemLanguage()
-	}
-})
-
 // Initialize welcome message and context menu entry on extension load
 
 chrome.runtime.onInstalled.addListener(function (details) {
@@ -162,6 +139,20 @@ chrome.runtime.onInstalled.addListener(function (details) {
 		id: "search-wikipedia",
 		title: 'Search Wikipedia for \"%s\"',
 		contexts: ['selection']
+	})
+	// Load settings and languages from storage when the extension is initialized
+	chrome.storage.local.get(async function (data) {
+		if (typeof data.multiLang == 'undefined') {
+			chrome.storage.local.set({
+				multiLang: false
+			})
+		}
+		if (data.userLanguage) {
+			console.log(`Language set to ${data.userLanguage}`);
+		} else {
+			// Detect system language and set it as the default
+			await resetToSystemLanguage()
+		}
 	})
 	// Show welcome message
 	if (details.reason === 'install' || details.reason === 'update') {

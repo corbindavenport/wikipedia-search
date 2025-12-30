@@ -5,12 +5,12 @@ async function loadSettings() {
 	const resetButton = document.getElementById('wikipedia-search-reset-language')
 	const multiLangButton = document.querySelector('#wikipedia-search-multilang')
 	const siteSelect = document.querySelector('#wikipedia-search-site-select')
-	const wikiList = await getWikis()
-	for (i in wikiList[0]) {
+	const wikiList = await getWikis();
+	for (const [key, value] of Object.entries(wikiList)) {
 		var option = document.createElement('option')
-		option.setAttribute('value', wikiList[0][i])
-		option.innerText = wikiList[1][i] + ' (' + wikiList[0][i] + '.wikipedia.org)'
-		select.appendChild(option)
+		option.setAttribute('value', key);
+		option.innerText = `${value} - ${key}.wikipedia.org`;
+		select.appendChild(option);
 	}
 	// Retrieve settings from storage
 	new Promise(function (resolve, reject) {
@@ -26,7 +26,6 @@ async function loadSettings() {
 		select.removeAttribute('disabled')
 		resetButton.removeAttribute('disabled')
 		multiLangButton.removeAttribute('disabled')
-		siteSelect.removeAttribute('disabled')
 	})
 }
 
@@ -38,15 +37,15 @@ document.querySelectorAll('input,select').forEach(function (el) {
 			userLanguage: document.querySelector('#wikipedia-search-language-select').value,
 			// Multi-language
 			multiLang: document.querySelector('#wikipedia-search-multilang').checked,
-		}, function() {
+		}, function () {
 			console.log('settings saved')
 		})
 	})
 })
 
 // Reset language button
-document.getElementById('wikipedia-search-reset-language').addEventListener('click', function () {
-	var lang = resetToSystemLanguage()
+document.getElementById('wikipedia-search-reset-language').addEventListener('click', async function () {
+	var lang = await resetToSystemLanguage()
 	// resetToSystemLanguage updates the storage, so here we only need to change the select value
 	document.getElementById('wikipedia-search-language-select').value = lang
 })
