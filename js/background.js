@@ -4,6 +4,7 @@ importScripts('/js/shared.js');
 
 // Global variables
 const isFirefox = chrome.runtime.getURL('').startsWith('moz-extension://');
+const isMicrosoftEdge = navigator.userAgent.includes('Edg');
 let wikiList = {};
 var userLanguage = ''
 var multiLang = ''
@@ -39,14 +40,14 @@ chrome.omnibox.onInputChanged.addListener(async function (text, suggest) {
 			if (localCurrentRequest !== currentRequest) {
 				return
 			}
-			// Set the maximum number of suggestion slots, and leave one for the settings option
-			var results = []
+			// Set the maximum number of suggestion slots, leaving one for the settings page link
+			var results = [];
 			if (isFirefox) {
-				// Firefox supports 4 suggestions
-				num = 4
+				num = 4;
+			} else if (isMicrosoftEdge) {
+				num = 7;
 			} else {
-				// Chrome can do 8 suggestions
-				num = 8
+				num = 8;
 			}
 			for (var i = 0; i < num; i++) {
 				var content = data[1][i]
