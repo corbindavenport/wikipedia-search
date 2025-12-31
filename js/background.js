@@ -9,18 +9,27 @@ let wikiList = {};
 var userLanguage = ''
 var multiLang = ''
 var activeLanguage = ''
-var currentRequest = null
+
+/**
+ * Returns the Wikipedia search URL for a given string and selected language.
+ * @param {String} searchText Text to search
+ * @param {String} language Language code to use for search (e.g. "en" or "de")
+ * @returns 
+ */
+function getWikiUrl(searchText, language) {
+	return "https://" + language + ".wikipedia.org/w/index.php?search=" + encodeURIComponent(searchText);
+}
 
 // Load data and settings when Omnibox search is activated
-chrome.omnibox.onInputStarted.addListener(function () {
+chrome.omnibox.onInputStarted.addListener(async function () {
+	// Get settings from storage
+	const storageData = await chrome.storage.local.get(['userLanguage', 'multiLang']);
+	userLanguage = storageData.userLanguage;
+	multiLang = storageData.multiLang;
+	// Reset default suggestion
 	updateDefaultSuggestion('', activeLanguage)
-	getWikis().then(function (data) {
-		wikiList = data;
-	})
-	chrome.storage.local.get(function (data) {
-		userLanguage = data.userLanguage
-		multiLang = data.multiLang
-	})
+	// Get list of Wikipedia sites
+	wikiList = await getWikis();
 })
 
 chrome.omnibox.onInputChanged.addListener(async function (text, suggest) {
@@ -34,45 +43,39 @@ chrome.omnibox.onInputChanged.addListener(async function (text, suggest) {
 	}
 	updateDefaultSuggestion(text, activeLanguage)
 	if (text.length > 0) {
-		var localCurrentRequest = suggests(text)
-		currentRequest = localCurrentRequest
-		localCurrentRequest.then(function (data) {
-			if (localCurrentRequest !== currentRequest) {
-				return
-			}
-			// Set the maximum number of suggestion slots, leaving one for the settings page link
-			var results = [];
-			if (isFirefox) {
-				num = 4;
-			} else if (isMicrosoftEdge) {
-				num = 7;
-			} else {
-				num = 8;
-			}
-			for (var i = 0; i < num; i++) {
-				var content = data[1][i]
-				if (content) {
-					results.push({
-						content: content,
-						description: content
-					})
-				}
-			}
-			// Add settings suggestion
-			if (isFirefox) {
-				// Firefox doesn't support <dim>
+		const request = await getSuggestions(text);
+		// Set the maximum number of suggestion slots, leaving one for the settings page link
+		var results = [];
+		if (isFirefox) {
+			num = 4;
+		} else if (isMicrosoftEdge) {
+			num = 7;
+		} else {
+			num = 8;
+		}
+		for (var i = 0; i < num; i++) {
+			var content = request[1][i]
+			if (content) {
 				results.push({
-					content: "settings",
-					description: "Change default search language (currently set to " + wikiList[activeLanguage] + ")"
-				})
-			} else {
-				results.push({
-					content: "settings",
-					description: "<dim>Change default search language (currently set to " + wikiList[activeLanguage] + ")</dim>"
+					content: content,
+					description: content
 				})
 			}
-			suggest(results)
-		})
+		}
+		// Add settings suggestion
+		if (isFirefox) {
+			// Firefox doesn't support <dim>
+			results.push({
+				content: "settings",
+				description: "Change default search language (currently set to " + wikiList[activeLanguage] + ")"
+			})
+		} else {
+			results.push({
+				content: "settings",
+				description: "<dim>Change default search language (currently set to " + wikiList[activeLanguage] + ")</dim>"
+			})
+		}
+		suggest(results)
 	}
 })
 
@@ -106,8 +109,14 @@ chrome.omnibox.onInputCancelled.addListener(function () {
 	resetDefaultSuggestion()
 })
 
-async function suggests(query) {
-	// OpenSearch documentation: https://www.mediawiki.org/wiki/API:Opensearch
+/**
+ * Gets list of autocomplete suggestions using official Wikimedia API.
+ * 
+ * More information: https://www.mediawiki.org/wiki/API:Opensearch
+ * @param {String} query Text string to use for search 
+ * @returns {Promise} Promise that resolves with a JSON object
+ */
+async function getSuggestions(query) {
 	return new Promise(async function (resolve, reject) {
 		const url = "https://" + activeLanguage + ".wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&search=" + encodeURIComponent(query)
 		const response = await fetch(url)
@@ -163,10 +172,10 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
 // Function for context menu search
 
-chrome.contextMenus.onClicked.addListener(function (info, tab) {
+chrome.contextMenus.onClicked.addListener(async function (info) {
 	if (info.menuItemId == "search-wikipedia") {
-		chrome.storage.local.get(function (data) {
-			chrome.tabs.create({ url: getWikiUrl(info.selectionText, data.userLanguage) })
-		})
+		const storageData = await chrome.storage.local.get(['userLanguage']);
+		const targetUrl = getWikiUrl(info.selectionText, storageData.userLanguage);
+		chrome.tabs.create({ url: targetUrl });
 	}
 })

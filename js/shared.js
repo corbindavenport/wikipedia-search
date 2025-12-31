@@ -347,16 +347,6 @@ const defaultWikiList = {
 }
 
 /**
- * Returns the Wikipedia search URL for a given string and selected language.
- * @param {String} searchText Text to search
- * @param {String} language Language code to use for search (e.g. "en" or "de")
- * @returns 
- */
-function getWikiUrl(searchText, language) {
-    return "https://" + language + ".wikipedia.org/w/index.php?search=" + encodeURIComponent(searchText);
-}
-
-/**
  * Function to obtain list of active Wikipedia sites using official Wikimedia API.
  * 
  * More information: https://www.mediawiki.org/wiki/Extension:SiteMatrix
