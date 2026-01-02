@@ -16,7 +16,7 @@ var activeLanguage = ''
  * @param {String} language Language code to use for search (e.g. "en" or "de")
  * @returns 
  */
-function getWikiUrl(searchText, language) {
+function getSearchUrl(searchText, language) {
 	return "https://" + language + ".wikipedia.org/w/index.php?search=" + encodeURIComponent(searchText);
 }
 
@@ -134,8 +134,12 @@ async function getSuggestions(query) {
 }
 
 // Function for handling clicks in the omnibox results or Enter key press
-chrome.omnibox.onInputEntered.addListener(function (url) {
-	chrome.tabs.update({ url: url });
+chrome.omnibox.onInputEntered.addListener(function (text) {
+	if (!text.startsWith('https://')) {
+		// This is a search string, so it needs to be converted to a search page URL
+		text = getSearchUrl(text, activeLanguage);
+	}
+	chrome.tabs.update({ url: text });
 })
 
 // Initialize welcome message and context menu entry on extension load
@@ -170,7 +174,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 chrome.contextMenus.onClicked.addListener(async function (info) {
 	if (info.menuItemId == "search-wikipedia") {
 		const storageData = await chrome.storage.local.get(['userLanguage']);
-		const targetUrl = getWikiUrl(info.selectionText, storageData.userLanguage);
+		const targetUrl = getSearchUrl(info.selectionText, storageData.userLanguage);
 		chrome.tabs.create({ url: targetUrl });
 	}
 })
