@@ -135,7 +135,7 @@ async function getSuggestions(query) {
 
 // Function for handling clicks in the omnibox results or Enter key press
 chrome.omnibox.onInputEntered.addListener(function (text) {
-	if (!text.startsWith('https://')) {
+	if (!(text.startsWith('https://') || text.startsWith('moz-extension://') || text.startsWith('chrome-extension://'))) {
 		// This is a search string, so it needs to be converted to a search page URL
 		text = getSearchUrl(text, activeLanguage);
 	}
