@@ -32,16 +32,17 @@ chrome.omnibox.onInputStarted.addListener(async function () {
 	wikiList = await getWikis();
 })
 
+// Function to generate omnibox search dropdown results
 chrome.omnibox.onInputChanged.addListener(async function (text, suggest) {
 	// If the first word in the query matches a known Wikipedia language, and multi-language is enabled, change the active search to that language
 	var firstWord = text.split(' ')[0]
 	if ((multiLang === true) && text.startsWith(firstWord + ' ') && wikiList.hasOwnProperty(firstWord)) {
-		activeLanguage = firstWord
-		text = text.replace(firstWord + ' ', '')
+		activeLanguage = firstWord;
+		text = text.replace(firstWord + ' ', '');
 	} else {
-		activeLanguage = userLanguage
+		activeLanguage = userLanguage;
 	}
-	updateDefaultSuggestion(text, activeLanguage)
+	updateDefaultSuggestion(text, activeLanguage);
 	if (text.length > 0) {
 		const request = await getSuggestions(text);
 		// Set the maximum number of suggestion slots, leaving one for the settings page link
@@ -53,12 +54,14 @@ chrome.omnibox.onInputChanged.addListener(async function (text, suggest) {
 		} else {
 			num = 8;
 		}
+		// Create list of suggestions from API results
 		for (var i = 0; i < num; i++) {
-			var content = request[1][i]
-			if (content) {
+			const articleTitle = request[1][i];
+			const articleUrl = request[3][i];
+			if (articleTitle) {
 				results.push({
-					content: content,
-					description: content
+					content: articleUrl,
+					description: articleTitle
 				})
 			}
 		}
@@ -66,16 +69,17 @@ chrome.omnibox.onInputChanged.addListener(async function (text, suggest) {
 		if (isFirefox) {
 			// Firefox doesn't support <dim>
 			results.push({
-				content: "settings",
+				content: chrome.runtime.getURL('settings.html'),
 				description: "Change default search language (currently set to " + wikiList[activeLanguage] + ")"
 			})
 		} else {
 			results.push({
-				content: "settings",
+				content: chrome.runtime.getURL('settings.html'),
 				description: "<dim>Change default search language (currently set to " + wikiList[activeLanguage] + ")</dim>"
 			})
 		}
-		suggest(results)
+		// Return list of suggestions to the browser
+		suggest(results);
 	}
 })
 
@@ -117,32 +121,24 @@ chrome.omnibox.onInputCancelled.addListener(function () {
  * @returns {Promise} Promise that resolves with a JSON object
  */
 async function getSuggestions(query) {
-	return new Promise(async function (resolve, reject) {
-		const url = "https://" + activeLanguage + ".wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&search=" + encodeURIComponent(query)
-		const response = await fetch(url)
+	return new Promise(async function (resolve) {
+		const url = "https://" + activeLanguage + ".wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&search=" + encodeURIComponent(query);
+		const response = await fetch(url);
 		if (!response.ok) {
-			console.log('Could not obtain data from Wikipedia API.')
-			resolve(null)
+			console.log('Could not obtain data from Wikipedia API.');
+			resolve(null);
 		}
-		const json = await response.json()
-		resolve(json)
+		const json = await response.json();
+		resolve(json);
 	})
 }
 
-chrome.omnibox.onInputEntered.addListener(function (text) {
-	if (text == "settings") {
-		chrome.runtime.openOptionsPage()
-	} else {
-		// If a search prefix is being used, exclude it from the text string
-		if (text.startsWith(activeLanguage + ' ')) {
-			text = text.replace(activeLanguage + ' ', '')
-		}
-		chrome.tabs.update(null, { url: getWikiUrl(text, activeLanguage) });
-	}
+// Function for handling clicks in the omnibox results or Enter key press
+chrome.omnibox.onInputEntered.addListener(function (url) {
+	chrome.tabs.update({ url: url });
 })
 
 // Initialize welcome message and context menu entry on extension load
-
 chrome.runtime.onInstalled.addListener(function (details) {
 	// Initialize context menu
 	chrome.contextMenus.create({
@@ -171,7 +167,6 @@ chrome.runtime.onInstalled.addListener(function (details) {
 })
 
 // Function for context menu search
-
 chrome.contextMenus.onClicked.addListener(async function (info) {
 	if (info.menuItemId == "search-wikipedia") {
 		const storageData = await chrome.storage.local.get(['userLanguage']);
