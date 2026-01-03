@@ -30,13 +30,17 @@
                 <!-- Language -->
                 <div class="mb-3">
                     <label for="wikipedia-search-language-select" class="form-label">Search language</label>
-                    <div class="input-group mb-1">
-                        <select id="wikipedia-search-language-select" class="form-select" disabled>
-                            <option value="loading" selected>Loading languages...</option>
-                        </select>
-                        <button class="btn btn-primary" type="button" id="wikipedia-search-reset-language">Reset</button>
+                    <select id="wikipedia-search-language-select" class="form-select mb-2" disabled>
+                        <option value="loading" selected>Loading languages...</option>
+                    </select>
+                    <div class="row">
+                        <div class="col-12 col-sm-6">
+                            <button class="btn btn-primary w-100 mb-2" type="button" id="wikipedia-search-reset-language" disabled>Reset to default</button>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <button class="btn btn-primary w-100 mb-2" type="button" id="wikipedia-search-refresh-languages" disabled>Refresh languages</button>
+                        </div>
                     </div>
-                    Refresh button will go here
                 </div>
                 <!-- Multi-language -->
                 <div class="mb-3">
@@ -68,6 +72,24 @@
         <div class="row">
             <div class="bg-light rounded-3 pt-3 pb-3 mt-5 mb-5">
                 Wikipedia Search uses code from <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a>. You can find the source code <a href="https://github.com/corbindavenport/wikipedia-search" target="_blank">on GitHub</a> under the GPL license.</div>
+        </div>
+    </div>
+
+    <!-- Modal for language refresh -->
+    <div class="modal fade" id="langModal" aria-labelledby="langModalLabel">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="langModalLabel">Language refresh</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="langModalText">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 

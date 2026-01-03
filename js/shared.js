@@ -354,26 +354,27 @@ const defaultWikiList = {
  */
 function updateWikis() {
     return new Promise(async function (resolve, reject) {
-        const response = await fetch('https://en.wikipedia.org/w/api.php?action=sitematrix&format=json&smtype=language');
-        if (!response.ok) {
-            reject();
-        }
-        const json = await response.json();
-        // Create list of active Wikipedia sites as object
-        let wikisObj = {};
-        for (item in json.sitematrix) {
-            // Check if the language has an associated Wikipedia website
-            if (Object.hasOwn(json.sitematrix[item], 'site') && json.sitematrix[item].site.length) {
-                // Check that the language's Wikipedia isn't closed
-                if (!Object.hasOwn(json.sitematrix[item].site[0], 'closed')) {
-                    wikisObj[json.sitematrix[item].code] = json.sitematrix[item].name;
-                } else {
-                    continue;
+        try {
+            const response = await fetch('https://en.wikipedia.org/w/api.php?action=sitematrix&format=json&smtype=language');
+            const json = await response.json();
+            // Create list of active Wikipedia sites as object
+            let wikisObj = {};
+            for (item in json.sitematrix) {
+                // Check if the language has an associated Wikipedia website
+                if (Object.hasOwn(json.sitematrix[item], 'site') && json.sitematrix[item].site.length) {
+                    // Check that the language's Wikipedia isn't closed
+                    if (!Object.hasOwn(json.sitematrix[item].site[0], 'closed')) {
+                        wikisObj[json.sitematrix[item].code] = json.sitematrix[item].name;
+                    } else {
+                        continue;
+                    }
                 }
             }
+            // Resolve the promise with the new list
+            resolve(wikisObj);
+        } catch (e) {
+            reject(e);
         }
-        // Resolve the promise with the new list
-        resolve(wikisObj);
     })
 }
 
