@@ -143,27 +143,43 @@ chrome.omnibox.onInputEntered.addListener(function (text) {
 })
 
 // Initialize welcome message and context menu entry on extension load
-chrome.runtime.onInstalled.addListener(function (details) {
+chrome.runtime.onInstalled.addListener(async function (details) {
 	// Initialize context menu
 	chrome.contextMenus.create({
 		id: "search-wikipedia",
 		title: 'Search Wikipedia for \"%s\"',
 		contexts: ['selection']
 	})
-	// Load settings and languages from storage when the extension is initialized
-	chrome.storage.local.get(async function (data) {
-		if (typeof data.multiLang == 'undefined') {
-			chrome.storage.local.set({
-				multiLang: false
-			})
-		}
-		if (data.userLanguage) {
-			console.log(`Language set to ${data.userLanguage}`);
-		} else {
-			// Detect system language and set it as the default
-			await resetToSystemLanguage()
-		}
-	})
+	// Load settings and languages from synced storage, and migrate old local data if needed
+	const legacyData = await chrome.storage.local.get(['userLanguage', 'multiLang']);
+	const storageData = await chrome.storage.sync.get(['userLanguage', 'multiLang']);
+	// Set user language
+	if (legacyData.userLanguage) {
+		await chrome.storage.sync.set({
+			userLanguage: legacyData.userLanguage
+		});
+	} else if (storageData.userLanguage) {
+		console.log(`Language set to ${storageData.userLanguage}.`);
+	} else {
+		const newLang = await getSystemLanguage();
+		await chrome.storage.sync.set({
+			userLanguage: newLang
+		});
+	}
+	// Set multi-language mode
+	if (legacyData.multiLang) {
+		await chrome.storage.sync.set({
+			multiLang: legacyData.multiLang
+		});
+	} else if (storageData.multiLang) {
+		console.log(`Multi-language mode set to ${storageData.multiLang}.`);
+	} else {
+		await chrome.storage.sync.set({
+			multiLang: false
+		});
+	}
+	// Delete old data so migration doesn't run again
+	chrome.storage.local.clear();
 	// Show welcome message
 	if (details.reason === 'install' || details.reason === 'update') {
 		chrome.tabs.create({ 'url': chrome.runtime.getURL('welcome.html') });

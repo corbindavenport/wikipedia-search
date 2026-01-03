@@ -395,27 +395,26 @@ async function getWikis() {
     })
 }
 
-// Function for detecting system language and setting it to the default search language
-async function resetToSystemLanguage() {
-    var lang = navigator.languages[0]
-    var newLang = ''
+/**
+ * Function to check the current system language and match it to supported a Wikipedia site
+ * @returns {String} The matching Wikipedia language, or 'en' as a fallback
+ */
+async function getSystemLanguage() {
+    var lang = navigator.languages[0];
+    var newLang = '';
     // Cut off the localization part if it exists (e.g. en-US becomes en), to match with Wikipedia's format
-    var n = lang.indexOf('-')
-    lang = lang.substring(0, n != -1 ? n : lang.length)
+    var n = lang.indexOf('-');
+    lang = lang.substring(0, n != -1 ? n : lang.length);
     // Check if the language has a Wikipedia
     const wikiList = await getWikis();
     if (lang in wikiList) {
-        console.log(`Language detected as ${wikiList[lang]} (${lang})`);
-        newLang = lang
+        console.log(`Language detected as ${wikiList[lang]} (${lang})`);;
+        newLang = lang;
     } else {
         // Set it to English as default
-        console.log("Could not auto-detect language, defaulting to 'en' (English)")
-        newLang = 'en'
+        console.log("Could not auto-detect language, defaulting to 'en' (English)");
+        newLang = 'en';
     }
-    // Update language setting
-    chrome.storage.local.set({
-        userLanguage: newLang
-    })
     // Return new language
-    return newLang
+    return newLang;
 }

@@ -27,7 +27,7 @@ async function loadSettings() {
 	const wikiList = await getWikis();
 	updateLangSelect(wikiList);
 	// Retrieve settings from storage
-	const storageData = await chrome.storage.local.get(['userLanguage', 'multiLang']);
+	const storageData = await chrome.storage.sync.get(['userLanguage', 'multiLang']);
 	langSelect.value = storageData.userLanguage;
 	multiLangCheck.checked = storageData.multiLang;
 	// Allow interaction on settings
@@ -38,25 +38,30 @@ async function loadSettings() {
 	refreshLangBtn.removeAttribute('disabled');
 }
 
+// Function to save settings
+async function saveSettings() {
+	chrome.storage.sync.set({
+		// Default language
+		userLanguage: langSelect.value,
+		// Multi-language
+		multiLang: multiLangCheck.checked,
+	}, function () {
+		console.log('Settings saved.')
+	})
+}
+
 // Save settings after any input change
 document.querySelectorAll('input,select').forEach(function (el) {
 	el.addEventListener('change', function () {
-		chrome.storage.local.set({
-			// Default language
-			userLanguage: langSelect.value,
-			// Multi-language
-			multiLang: multiLangCheck.checked,
-		}, function () {
-			console.log('settings saved')
-		})
+		saveSettings();
 	})
 })
 
 // Reset language button
 langResetBtn.addEventListener('click', async function () {
-	var lang = await resetToSystemLanguage()
-	// resetToSystemLanguage updates the storage, so here we only need to change the select value
-	langSelect.value = lang
+	const newLang = await getSystemLanguage();
+	langSelect.value = newLang;
+	saveSettings();
 })
 
 // Refresh language button
@@ -71,7 +76,7 @@ refreshLangBtn.addEventListener('click', async function () {
 			updateLangSelect(result);
 			refreshModalText.innerText = `Done! Wikipedia API provided ${Object.keys(result).length} languages.`;
 			refreshModal.show();
-			
+
 		},
 		function (error) {
 			console.log(error);
