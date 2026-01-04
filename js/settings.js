@@ -1,57 +1,90 @@
+const langSelect = document.getElementById('wikipedia-search-language-select');
+const langResetBtn = document.getElementById('wikipedia-search-reset-language');
+const multiLangCheck = document.getElementById('wikipedia-search-multilang');
+const refreshLangBtn = document.getElementById('wikipedia-search-refresh-languages');
+const refreshModal = new bootstrap.Modal(document.getElementById('langModal'));
+const refreshModalText = document.getElementById('langModalText');
+
+// Function to update language select menu with list of languages
+function updateLangSelect(data) {
+	// Save current value and delete list contents
+	const initValue = langSelect.value;
+	langSelect.innerHTML = '';
+	// Create new list
+	for (const [key, value] of Object.entries(data)) {
+		var option = document.createElement('option')
+		option.setAttribute('value', key);
+		option.innerText = `${value} - ${key}.wikipedia.org`;
+		langSelect.appendChild(option);
+	}
+	// Restore initial value
+	langSelect.value = initValue;
+}
+
 // Function for populating settings
 async function loadSettings() {
-	// Update list of Wikipedias using API
-	const select = document.getElementById('wikipedia-search-language-select')
-	const resetButton = document.getElementById('wikipedia-search-reset-language')
-	const multiLangButton = document.querySelector('#wikipedia-search-multilang')
-	const siteSelect = document.querySelector('#wikipedia-search-site-select')
-	const wikiList = await getWikis()
-	for (i in wikiList[0]) {
-		var option = document.createElement('option')
-		option.setAttribute('value', wikiList[0][i])
-		option.innerText = wikiList[1][i] + ' (' + wikiList[0][i] + '.wikipedia.org)'
-		select.appendChild(option)
-	}
-	// Retrieve settings from storage
-	new Promise(function (resolve, reject) {
-		chrome.storage.local.get(function (data) {
-			console.log(data)
-			select.value = data.userLanguage
-			multiLangButton.checked = data.multiLang
-			siteSelect.value = data.siteVersion
-			resolve()
-		})
-	}).then(function () {
-		// Allow interaction on settings
-		select.remove(0)
-		select.removeAttribute('disabled')
-		resetButton.removeAttribute('disabled')
-		multiLangButton.removeAttribute('disabled')
-		siteSelect.removeAttribute('disabled')
+	// Retrieve settings and wikis from storage
+	const storageData = await chrome.storage.sync.get(['userLanguage', 'multiLang', 'wikiList']);
+	const wikiList = (storageData.wikiList || defaultWikiList);
+	updateLangSelect(wikiList);
+	langSelect.value = storageData.userLanguage;
+	multiLangCheck.checked = storageData.multiLang;
+	// Allow interaction on settings
+	langSelect.removeAttribute('disabled');
+	langResetBtn.removeAttribute('disabled');
+	multiLangCheck.removeAttribute('disabled');
+	refreshLangBtn.removeAttribute('disabled');
+}
+
+// Function to save settings
+async function saveSettings() {
+	chrome.storage.sync.set({
+		// Default language
+		userLanguage: langSelect.value,
+		// Multi-language
+		multiLang: multiLangCheck.checked,
+	}, function () {
+		console.log('Settings saved.')
 	})
 }
 
 // Save settings after any input change
 document.querySelectorAll('input,select').forEach(function (el) {
 	el.addEventListener('change', function () {
-		chrome.storage.local.set({
-			// Default language
-			userLanguage: document.querySelector('#wikipedia-search-language-select').value,
-			// Multi-language
-			multiLang: document.querySelector('#wikipedia-search-multilang').checked,
-			// Site version
-			siteVersion: document.querySelector('#wikipedia-search-site-select').value
-		}, function() {
-			console.log('settings saved')
-		})
+		saveSettings();
 	})
 })
 
 // Reset language button
-document.getElementById('wikipedia-search-reset-language').addEventListener('click', function () {
-	var lang = resetToSystemLanguage()
-	// resetToSystemLanguage updates the storage, so here we only need to change the select value
-	document.getElementById('wikipedia-search-language-select').value = lang
+langResetBtn.addEventListener('click', async function () {
+	const newLang = await getSystemLanguage();
+	langSelect.value = newLang;
+	saveSettings();
+})
+
+// Refresh language button
+refreshLangBtn.addEventListener('click', async function () {
+	// Show loading message
+	refreshLangBtn.setAttribute('disabled', 'true');
+	refreshLangBtn.innerHTML = 'Please wait...'
+	// Check for new languages and show success or error message
+	await updateWikis().then(
+		function (result) {
+			console.log('Retrieved site list:', result);
+			updateLangSelect(result);
+			refreshModalText.innerText = `Done! Wikipedia API provided ${Object.keys(result).length} languages.`;
+			refreshModal.show();
+
+		},
+		function (error) {
+			console.log(error);
+			refreshModalText.innerText = `There was an error:\n\n${error}`;
+			refreshModal.show();
+		}
+	);
+	// Return button to original state
+	refreshLangBtn.removeAttribute('disabled');
+	refreshLangBtn.innerHTML = 'Refresh languages';
 })
 
 loadSettings()
