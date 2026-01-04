@@ -23,15 +23,13 @@ function updateLangSelect(data) {
 
 // Function for populating settings
 async function loadSettings() {
-	// Get list of wikis from storage
-	const wikiList = await getWikis();
+	// Retrieve settings and wikis from storage
+	const storageData = await chrome.storage.sync.get(['userLanguage', 'multiLang', 'wikiList']);
+	const wikiList = (storageData.wikiList || defaultWikiList);
 	updateLangSelect(wikiList);
-	// Retrieve settings from storage
-	const storageData = await chrome.storage.sync.get(['userLanguage', 'multiLang']);
 	langSelect.value = storageData.userLanguage;
 	multiLangCheck.checked = storageData.multiLang;
 	// Allow interaction on settings
-	langSelect.remove(0);
 	langSelect.removeAttribute('disabled');
 	langResetBtn.removeAttribute('disabled');
 	multiLangCheck.removeAttribute('disabled');

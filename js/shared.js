@@ -379,23 +379,6 @@ function updateWikis() {
 }
 
 /**
- * Function to get the list of Wikipedia sites. If no user-updated list is available, the default list is returned.
- * @returns {Promise} Promise that resolves with a JSON object
- */
-async function getWikis() {
-    return new Promise(async function (resolve, reject) {
-        // Check for updated list of Wikipedia sites
-        const data = await chrome.storage.sync.get(['wikiList']);
-        if (data.wikiList) {
-            resolve(data.wikiList);
-        } else {
-            // No updated list has been stored, send the default list
-            resolve(defaultWikiList);
-        }
-    })
-}
-
-/**
  * Function to check the current system language and match it to supported a Wikipedia site
  * @returns {String} The matching Wikipedia language, or 'en' as a fallback
  */
@@ -406,7 +389,8 @@ async function getSystemLanguage() {
     var n = lang.indexOf('-');
     lang = lang.substring(0, n != -1 ? n : lang.length);
     // Check if the language has a Wikipedia
-    const wikiList = await getWikis();
+    const storageData = await chrome.storage.sync.get(['wikiList']);
+    wikiList = (storageData.wikiList || defaultWikiList);
     if (lang in wikiList) {
         console.log(`Language detected as ${wikiList[lang]} (${lang})`);;
         newLang = lang;

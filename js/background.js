@@ -6,9 +6,7 @@ importScripts('/js/shared.js');
 const isFirefox = chrome.runtime.getURL('').startsWith('moz-extension://');
 const isMicrosoftEdge = navigator.userAgent.includes('Edg');
 let wikiList = {};
-var userLanguage = ''
-var multiLang = ''
-var activeLanguage = ''
+let userLanguage, multiLang, activeLanguage;
 
 /**
  * Returns the Wikipedia search URL for a given string and selected language.
@@ -23,30 +21,30 @@ function getSearchUrl(searchText, language) {
 // Load data and settings when Omnibox search is activated
 chrome.omnibox.onInputStarted.addListener(async function () {
 	// Get settings from storage
-	const storageData = await chrome.storage.local.get(['userLanguage', 'multiLang']);
+	const storageData = await chrome.storage.sync.get(['userLanguage', 'multiLang', 'wikiList']);
 	userLanguage = storageData.userLanguage;
 	multiLang = storageData.multiLang;
 	// Reset default suggestion
 	updateDefaultSuggestion('', activeLanguage)
 	// Get list of Wikipedia sites
-	wikiList = await getWikis();
+	wikiList = (storageData.wikiList || defaultWikiList);
 })
 
 // Function to generate omnibox search dropdown results
 chrome.omnibox.onInputChanged.addListener(async function (text, suggest) {
-	// If the first word in the query matches a known Wikipedia language, and multi-language is enabled, change the active search to that language
-	var firstWord = text.split(' ')[0]
-	if ((multiLang === true) && text.startsWith(firstWord + ' ') && wikiList.hasOwnProperty(firstWord)) {
-		activeLanguage = firstWord;
-		text = text.replace(firstWord + ' ', '');
-	} else {
-		activeLanguage = userLanguage;
-	}
-	updateDefaultSuggestion(text, activeLanguage);
-	if (text.length > 0) {
+	let results = [];
+	if (userLanguage && (text.length > 0)) {
+		// If the first word in the query matches a known Wikipedia language, and multi-language is enabled, change the active search to that language
+		var firstWord = text.split(' ')[0]
+		if ((multiLang === true) && text.startsWith(firstWord + ' ') && wikiList.hasOwnProperty(firstWord)) {
+			activeLanguage = firstWord;
+			text = text.replace(firstWord + ' ', '');
+		} else {
+			activeLanguage = userLanguage;
+		}
+		updateDefaultSuggestion(text, activeLanguage);
 		const request = await getSuggestions(text);
 		// Set the maximum number of suggestion slots, leaving one for the settings page link
-		var results = [];
 		if (isFirefox) {
 			num = 4;
 		} else if (isMicrosoftEdge) {
@@ -65,22 +63,24 @@ chrome.omnibox.onInputChanged.addListener(async function (text, suggest) {
 				})
 			}
 		}
-		// Add settings suggestion
-		if (isFirefox) {
-			// Firefox doesn't support <dim>
-			results.push({
-				content: chrome.runtime.getURL('settings.html'),
-				description: "Change default search language (currently set to " + wikiList[activeLanguage] + ")"
-			})
-		} else {
-			results.push({
-				content: chrome.runtime.getURL('settings.html'),
-				description: "<dim>Change default search language (currently set to " + wikiList[activeLanguage] + ")</dim>"
-			})
-		}
-		// Return list of suggestions to the browser
-		suggest(results);
+	} else if (activeLanguage || userLanguage) {
+		updateDefaultSuggestion('', (activeLanguage || userLanguage));
 	}
+	// Add settings suggestion
+	if (isFirefox) {
+		// Firefox doesn't support <dim>
+		results.push({
+			content: chrome.runtime.getURL('settings.html'),
+			description: "Change default search language (currently set to " + wikiList[activeLanguage] + ")"
+		})
+	} else {
+		results.push({
+			content: chrome.runtime.getURL('settings.html'),
+			description: "<dim>Change default search language (currently set to " + wikiList[activeLanguage] + ")</dim>"
+		})
+	}
+	// Return list of suggestions to the browser
+	suggest(results);
 })
 
 function resetDefaultSuggestion() {
@@ -123,6 +123,7 @@ chrome.omnibox.onInputCancelled.addListener(function () {
 async function getSuggestions(query) {
 	return new Promise(async function (resolve) {
 		const url = "https://" + activeLanguage + ".wikipedia.org/w/api.php?action=opensearch&namespace=0&suggest=&search=" + encodeURIComponent(query);
+		console.log(url)
 		const response = await fetch(url);
 		if (!response.ok) {
 			console.log('Could not obtain data from Wikipedia API.');
